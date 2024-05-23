@@ -1,15 +1,13 @@
 ---
-import type { GetStaticPaths } from 'astro';
-import HomePage from '@/modules/home/pages/index.astro';
-import { languages } from '@/i18n/ui';
-
-export const getStaticPaths = (() => {
-    const lang = Object.keys(languages);
-    return lang.map((lang) => ({ params: { lang } }));
-}) satisfies GetStaticPaths;
+import Layout from "@/layouts/Layout.astro";
+import Navbar from "@/components/molecule/Navbar.vue";
 ---
 
-<HomePage />
+<Layout title="Portfolio | Th3Mayar">
+  <main>
+	<Navbar />
+  </main>
+</Layout>
 
 <style>
   main {

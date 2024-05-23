@@ -1,0 +1,11 @@
+{
+  "common": {
+    "footer": {}
+  },
+  "home": {
+    "seo": {
+      "title": "Portfolio | Home",
+      "description": "Home Page"
+    }
+  }
+}
