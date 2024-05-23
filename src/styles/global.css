@@ -18,8 +18,15 @@
         --background: 206.84 95% 7.84%;
         --background-foreground: 0 0% 100%;
 
-        --dark: 266 10% 14%;
+        --dark: 207 36.6% 41.1%;
         --dark-foreground: 48 71% 99%;
+
+        --purple:235 67% 65%;
+        --limongrass: 9 74% 72%;
+        --green: 162.4 66.37% 55.69%;
+        --pink: 283 55% 71%;
+        --orange: 29 97% 66%;
+        --button: 206 35% 16%;
 
         --light: 48 71% 99%;
         --light-foreground: 199 80.36% 43.92%;

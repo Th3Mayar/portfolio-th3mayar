@@ -16,8 +16,15 @@ module.exports = {
       },
       colors: {
         bg: "hsl(var(--bg))",
+        purple: "hsl(var(--purple))",
+        limongrass: "hsl(var(--limongrass))",
+        green: "hsl(var(--green))",
+        pink: "hsl(var(--pink))",
+        orange: "hsl(var(--orange))",
+        button: "hsl(var(--button))",
+
         dark: {
-          DEFAULT: "hsl(var(--dark))",
+          DEFAULT: "hsl(var( --dark))",
           foreground: "hsl(var(--dark-foreground))",
         },
         light: {
