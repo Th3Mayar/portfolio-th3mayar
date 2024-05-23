@@ -5,7 +5,9 @@ interface Props {
 
 const { title } = Astro.props;
 
+import Footer from "@/components/organism/Footer.vue";
 import "../styles/global.css";
+import Header from "@/components/organism/Header.vue";
 ---
 
 <!doctype html>
@@ -19,6 +21,8 @@ import "../styles/global.css";
     <title>{title}</title>
   </head>
   <body>
+    <!-- <Header />
+    <Footer /> -->
     <slot />
   </body>
 </html>
