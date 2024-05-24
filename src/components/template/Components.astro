@@ -4,12 +4,14 @@ import IconByName from "@/components/atoms/IconByName.vue";
 import Button from "@/components/atoms/Button.vue";
 import Typography from "../atoms/Typography.vue";
 import { useTranslations, getLangFromUrl } from '@/i18n/utils';
+import Card from "@/components/molecule/Card.vue";
 
 const lang = getLangFromUrl(Astro.url);
 const { common: TCommon } = useTranslations(lang);
 const { components: TComponents } = TCommon;
 const { variant: TVariant } = TComponents;
 const { buttonVariant: TButtonVariant } = TComponents;
+const { page: TPage } = TCommon;
 ---
 
 <main>
@@ -88,12 +90,29 @@ const { buttonVariant: TButtonVariant } = TComponents;
     <Button variant="link" size="medium" disabled={false}>{TButtonVariant.Link}</Button>
     <Button variant="simple" size="medium" disabled={false}>{TButtonVariant.Simple}</Button>
   </div>
+  <div>
+    <Card
+      image="codesys"
+      icon="astro"
+      className=""
+      ButtonVariant="simple"
+      size=""
+    >
+      <p slot="content">
+        <Typography variant="FiraCode" as="p" color="dark" caseType="capital" class:list={"font-bold"}>
+          {TComponents.example}
+        </Typography>
+      </p>
+      {TPage.viewProjects}
+    </Card>
+  </div>
 </main>
+
 
 <style>
   main {
+    width: max-content;
     display: flex;
-    padding: 20px;
     justify-content: center;
     align-items: center;
     border: 2px solid #fff;

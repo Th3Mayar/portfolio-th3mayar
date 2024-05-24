@@ -48,5 +48,11 @@
       "title": "Portafolio | Inicio",
       "description": "Pagina de inicio"
     }
+  },
+  "components": {
+    "seo": {
+      "title": "Portafolio | Componentes",
+      "description": "Página de componentes"
+    }
   }
 }

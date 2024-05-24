@@ -48,5 +48,11 @@
       "title": "Portfolio | Home",
       "description": "Home Page"
     }
+  },
+  "components": {
+    "seo": {
+      "title": "Portfolio | Components",
+      "description": "Components Page"
+    }
   }
 }
