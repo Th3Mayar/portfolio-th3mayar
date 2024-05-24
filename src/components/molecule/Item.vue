@@ -29,4 +29,16 @@ export default {
   display: flex;
   cursor: pointer;
 }
+.link-card > a {
+  width: 100%;
+  text-decoration: none;
+  line-height: 1.4;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+  opacity: 0.8;
+}
+.link-card > a:hover {
+ border-bottom: 4px solid var(--orangeHover);
+ margin-bottom: -18px;
+}
 </style>

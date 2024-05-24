@@ -27,6 +27,7 @@
       "name": "jose-francisco",
       "personalInfo": "personal-info",
       "contacts": "contacts",
+      "contactMe": "contact-me",
       "variant": {
         "green": "variant-green",
         "dark": "variant-dark",

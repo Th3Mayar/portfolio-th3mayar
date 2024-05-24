@@ -5,9 +5,8 @@ interface Props {
 
 const { title } = Astro.props;
 
-import Footer from "@/components/organism/Footer.vue";
 import "../styles/global.css";
-import Header from "@/components/organism/Header.vue";
+import Navbar from "@/components/organism/Header.astro";
 ---
 
 <!doctype html>
@@ -21,12 +20,25 @@ import Header from "@/components/organism/Header.vue";
     <title>{title}</title>
   </head>
   <body>
-    <!-- <Header />
-    <Footer /> -->
-    <slot />
+    <main>
+      <Navbar />
+      <slot />
+    </main>
   </body>
 </html>
 
 <style>
-	
+  body{
+    padding: 50px;
+    background-color: var(--card);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  main{
+    max-height: 90vh;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    background-color: var(--darkBackground);
+    box-shadow: 0 0 50px 0 var(--border-effect);
+  }
 </style>
