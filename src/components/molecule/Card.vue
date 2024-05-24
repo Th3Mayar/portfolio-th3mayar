@@ -72,10 +72,6 @@ const props = defineProps({
   position: relative;
 }
 
-.image {
-  align-self: flex-start;
-  width: max-content;
-}
 
 .image-container img {
   width: 100%;
