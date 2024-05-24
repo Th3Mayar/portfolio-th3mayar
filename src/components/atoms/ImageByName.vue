@@ -19,7 +19,7 @@ const ImageComponent = computed(() => {
   const imageName = props.name;
 
   let imageSrc = "";
-  let modifyUrl = "../";
+  let modifyUrl = "/";
 
   if (routes.logos[imageName]) {
     imageSrc = modifyUrl + routes.logos[imageName];
