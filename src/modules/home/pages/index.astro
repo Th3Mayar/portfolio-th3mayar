@@ -1,31 +1,15 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import Card from "@/components/molecule/Card.vue";
 import { useTranslations, getLangFromUrl } from "@/i18n/utils";
-import Typography from "@/components/atoms/Typography.vue";
 
 const lang = getLangFromUrl(Astro.url);
-const { common: TCommon } = useTranslations(lang);
-const { components: TComponents } = TCommon;
-const { page: TPage } = TCommon;
+const { home: THome } = useTranslations(lang);
+const { seo: TSeo } = THome;
 ---
 
-<Layout title="Portfolio | Th3Mayar">
+<Layout title={TSeo.title}>
   <main>
-    <Card
-      image="codesys"
-      icon="astro"
-      className=""
-      ButtonVariant="simple"
-      size=""
-    >
-      <p slot="content">
-        <Typography variant="FiraCode" as="p" color="dark" caseType="capital" class:list={"font-bold"}>
-          {TComponents.example}
-        </Typography>
-      </p>
-      {TPage.viewProjects}
-    </Card>
+    
   </main>
 </Layout>
 
