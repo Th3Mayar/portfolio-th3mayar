@@ -31,7 +31,7 @@
         --light: 48 71% 99%;
         --light-foreground: 199 80.36% 43.92%;
 
-        --card: 0 0% 100%;
+        --card: hsl(207.27 100% 6.47%);
         --card-foreground: 222.2 84% 4.9%;
 
         --popover: 0 0% 100%;
@@ -52,7 +52,7 @@
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 210 40% 98%;
 
-        --border: 214.3 31.8% 91.4%;
+        --border: hsl(210.97 34.07% 17.84%);
         --input: 214.3 31.8% 91.4%;
         --ring: 222.2 84% 4.9%;
 
