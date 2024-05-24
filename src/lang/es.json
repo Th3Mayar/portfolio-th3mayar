@@ -1,10 +1,51 @@
 {
   "common": {
-    "footer": {}
+    "header": {},
+    "footer": {},
+    "components": {
+      "title": "Componentes",
+      "buttons": "Botones",
+      "cards": "Tarjetas",
+      "forms": "Formularios",
+      "modals": "modales",
+      "tables": "Tablas",
+      "buttonVariant": {
+        "orange": "Botón Naranja",
+        "outline": "Botón de esquema",
+        "secondary": "Botón secundario",
+        "primary": "Botón Principal",
+        "ghost": "Botón fantasma",
+        "Link": "Botón de enlace",
+        "Simple": "Botón simple"
+      },
+      "typography": "Tipografía",
+      "icons": "iconos",
+      "items": "artículos",
+      "hello": "hola",
+      "aboutMe": "acerca-de-mí",
+      "projects": "proyectos",
+      "name": "jose-francisco",
+      "personalInfo": "información-personal",
+      "contacts": "contactos",
+      "variant": {
+        "green": "variante-verde",
+        "dark": "variante-oscura",
+        "purple": "variante-morada",
+        "pink": "variante-rosa",
+        "limongrass": "variante-limoncillo",
+        "orange": "variante-naranja"
+      },
+      "example": "La vida es demasiado corta como para preocuparse por cosas sin importancia."
+    },
+    "page": {
+      "error": "error",
+      "notFound": "no-encontrado",
+      "viewProjects": "ver-proyectos"
+    }
   },
   "home": {
     "seo": {
-      "title": "Portfolio | Inicio",
+      "title": "Portafolio | Inicio",
       "description": "Pagina de inicio"
     }
   }

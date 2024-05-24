@@ -1,6 +1,47 @@
 {
   "common": {
-    "footer": {}
+    "header": {},
+    "footer": {},
+    "components": {
+      "title": "Components",
+      "buttons": "Buttons",
+      "cards": "Cards",
+      "forms": "Forms",
+      "modals": "Modals",
+      "tables": "Tables",
+      "buttonVariant": {
+        "orange": "Orange Button",
+        "outline": "Outline Button",
+        "secondary": "Secondary Button",
+        "primary": "Primary Button",
+        "ghost": "Ghost Button",
+        "Link": "Link Button",
+        "Simple": "Simple Button"
+      },
+      "typography": "Typography",
+      "icons": "Icons",
+      "items": "Items",
+      "hello": "hello",
+      "aboutMe": "about-me",
+      "projects": "projects",
+      "name": "jose-francisco",
+      "personalInfo": "personal-info",
+      "contacts": "contacts",
+      "variant": {
+        "green": "variant-green",
+        "dark": "variant-dark",
+        "purple": "variant-purple",
+        "pink": "variant-pink",
+        "limongrass": "variant-limongrass",
+        "orange": "variant-orange"
+      },
+      "example": "Life is too short to worry about unimportant things."
+    },
+    "page": {
+      "error": "error",
+      "notFound": "not-found",
+      "viewProjects": "view-projects"
+    }
   },
   "home": {
     "seo": {
