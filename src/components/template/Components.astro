@@ -14,10 +14,7 @@ const { buttonVariant: TButtonVariant } = TComponents;
 const { page: TPage } = TCommon;
 ---
 
-<main>
-  <Typography variant="FiraCode" as="h5" color="light" caseType="upper">
-    {TComponents.title} <span>&rarr;</span>
-  </Typography>
+<aside>
   <div>
     <Typography variant="FiraCode" as="h5" color="light" caseType="upper">
       {TComponents.typography}
@@ -106,19 +103,15 @@ const { page: TPage } = TCommon;
       {TPage.viewProjects}
     </Card>
   </div>
-</main>
+</aside>
 
 
 <style>
-  main {
+  aside {
     width: max-content;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #fff;
-    border-radius: 20px;
-    padding: 50px;
     gap: 50px;
+    margin-bottom: 200px;
   }
   section {
     flex-direction: column;
