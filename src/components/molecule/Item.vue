@@ -4,7 +4,7 @@ import Typography from "@/components/atoms/Typography.vue";
 </script>
 
 <template>
-  <li class="link-card">
+  <li :class="class">
     <a :href="href">
       <Typography variant="FiraCode" as="h5" color="dark" caseType="normal">
         _{{ title }}
@@ -19,6 +19,7 @@ export default {
     title: String,
     body: String,
     href: String,
+    class: String,
   },
 };
 </script>
@@ -36,9 +37,21 @@ export default {
   color: var(--color-dark);
   background-color: var(--color-light);
   opacity: 0.8;
+  border-right: 2px solid var(--border); 
+  padding-right: 10px;
 }
-.link-card > a:hover {
- border-bottom: 4px solid var(--orangeHover);
- margin-bottom: -18px;
+
+h5:hover{
+  color: var(--lighHover);
+}
+
+@media (max-width: 752px) {
+  .link-card > a:hover{
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  .item-name{
+    color: white;
+  }
 }
 </style>

@@ -1,35 +1,190 @@
 ---
+import { ref } from "vue";
 import Item from "@/components/molecule/Item.vue";
 import { useTranslations, getLangFromUrl } from "@/i18n/utils";
+import IconByName from "../atoms/IconByName.vue";
 
 const lang = getLangFromUrl(Astro.url);
 const { common: TCommon } = useTranslations(lang);
 const { components: TComponents } = TCommon;
+
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+  console.log("isMenuOpen", isMenuOpen.value);
+};
 ---
 
 <header>
-  <aside>
-    <ul>
-      <Item title={TComponents.name} class="item"/>
-      <Item title={TComponents.hello} class="item" />
-      <Item title={TComponents.aboutMe} class="item" />
-      <Item title={TComponents.projects} class="item" />
-      <Item title={TComponents.contactMe} class="item" />
+  <nav>
+    <div class="header-left">
+      <Item title={TComponents.name} class="item-name link-card" />
+    </div>
+    <div class="header-right">
+      <button class="menu-toggle" @click="toggleMenu">
+        <IconByName name="Menu" color="simple" className="header-icon" />
+        <!-- <IconByName name="X" color="simple" class="header-icon" /> -->
+      </button>
+    </div>
+    <ul v-if="isMenuOpen" class="items">
+      <Item href="" title={TComponents.name} class="item-name link-card" />
+      <Item href="" title={TComponents.hello} class="item-hello link-card" />
+      <Item href="" title={TComponents.aboutMe} class="item-about link-card" />
+      <Item
+        href=""
+        title={TComponents.projects}
+        class="item-projects link-card"
+      />
+      <li class="item-hidden"></li>
+      <Item
+        href=""
+        title={TComponents.contactMe}
+        class="item-contact link-card"
+      />
     </ul>
-  </aside>
+  </nav>
 </header>
 
 <style>
-  ul{
-    display: flex;
+  ul {
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
     gap: 1rem;
   }
 
-  aside {
-    display: flex;
-    justify-content: space-between;
+  nav {
+    display: grid;
     align-items: center;
     padding: 1rem;
     border-bottom: 2px solid var(--border);
+    grid-template-rows: 1fr;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .header-left {
+    display: none;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+
+  .item-name {
+    justify-content: flex-start;
+    text-align: start;
+    grid-column: span 2;
+  }
+
+  .item-hello:hover,
+  .item-about:hover,
+  .item-projects:hover,
+  .item-contact:hover {
+    border-bottom: 4px solid var(--orangeHover);
+    margin-bottom: -18px;
+  }
+
+  .item-contact {
+    justify-content: end;
+    grid-column: span 2;
+    text-align: center;
+  }
+
+  .item-hidden {
+    grid-column: span 3;
+  }
+  .item-hidden:hover {
+    border: none;
+  }
+
+  @media (max-width: 926px) {
+    .menu-toggle {
+      display: flex;
+      gap: 5px;
+    }
+
+    ul {
+      display: none;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    ul.v-if {
+      display: flex;
+    }
+
+    .header-name {
+      display: flex;
+      justify-content: flex-start;
+      width: max-content;
+    }
+
+    .header-icon {
+      display: flex;
+      justify-content: flex-end;
+      width: auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 1387px) {
+  ul.items {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  .item-hidden {
+    grid-column: span 1;
+  }
+  
+  .item-contact {
+    grid-column: span 2;
+    text-align: center;
+  }
+}
+
+  @media (max-width: 1230px){
+    ul.items {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    .item-hidden {
+      display: none;
+    }
+    
+    .item-contact {
+      grid-column: span 2;
+      text-align: center;
+    }
+
+    .item-about{
+      grid-column: span 2;
+    }
+  }
+  @media (max-width: 1507px){
+    ul.items {
+      grid-template-columns: repeat(8, 1fr);
+    }
+    .item-hidden {
+      grid-column: span 1;
+    }
+    
+    .item-contact {
+      grid-column: span 2;
+      text-align: center;
+    }
   }
 </style>
