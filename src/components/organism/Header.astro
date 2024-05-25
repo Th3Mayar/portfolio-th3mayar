@@ -15,7 +15,6 @@ const { components: TComponents } = TCommon;
 // };
 
 // onclick=`${toggleMenu}` call funtion on button
-
 ---
 
 <header>
@@ -31,35 +30,48 @@ const { components: TComponents } = TCommon;
     </div>
     <ul v-if="isMenuOpen" class="items">
       <Item href="" title={TComponents.name} class="item-name link-card" />
-      <Item href="" title={TComponents.hello} class="item-hello link-card" />
-      <Item href="" title={TComponents.aboutMe} class="item-about link-card" />
+      <Item
+        href=""
+        title={TComponents.hello}
+        class="item-hello link-card item"
+      />
+      <Item
+        href=""
+        title={TComponents.aboutMe}
+        class="item-about link-card item"
+      />
       <Item
         href=""
         title={TComponents.projects}
-        class="item-projects link-card"
+        class="item-projects link-card item"
       />
       <li class="item-hidden"></li>
       <Item
         href=""
         title={TComponents.contactMe}
-        class="item-contact link-card"
+        class="item-contact link-card item"
       />
     </ul>
   </nav>
 </header>
 
 <style>
+  .item:not(:first-child) {
+    padding: 1rem;
+    border-left: 2px solid var(--border);
+  }
+  .item-projects{
+    border-right: 2px solid var(--border);
+  }
   ul {
     text-align: center;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
-    gap: 1rem;
   }
 
   nav {
     display: grid;
     align-items: center;
-    padding: 1rem;
     border-bottom: 2px solid var(--border);
     grid-template-rows: 1fr;
   }
@@ -78,6 +90,7 @@ const { components: TComponents } = TCommon;
   }
 
   .item-name {
+    padding: 1rem;
     justify-content: flex-start;
     text-align: start;
     grid-column: span 2;
@@ -87,8 +100,9 @@ const { components: TComponents } = TCommon;
   .item-about:hover,
   .item-projects:hover,
   .item-contact:hover {
-    border-bottom: 4px solid var(--orangeHover);
-    margin-bottom: -18px;
+    border-bottom: 2px solid var(--orangeHover);
+    margin-bottom: -3px;
+    width: 100%;
   }
 
   .item-contact {
@@ -134,6 +148,7 @@ const { components: TComponents } = TCommon;
 
     nav {
       display: flex;
+      padding: 1rem;
       justify-content: space-between;
       align-items: center;
     }
@@ -145,45 +160,45 @@ const { components: TComponents } = TCommon;
   }
 
   @media (max-width: 1387px) {
-  ul.items {
-    grid-template-columns: repeat(8, 1fr);
+    ul.items {
+      grid-template-columns: repeat(8, 1fr);
+    }
+
+    .item-hidden {
+      grid-column: span 1;
+    }
+
+    .item-contact {
+      grid-column: span 2;
+      text-align: center;
+    }
   }
 
-  .item-hidden {
-    grid-column: span 1;
-  }
-  
-  .item-contact {
-    grid-column: span 2;
-    text-align: center;
-  }
-}
-
-  @media (max-width: 1230px){
+  @media (max-width: 1230px) {
     ul.items {
       grid-template-columns: repeat(6, 1fr);
     }
     .item-hidden {
       display: none;
     }
-    
+
     .item-contact {
       grid-column: span 2;
       text-align: center;
     }
 
-    .item-about{
+    .item-about {
       grid-column: span 2;
     }
   }
-  @media (max-width: 1507px){
+  @media (max-width: 1507px) {
     ul.items {
       grid-template-columns: repeat(8, 1fr);
     }
     .item-hidden {
       grid-column: span 1;
     }
-    
+
     .item-contact {
       grid-column: span 2;
       text-align: center;

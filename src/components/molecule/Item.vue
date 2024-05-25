@@ -30,6 +30,7 @@ export default {
   display: flex;
   cursor: pointer;
 }
+
 .link-card > a {
   width: 100%;
   text-decoration: none;
@@ -37,8 +38,8 @@ export default {
   color: var(--color-dark);
   background-color: var(--color-light);
   opacity: 0.8;
-  border-right: 2px solid var(--border); 
-  padding-right: 10px;
+  /* border-right: 2px solid var(--border);  */
+  /* padding-right: 10px; */
 }
 
 h5:hover{
