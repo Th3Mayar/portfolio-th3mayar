@@ -13,6 +13,9 @@ const toggleMenu = () => {
   isMenuOpen = !isMenuOpen;
   console.log(isMenuOpen);
 };
+
+// onclick=`${toggleMenu}` call funtion on button
+
 ---
 
 <header>
@@ -21,7 +24,7 @@ const toggleMenu = () => {
       <Item title={TComponents.name} class="item-name link-card" />
     </div>
     <div class="header-right">
-      <button class="menu-toggle" onclick=`${toggleMenu}`>
+      <button class="menu-toggle">
         <IconByName name="Menu" color="simple" className="header-icon" />
         <!-- <IconByName name="X" color="simple" class="header-icon" /> -->
       </button>
