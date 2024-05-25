@@ -1,5 +1,4 @@
 ---
-import { ref } from "vue";
 import Item from "@/components/molecule/Item.vue";
 import { useTranslations, getLangFromUrl } from "@/i18n/utils";
 import IconByName from "@/components/atoms/IconByName.vue";
@@ -8,11 +7,11 @@ const lang = getLangFromUrl(Astro.url);
 const { common: TCommon } = useTranslations(lang);
 const { components: TComponents } = TCommon;
 
-const isMenuOpen = ref(false);
+let isMenuOpen = false;
 
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-  console.log("isMenuOpen", isMenuOpen.value);
+  isMenuOpen = !isMenuOpen;
+  console.log(isMenuOpen);
 };
 ---
 
