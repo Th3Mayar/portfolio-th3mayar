@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
-import vue from "@astrojs/vue";
-
-import tailwind from "@astrojs/tailwind";
+import vue from '@astrojs/vue';
+import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,9 +9,16 @@ export default defineConfig({
     locales: ['en', 'es'],
     defaultLocale: 'en',
     routing: {
-        prefixDefaultLocale: true,
-        redirectToDefaultLocale: true,
-        strategy: 'pathname',
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: true,
+      strategy: 'pathname',
     },
-},
+  },
+  vite: {
+    resolve: {
+      alias: {
+        '@': '/src',
+      },
+    },
+  },
 });
