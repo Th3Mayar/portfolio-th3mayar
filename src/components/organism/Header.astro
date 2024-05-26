@@ -9,7 +9,6 @@ import Toggle from '../../components/atoms/Toggle.vue';
 ---
 
 <header>
-  <!-- <LightDark client:load /> -->
   <nav>
     <div class="header-left">
       <Item title={TComponents.name} class="link-card" />
@@ -34,7 +33,7 @@ import Toggle from '../../components/atoms/Toggle.vue';
         title={TComponents.projects}
         class="item-projects link-card item"
       />
-      <li class="item-hidden"></li>
+      <li class="item-hidden"> <LightDark client:load /></li>
       <Item
         href=""
         title={TComponents.contactMe}
@@ -102,6 +101,9 @@ import Toggle from '../../components/atoms/Toggle.vue';
 
   .item-hidden {
     grid-column: span 3;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
   }
   .item-hidden:hover {
     border: none;

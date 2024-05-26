@@ -1,39 +1,57 @@
 <template>
   <div>
     <label class="switch">
-      <input type="checkbox" v-model="darkMode" @change="toggleDarkMode">
-      <span class="slider round"></span>
+      <span class="moon">
+        <IconByName name="Moon" color="dark" />
+      </span>
+      <span class="sun">
+        <IconByName name="Sun" color="dark" />
+      </span>
+      <input type="checkbox" class="input" @change="toggleDarkMode" />
+      <span class="slider"></span>
     </label>
-    <span v-if="darkMode">Dark Mode Activado</span>
-    <span v-else>Dark Mode Desactivado</span>
   </div>
 </template>
 
 <script>
+import IconByName from "@/components/atoms/IconByName.vue";
+
 export default {
+  components: {
+    IconByName,
+  },
   data() {
     return {
-      darkMode: false
+      darkMode: false,
     };
   },
   methods: {
     toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-    }
-  }
+      this.darkMode = !this.darkMode;
+      document.body.classList.toggle("sun", !this.darkMode);
+      document.body.classList.toggle("dark-mode", this.darkMode);
+    },
+  },
 };
 </script>
 
 <style>
 
+body.dark-mode main {
+  background-color: #b4b4b4;
+  height: 85vh;
+  border-radius: 20px;
+}
+
 .switch {
+  font-size: 17px;
   position: relative;
   display: inline-block;
-  width: 60px;
+  width: 64px;
   height: 34px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -46,45 +64,84 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 34px;
+  background-color: #73c0fc;
+  transition: 0.4s;
+  border-radius: 30px;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  border-radius: 20px;
+  left: 2px;
+  bottom: 2px;
+  z-index: 2;
+  background-color: #e8e8e8;
+  transition: 0.4s;
 }
 
-input:checked + .slider {
-  background-color: #2196F3;
+.sun svg {
+  position: absolute;
+  top: 6px;
+  left: 36px;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+.moon svg {
+  fill: #73c0fc;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+.sun svg {
+  animation: rotate 15s linear infinite;
 }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.slider.round:before {
-  border-radius: 50%;
+.moon svg {
+  animation: tilt 5s linear infinite;
+}
+
+@keyframes tilt {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.input:checked + .slider {
+  background-color: #183153;
+}
+
+.input:focus + .slider {
+  box-shadow: 0 0 1px #183153;
+}
+
+.input:checked + .slider:before {
+  transform: translateX(30px);
 }
 </style>
