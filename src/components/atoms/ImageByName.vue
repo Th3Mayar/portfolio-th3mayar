@@ -21,10 +21,10 @@ const ImageComponent = computed(() => {
   let imageSrc = "";
   let modifyUrl = "/";
 
-  if (routes.logos[imageName]) {
-    imageSrc = modifyUrl + routes.logos[imageName];
-  } else if (routes.projects[imageName]) {
-    imageSrc = modifyUrl + routes.projects[imageName];
+  if (routes.logos[imageName as keyof typeof routes.logos]) {
+    imageSrc = modifyUrl + routes.logos[imageName as keyof typeof routes.logos];
+  } else if (routes.projects[imageName as keyof typeof routes.projects]) {
+    imageSrc = modifyUrl + routes.projects[imageName as keyof typeof routes.projects];
   } else {
     console.error(`Image not found for name: ${imageName}`);
   }

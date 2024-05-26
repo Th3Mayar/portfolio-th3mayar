@@ -1,6 +1,6 @@
 <!-- Create component Item ul, li, a -->
 <script setup>
-import Typography from "@/components/atoms/Typography.vue";
+import Typography from "../components/atoms/Typography.vue";
 </script>
 
 <template>
