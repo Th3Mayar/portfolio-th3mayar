@@ -11,13 +11,13 @@ export default defineConfig({
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: true,
-      strategy: 'pathname',
+      // strategy: 'pathname',
     },
   },
   vite: {
     resolve: {
       alias: {
-        '@': './src',
+        "@/*": ["src/*"]
       },
     },
   },

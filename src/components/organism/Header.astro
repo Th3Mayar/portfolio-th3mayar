@@ -15,7 +15,7 @@ import Toggle from '../../components/atoms/Toggle.vue';
       <Item title={TComponents.name} class="link-card" />
     </div>
     <div class="header-right">
-      <Toggle client:load />
+      <Toggle client:load class="toggle"/>
     </div>
     <ul v-if="isMenuOpen" class="items">
       <Item href="" title={TComponents.name} class="item-name link-card" />
@@ -107,11 +107,18 @@ import Toggle from '../../components/atoms/Toggle.vue';
     border: none;
   }
 
+  .toggle{
+    display: none;
+  }
+
   button:nth-child(2){
     display: none;
   }
 
   @media (max-width: 926px) {
+    .toggle{
+      display: flex;
+    }
     .menu-toggle {
       display: flex;
       gap: 5px;
