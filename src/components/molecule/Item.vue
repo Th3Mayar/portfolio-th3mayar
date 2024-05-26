@@ -38,8 +38,6 @@ export default {
   color: var(--color-dark);
   background-color: var(--color-light);
   opacity: 0.8;
-  /* border-right: 2px solid var(--border);  */
-  /* padding-right: 10px; */
 }
 
 h5:hover{
@@ -52,7 +50,7 @@ h5:hover{
     margin-bottom: 0;
   }
   .item-name{
-    color: white;
+    color: var(--color-light);
   }
 }
 </style>

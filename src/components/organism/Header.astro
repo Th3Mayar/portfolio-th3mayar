@@ -1,32 +1,21 @@
 ---
 import Item from "@/components/molecule/Item.vue";
 import { useTranslations, getLangFromUrl } from "@/i18n/utils";
-import IconByName from "@/components/atoms/IconByName.vue";
-
+import LightDark from "@/components/molecule/LightDark.vue";
 const lang = getLangFromUrl(Astro.url);
 const { common: TCommon } = useTranslations(lang);
 const { components: TComponents } = TCommon;
-
-// let isMenuOpen = false;
-
-// const toggleMenu = () => {
-//   isMenuOpen = !isMenuOpen;
-//   console.log(isMenuOpen);
-// };
-
-// onclick=`${toggleMenu}` call funtion on button
+import Toggle from '@/components/atoms/Toggle.vue';
 ---
 
 <header>
+  <!-- <LightDark client:load /> -->
   <nav>
     <div class="header-left">
-      <Item title={TComponents.name} class="item-name link-card" />
+      <Item title={TComponents.name} class="link-card" />
     </div>
     <div class="header-right">
-      <button class="menu-toggle">
-        <IconByName name="Menu" color="simple" className="header-icon" />
-        <!-- <IconByName name="X" color="simple" class="header-icon" /> -->
-      </button>
+      <Toggle client:load />
     </div>
     <ul v-if="isMenuOpen" class="items">
       <Item href="" title={TComponents.name} class="item-name link-card" />
@@ -60,7 +49,7 @@ const { components: TComponents } = TCommon;
     padding: 1rem;
     border-left: 2px solid var(--border);
   }
-  .item-projects{
+  .item-projects {
     border-right: 2px solid var(--border);
   }
   ul {
@@ -100,8 +89,8 @@ const { components: TComponents } = TCommon;
   .item-about:hover,
   .item-projects:hover,
   .item-contact:hover {
-    border-bottom: 2px solid var(--orangeHover);
-    margin-bottom: -3px;
+    border-bottom: 4px solid var(--orangeHover);
+    margin-bottom: -4px;
     width: 100%;
   }
 
@@ -116,6 +105,10 @@ const { components: TComponents } = TCommon;
   }
   .item-hidden:hover {
     border: none;
+  }
+
+  button:nth-child(2){
+    display: none;
   }
 
   @media (max-width: 926px) {

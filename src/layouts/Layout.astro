@@ -4,7 +4,8 @@ interface Props {
 }
 
 const { title } = Astro.props;
-import Navbar from "@/components/organism/Header.astro";
+// import Navbar from "@/components/organism/Header.astro";
+import Header from "@/components/organism/Header.astro";
 import "../styles/global.css";
 ---
 
@@ -20,7 +21,7 @@ import "../styles/global.css";
   </head>
   <body>
     <main>
-      <Navbar />
+      <Header client:load />
       <slot />
     </main>
   </body>
@@ -39,5 +40,13 @@ import "../styles/global.css";
     border-radius: 20px;
     background-color: var(--darkBackground);
     box-shadow: 0 0 50px 0 var(--border-effect);
+  }
+  @media (max-width: 926px) {
+    body{
+      overflow-y: scroll;
+    }
+    main{
+      max-height: 100vh;
+    }
   }
 </style>
