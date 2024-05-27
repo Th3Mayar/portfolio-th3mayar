@@ -1,7 +1,11 @@
 {
   "common": {
     "header": {},
-    "footer": {},
+    "footer": {
+      "findMe": "encuéntrame en:",
+      "rights": "Todos los derechos reservados",
+      "username": "@th3mayar"
+    },
     "components": {
       "title": "Componentes",
       "buttons": "Botones",
@@ -19,22 +23,22 @@
         "Simple": "Botón simple"
       },
       "typography": "Tipografía",
-      "icons": "iconos",
-      "items": "artículos",
-      "hello": "hola",
-      "aboutMe": "acerca-de-mí",
-      "projects": "proyectos",
-      "name": "jose-francisco",
-      "personalInfo": "información-personal",
-      "contacts": "contactos",
-      "contactMe": "contactame",
+      "icons": "_iconos",
+      "items": "_artículos",
+      "hello": "_hola",
+      "aboutMe": "_acerca-de-mí",
+      "projects": "_proyectos",
+      "name": "_jose-francisco",
+      "personalInfo": "_información-personal",
+      "contacts": "_contactos",
+      "contactMe": "_contactame",
       "variant": {
-        "green": "variante-verde",
-        "dark": "variante-oscura",
-        "purple": "variante-morada",
-        "pink": "variante-rosa",
-        "limongrass": "variante-limoncillo",
-        "orange": "variante-naranja"
+        "green": "_variante-verde",
+        "dark": "_variante-oscura",
+        "purple": "_variante-morada",
+        "pink": "_variante-rosa",
+        "limongrass": "_variante-limoncillo",
+        "orange": "_variante-naranja"
       },
       "example": "La vida es demasiado corta como para preocuparse por cosas sin importancia."
     },
@@ -54,6 +58,12 @@
     "seo": {
       "title": "Portafolio | Componentes",
       "description": "Página de componentes"
+    }
+  },
+  "footer": {
+    "seo": {
+      "title": "Portafolio | Pie de página",
+      "description": " Pie de página"
     }
   }
 }

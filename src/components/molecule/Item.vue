@@ -7,7 +7,7 @@ import Typography from "@/components/atoms/Typography.vue";
   <li :class="class">
     <a :href="href">
       <Typography variant="FiraCode" as="h5" color="dark" caseType="normal">
-        _{{ title }}
+        {{ title }}
       </Typography>
     </a>
   </li>

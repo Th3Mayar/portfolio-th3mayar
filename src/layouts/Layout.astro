@@ -4,8 +4,8 @@ interface Props {
 }
 
 const { title } = Astro.props;
-// import Navbar from "@/components/organism/Header.astro";
 import Header from "../components/organism/Header.astro";
+import Footer from "@/components/organism/Footer.astro";
 import "../styles/global.css";
 ---
 
@@ -23,6 +23,9 @@ import "../styles/global.css";
     <main>
       <Header />
       <slot />
+      <footer>
+        <Footer />
+      </footer>
     </main>
   </body>
 </html>
@@ -41,6 +44,15 @@ import "../styles/global.css";
     background-color: var(--darkBackground);
     box-shadow: 0 0 50px 0 var(--border-effect);
   }
+
+  footer {
+    margin-top: -240px; 
+    text-align: center;
+    border-top: 2px solid var(--border); 
+    border-radius: 0 0 20px 20px; 
+    color: #fff;
+  }
+  
   @media (max-width: 926px) {
     body{
       overflow-y: scroll;
@@ -48,6 +60,11 @@ import "../styles/global.css";
     }
     main{
       max-height: max-content;
+    }
+    footer {
+      margin-top: 20px;
+      padding: 10px; 
+      font-size: 14px; 
     }
   }
 </style>

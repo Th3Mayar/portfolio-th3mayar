@@ -1,7 +1,11 @@
 {
   "common": {
     "header": {},
-    "footer": {},
+    "footer": {
+      "findMe": "find me in:",
+      "rights": "All rights reserved",
+      "username": "@th3mayar"
+    },
     "components": {
       "title": "Components",
       "buttons": "Buttons",
@@ -21,20 +25,20 @@
       "typography": "Typography",
       "icons": "Icons",
       "items": "Items",
-      "hello": "hello",
-      "aboutMe": "about-me",
-      "projects": "projects",
-      "name": "jose-francisco",
-      "personalInfo": "personal-info",
-      "contacts": "contacts",
-      "contactMe": "contact-me",
+      "hello": "_hello",
+      "aboutMe": "_about-me",
+      "projects": "_projects",
+      "name": "_jose-francisco",
+      "personalInfo": "_personal-info",
+      "contacts": "_contacts",
+      "contactMe": "_contact-me",
       "variant": {
-        "green": "variant-green",
-        "dark": "variant-dark",
-        "purple": "variant-purple",
-        "pink": "variant-pink",
-        "limongrass": "variant-limongrass",
-        "orange": "variant-orange"
+        "green": "_variant-green",
+        "dark": "_variant-dark",
+        "purple": "_variant-purple",
+        "pink": "_variant-pink",
+        "limongrass": "_variant-limongrass",
+        "orange": "_variant-orange"
       },
       "example": "Life is too short to worry about unimportant things."
     },
@@ -54,6 +58,12 @@
     "seo": {
       "title": "Portfolio | Components",
       "description": "Components Page"
+    }
+  },
+  "footer": {
+    "seo": {
+      "title": "Portfolio | Footer",
+      "description": "Footer Page"
     }
   }
 }

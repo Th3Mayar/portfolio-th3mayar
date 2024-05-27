@@ -21,7 +21,7 @@ const buttonVariants = {
     dark: "bg-dark text-dark-foreground hover:bg-dark/90",
     orange: "bg-orange text-limongrass-foreground hover:bg-orange/90",
     simple: "text-light bg-button hover:bg-button-hover hover:text-orange",
-    none: "bg-transparent text-primary-foreground",
+    none: "bg-transparent border-none p-0",
   },
   size: {
     default: "h-10 px-4 py-2",
