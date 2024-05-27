@@ -1,11 +1,11 @@
 ---
-import Item from "../../components/molecule/Item.vue";
-import { useTranslations, getLangFromUrl } from "../../i18n/utils";
-import LightDark from "../../components/molecule/LightDark.vue";
+import Item from "@/components/molecule/Item.vue";
+import { useTranslations, getLangFromUrl } from "@/i18n/utils";
+import LightDark from "@/components/molecule/LightDark.vue";
 const lang = getLangFromUrl(Astro.url);
 const { common: TCommon } = useTranslations(lang);
 const { components: TComponents } = TCommon;
-import Toggle from '../../components/atoms/Toggle.vue';
+import Toggle from '@/components/atoms/Toggle.vue';
 ---
 
 <header>
@@ -33,7 +33,7 @@ import Toggle from '../../components/atoms/Toggle.vue';
         title={TComponents.projects}
         class="item-projects link-card item"
       />
-      <li class="item-hidden"> <LightDark client:load /></li>
+      <li class="item-hidden"> {/* <LightDark client:load /> */}</li>
       <Item
         href=""
         title={TComponents.contactMe}

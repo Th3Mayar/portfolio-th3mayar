@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import IconByName from "../../components/atoms/IconByName.vue";
+import IconByName from "@/components/atoms/IconByName.vue";
 
 export default {
   components: {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, computed } from "vue";
+import { defineProps, computed } from 'vue';
 import { routes } from "public/routeImg";
 
 const props = defineProps({
