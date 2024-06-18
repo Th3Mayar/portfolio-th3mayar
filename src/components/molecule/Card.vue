@@ -24,32 +24,23 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps } from "vue";
 import ImageByName from "../atoms/ImageByName.vue";
 import Button from "../atoms/Button.vue";
 
-const props = defineProps({
-  image: {
-    type: String,
-    required: true,
-  },
-  icon: {
-    type: String,
-    required: true,
-  },
-  className: {
-    type: String,
-    default: "",
-  },
-  ButtonVariant: {
-    type: String,
-    default: "simple",
-  },
-  size: {
-    type: String,
-    default: "medium",
-  },
+interface Props {
+  image: string;
+  icon: string;
+  className?: string;
+  ButtonVariant?: string;
+  size?: string;
+}
+
+withDefaults(defineProps<Props>(), {
+  className: "",
+  ButtonVariant: "simple",
+  size: "medium",
 });
 </script>
 
