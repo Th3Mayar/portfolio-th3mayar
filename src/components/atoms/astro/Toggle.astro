@@ -1,0 +1,41 @@
+---
+import create from "zustand";
+import IconByName from "../IconByName.vue";
+import Button from "../Button.vue";
+
+const useToggleStore = create((set) => ({
+  isMenuOpen: false,
+  toggleMenu: () => set((state) => ({ isMenuOpen: !state.isMenuOpen })),
+}));
+
+const handleClick = () => {
+  useToggleStore.getState().toggleMenu();
+};
+---
+
+<div class="toggle">
+  <Button
+    variant="none"
+    size="default"
+    disabled={false}
+    onclick={handleClick()}
+  >
+    <IconByName
+      name={useToggleStore.getState().isMenuOpen ? "Menu" : "X"}
+      color="simple"
+      className="social-icon"
+    />
+  </Button>
+</div>
+
+<style>
+  .toggle {
+    display: none;
+  }
+
+  @media (max-width: 926px) {
+    .toggle {
+      display: block;
+    }
+  }
+</style>
