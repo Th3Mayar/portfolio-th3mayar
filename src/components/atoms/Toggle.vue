@@ -62,14 +62,11 @@ export default {
 
 .custom-item {
 }
+
+/* Media Queries Optimized */
 @media (max-width: 926px) {
   .items-dropdown {
     width: 94.7%;
-  }
-}
-@media (max-width: 896) {
-  .items-dropdown {
-    width: 94.6%;
   }
 }
 @media (max-width: 894px) {
@@ -90,11 +87,6 @@ export default {
 @media (max-width: 666px) {
   .items-dropdown {
     width: 92.8%;
-  }
-}
-@media (max-width: 642px) {
-  .items-dropdown {
-    width: 92.6%;
   }
 }
 @media (max-width: 590px) {
@@ -120,11 +112,6 @@ export default {
 @media (max-width: 376px) {
   .items-dropdown {
     width: 87.5%;
-  }
-}
-@media (max-width: 344px) {
-  .items-dropdown {
-    width: 86%;
   }
 }
 @media (max-width: 310px) {
