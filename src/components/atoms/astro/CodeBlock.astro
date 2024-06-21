@@ -27,7 +27,7 @@ const { language = 'javascript', code } = Astro.props;
 
 <script>
   import Prism from 'prismjs';
-
+  
   function initializePrism() {
     const codeBlocks = document.querySelectorAll('pre code');
     codeBlocks.forEach((codeBlock) => {
@@ -40,12 +40,4 @@ const { language = 'javascript', code } = Astro.props;
       initializePrism();
     });
   }
-
-  Astro.watch(() => {
-    const codeElement = document.querySelector(`.language-${Astro.props.language}`);
-    if (codeElement) {
-      codeElement.innerHTML = Astro.props.code;
-      Prism.highlightElement(codeElement);
-    }
-  });
 </script>
