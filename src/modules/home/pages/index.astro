@@ -1,23 +1,76 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { useTranslations, getLangFromUrl } from "@/i18n/utils";
+import IconByName from "@/components/atoms/IconByName.vue";
+import Button from "@/components/atoms/Button.vue";
+import Typography from "@/components/atoms/Typography.vue";
+import ImageByName from "@/components/atoms/ImageByName.vue";
+import CodeBlock from '@/components/atoms/astro/CodeBlock.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const { home: THome } = useTranslations(lang);
 const { seo: TSeo } = THome;
+const { home: THomeDescription } = useTranslations(lang);
+
+const {
+  title,
+  name,
+  description,
+  comment,
+  commentTwo,
+  constDefined,
+  link,
+  card,
+} = THomeDescription;
 ---
 
 <Layout title={TSeo.title}>
   <main>
-    
+    <section class="presentation">
+      <Typography variant="FiraCode" as="h4" color="light" caseType="capital">
+        {title}
+      </Typography>
+      <Typography variant="FiraCode" as="h1" color="light" caseType="capital">
+        {name}
+      </Typography>
+      <Typography variant="FiraCode" as="h2" color="purple" caseType="capital">
+        > {description}
+      </Typography>
+      <CodeBlock language="javascript" code={`// ${comment}`} />
+      <CodeBlock language="javascript" code={`// ${commentTwo}`} />
+      <CodeBlock language="javascript" code={`const ${constDefined};`} />
+    </section>
+    <section class="game-presentation">
+      <div>
+        <ImageByName name="effectCard" className="className" />
+      </div>
+    </section>
   </main>
 </Layout>
 
 <style>
   main {
     display: flex;
+    height: 100vh;
+  }
+
+  .presentation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    width: 100%;
+    height: min-content;
+    padding: 10rem 10rem;
+    gap: 15px;
+  }
+
+  .game-presentation {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    width: 100%;
+    height: min-content;
   }
 </style>

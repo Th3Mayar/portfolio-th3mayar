@@ -1,0 +1,17 @@
+---
+import hljs from 'highlight.js';
+import 'highlight.js/styles/default.css';
+
+const { language = 'javascript', code } = Astro.props;
+
+const highlightCode = (code: string) => {
+  const highlightedCode = hljs.highlight(language, code).value;
+  return highlightedCode;
+};
+---
+
+<pre><code class={`language-${language}`} {...{ dangerouslySetInnerHTML: { __html: highlightCode(code) } }}></code></pre>
+
+<script>
+  initializeHighlighting();
+</script>

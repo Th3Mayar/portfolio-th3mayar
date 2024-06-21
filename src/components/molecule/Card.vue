@@ -2,9 +2,9 @@
   <div class="card">
     <div class="card-header">
       <div class="image-container">
-        <ImageByName :name="image" stroke-width="1" :className="className" />
+        <ImageByName :name="image" :stroke-width="1" :className="className" />
         <div class="logo">
-          <ImageByName :name="icon" stroke-width="1" :className="className" />
+          <ImageByName :name="icon" :stroke-width="1" :className="className" />
         </div>
       </div>
     </div>

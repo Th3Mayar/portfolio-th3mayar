@@ -52,6 +52,20 @@
     "seo": {
       "title": "Portfolio | Home",
       "description": "Home Page"
+    },
+    "title": "Hi all. I am",
+    "name": "Jose Francisco",
+    "description": "Front-end developer",
+    "comment": "complete the game to continue",
+    "commentTwo": "you can also see it on my Github page",
+    "constDefined": "githubLink",
+    "link": "https://github.com/th3mayar",
+    "card": {
+      "comment": "use keyboard",
+      "commentTwo": "arrows to play",
+      "commentThree": "food left",
+      "skip": "skip",
+      "startGame": "start-game"
     }
   },
   "components": {

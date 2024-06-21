@@ -1,7 +1,9 @@
 export const routes = {
   projects: {
     codesys: "assets/codesys.PNG",
-    priceNotify: "assets/price-notify.PNG"
+    priceNotify: "assets/price-notify.PNG",
+    effectCard: "assets/effect-card.svg",
+    bgCard: "assets/bg-card.svg",
   },
   logos: {
     css: "logos/css.svg",
