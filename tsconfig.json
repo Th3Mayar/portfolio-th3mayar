@@ -1,7 +1,9 @@
 {
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
-    "jsx": "react-jsx",
+    "types": [
+      "prismjs"
+    ],
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -12,7 +14,6 @@
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
-    "jsxImportSource": "react"
   },
   "include": [
     "src"
