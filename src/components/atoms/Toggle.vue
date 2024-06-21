@@ -49,6 +49,9 @@ export default {
   gap: 20px;
   padding: 1rem 1rem 0px 1rem;
   width: 92%;
+  /* the items appear above what is there */
+  z-index: 100;
+  background-color: var(--darkBackground) !important;
 }
 
 .items-dropdown li {
@@ -58,9 +61,6 @@ export default {
   align-items: center;
   border-bottom: 1px solid var(--border);
   padding: 20px 0;
-}
-
-.custom-item {
 }
 
 /* Media Queries Optimized */
