@@ -11,7 +11,3 @@ const highlightCode = (code: string) => {
 ---
 
 <pre><code class={`language-${language}`} {...{ dangerouslySetInnerHTML: { __html: highlightCode(code) } }}></code></pre>
-
-<script>
-  initializeHighlighting();
-</script>
