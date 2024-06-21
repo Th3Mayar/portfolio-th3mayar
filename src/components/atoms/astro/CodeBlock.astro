@@ -21,6 +21,20 @@ const { language = 'javascript', code } = Astro.props;
     line-height: 0.1 !important;
   }
 
+  /* responsive */
+
+  @media (max-width: 768px) {
+    pre {
+      padding: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    pre {
+      padding: 2rem;
+    }
+  }
+
 </style>
 
 <script setup{}>
