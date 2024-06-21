@@ -1,13 +1,52 @@
 ---
-import hljs from 'highlight.js';
-import 'highlight.js/styles/default.css';
+import 'prismjs/themes/prism.css';
+import 'prismjs/components/prism-javascript';
+import Typography from "@/components/atoms/Typography.vue";
 
 const { language = 'javascript', code } = Astro.props;
-
-const highlightCode = (code: string) => {
-  const highlightedCode = hljs.highlight(language, code).value;
-  return highlightedCode;
-};
 ---
 
-<pre><code class={`language-${language}`} {...{ dangerouslySetInnerHTML: { __html: highlightCode(code) } }}></code></pre>
+<pre>
+  <code class={`language-${language}`}>
+    {code}
+  </code>
+</pre>
+
+<style>
+  pre {
+    background-color: var(--background); 
+    display: flex;
+    flex-direction: column;
+  }
+
+  code {
+    font-family: 'Fira Code', Arial, Helvetica, sans-serif;
+    line-height: 0.1 !important;
+  }
+
+</style>
+
+<script>
+  import Prism from 'prismjs';
+
+  function initializePrism() {
+    const codeBlocks = document.querySelectorAll('pre code');
+    codeBlocks.forEach((codeBlock) => {
+      Prism.highlightElement(codeBlock);
+    });
+  }
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('load', () => {
+      initializePrism();
+    });
+  }
+
+  Astro.watch(() => {
+    const codeElement = document.querySelector(`.language-${Astro.props.language}`);
+    if (codeElement) {
+      codeElement.innerHTML = Astro.props.code;
+      Prism.highlightElement(codeElement);
+    }
+  });
+</script>

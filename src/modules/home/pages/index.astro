@@ -36,9 +36,11 @@ const {
       <Typography variant="FiraCode" as="h2" color="purple" caseType="capital">
         > {description}
       </Typography>
-      <CodeBlock language="javascript" code={`// ${comment}`} />
-      <CodeBlock language="javascript" code={`// ${commentTwo}`} />
-      <CodeBlock language="javascript" code={`const ${constDefined};`} />
+      <div class="flex flex-col space-y-0">
+        <CodeBlock language="javascript" code={`// ${comment}`} />
+        <CodeBlock language="javascript" code={`// ${commentTwo}`} />
+        <CodeBlock language="javascript" code={`const ${constDefined} = ${link};`} />
+      </div>
     </section>
     <section class="game-presentation">
       <div>
