@@ -1,11 +1,10 @@
 ---
 import Item from "@/components/molecule/Item.vue";
 import { useTranslations, getLangFromUrl } from "@/i18n/utils";
-// import LightDark from "@/components/molecule/LightDark.vue";
 const lang = getLangFromUrl(Astro.url);
 const { common: TCommon } = useTranslations(lang);
 const { components: TComponents } = TCommon;
-import Toggle from '@/components/atoms/Toggle.vue';
+import Toggle from "@/components/atoms/Toggle.vue";
 ---
 
 <header>
@@ -17,22 +16,22 @@ import Toggle from '@/components/atoms/Toggle.vue';
       <Toggle class="toggle" client:load>
         <section class="popup-window">
           <Item
-            href=""
+            href=`/${lang}/`
             title={TComponents.hello}
             class="custom-item"
           />
           <Item
-            href=""
+            href=`/${lang}/about`
             title={TComponents.aboutMe}
             class="custom-item"
           />
           <Item
-            href=""
+            href=`/${lang}/projects`
             title={TComponents.projects}
             class="custom-item"
           />
           <Item
-            href=""
+            href=`/${lang}/contacts`
             title={TComponents.contactMe}
             class="custom-item"
           />
@@ -42,23 +41,23 @@ import Toggle from '@/components/atoms/Toggle.vue';
     <ul v-if="isMenuOpen" class="items">
       <Item href="" title={TComponents.name} class="item-name link-card" />
       <Item
-        href=""
+        href=`/${lang}/`
         title={TComponents.hello}
         class="item-hello link-card item"
       />
       <Item
-        href=""
+        href=`/${lang}/about`
         title={TComponents.aboutMe}
         class="item-about link-card item"
       />
       <Item
-        href=""
+        href=`/${lang}/projects`
         title={TComponents.projects}
         class="item-projects link-card item"
       />
-      <li class="item-hidden"> {/* <LightDark client:load /> */}</li>
+      <li class="item-hidden">{/* <LightDark client:load /> */}</li>
       <Item
-        href=""
+        href=`/${lang}/contacts`
         title={TComponents.contactMe}
         class="item-contact link-card item"
       />
@@ -114,6 +113,7 @@ import Toggle from '@/components/atoms/Toggle.vue';
     border-bottom: 4px solid var(--orangeHover);
     margin-bottom: -4px;
     width: 100%;
+    z-index: 999;
   }
 
   .item-contact {
@@ -132,20 +132,20 @@ import Toggle from '@/components/atoms/Toggle.vue';
     border: none;
   }
 
-  .toggle{
+  .toggle {
     display: none;
   }
 
-  button:nth-child(2){
+  button:nth-child(2) {
     display: none;
   }
 
-  .custom-item{
+  .custom-item {
     padding: 1rem 0 1rem 1rem;
   }
 
   @media (max-width: 926px) {
-    .toggle{
+    .toggle {
       display: flex;
     }
     .menu-toggle {
@@ -235,10 +235,21 @@ import Toggle from '@/components/atoms/Toggle.vue';
   }
 </style>
 
-
 <script>
+  import { useRouter } from "vue-router";
+
+  const router = useRouter();
+
   document.addEventListener("click", (e) => {
-    const item = document.querySelector('.item');
+    const target = (e.target as Element).closest("a");
+    if (!target || target.getAttribute("href") === "#") return;
+
+    const href = target.getAttribute("href");
+
     e.preventDefault();
+
+    if (href) {
+      router.push(href);
+    }
   });
 </script>

@@ -1,14 +1,17 @@
-<!-- Create component Item ul, li, a -->
 <script setup>
 import Typography from "@/components/atoms/Typography.vue";
 </script>
 
 <template>
-  <li :class="class">
+  <li :class="['link-card', customClass]">
+    <!-- Dynamic class binding with default 'link-card' -->
     <a :href="href">
+      <!-- Title Rendering -->
       <Typography variant="FiraCode" as="h5" color="dark" caseType="normal">
         {{ title }}
       </Typography>
+      <!-- Slot for additional content like Icons or other elements -->
+      <slot />
     </a>
   </li>
 </template>
@@ -17,9 +20,11 @@ import Typography from "@/components/atoms/Typography.vue";
 export default {
   props: {
     title: String,
-    body: String,
     href: String,
-    class: String,
+    customClass: {
+      type: [String, Object, Array], // Class binding can accept string, object, or array
+      default: "",
+    },
   },
 };
 </script>
@@ -40,16 +45,16 @@ export default {
   opacity: 0.8;
 }
 
-h5:hover{
-  color: var(--lighHover);
+h5:hover {
+  color: var(--lightHover); /* Fixed typo */
 }
 
 @media (max-width: 752px) {
-  .link-card > a:hover{
+  .link-card > a:hover {
     border-bottom: none;
     margin-bottom: 0;
   }
-  .item-name{
+  .item-name {
     color: var(--color-light);
   }
 }
