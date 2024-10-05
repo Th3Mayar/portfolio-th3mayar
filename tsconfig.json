@@ -1,26 +1,21 @@
 {
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
-    "types": [
-      "prismjs"
-    ],
+    // "types": [
+    //   "prismjs"
+    // ],
+    "target": "ESNext",
+    "module": "ESNext",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
+    "jsx": "preserve"
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "public"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "public"]
 }
