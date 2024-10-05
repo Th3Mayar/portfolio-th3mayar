@@ -1,0 +1,12 @@
+---
+import type { GetStaticPaths } from "astro";
+import { languages } from "@/i18n/ui";
+import AboutView from "@/modules/about/page/about.astro";
+
+export const getStaticPaths = (() => {
+  const lang = Object.keys(languages);
+  return lang.map((lang) => ({ params: { lang } }));
+}) satisfies GetStaticPaths;
+---
+
+<AboutView />

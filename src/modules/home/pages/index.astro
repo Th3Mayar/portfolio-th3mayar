@@ -1,8 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { useTranslations, getLangFromUrl } from "@/i18n/utils";
-import IconByName from "@/components/atoms/IconByName.vue";
-import Button from "@/components/atoms/Button.vue";
 import Typography from "@/components/atoms/Typography.vue";
 import ImageByName from "@/components/atoms/ImageByName.vue";
 import SnakeGame from "@/components/template/Snake.astro";
@@ -51,8 +49,13 @@ const {
         </Typography>
       </div>
     </section>
-    <section class="game-presentation mt-20">
-      <SnakeGame client:load />
+    <section class="game-presentation">
+      <div class="relative -top-5 -left-20 z-1">
+        <ImageByName name="effectCard" className="w-full h-full" />
+      </div>
+      <div class="absolute">
+        <SnakeGame client:load />
+      </div>
     </section>
   </main>
 </Layout>

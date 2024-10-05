@@ -20,24 +20,24 @@ import "../styles/global.css";
     <title>{title}</title>
   </head>
   <body>
-    <main>
+    <div class="content">
       <Header />
       <slot />
       <footer>
         <Footer />
       </footer>
-    </main>
+    </div>
   </body>
 </html>
 
 <style>
-  body{
+  body {
     padding: 50px;
     background-color: var(--card);
     overflow-y: hidden;
     overflow-x: hidden;
   }
-  main{
+  .content {
     max-height: 90vh;
     border: 2px solid var(--border);
     border-radius: 20px;
@@ -46,25 +46,25 @@ import "../styles/global.css";
   }
 
   footer {
-    margin-top: -240px; 
+    margin-top: -240px;
     text-align: center;
-    border-top: 2px solid var(--border); 
-    border-radius: 0 0 20px 20px; 
+    border-top: 2px solid var(--border);
+    border-radius: 0 0 20px 20px;
     color: #fff;
   }
-  
+
   @media (max-width: 926px) {
-    body{
+    body {
       overflow-y: scroll;
       padding: 20px;
     }
-    main{
+    .content {
       max-height: max-content;
     }
     footer {
       margin-top: 20px;
-      padding: 10px; 
-      font-size: 14px; 
+      padding: 10px;
+      font-size: 14px;
     }
   }
 </style>
