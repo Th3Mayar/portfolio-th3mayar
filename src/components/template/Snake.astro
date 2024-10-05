@@ -1,21 +1,7 @@
----
-let snake = [{ x: 150, y: 150 }];
-let direction = { x: 0, y: 0 };
-let food = {
-  x: Math.floor(Math.random() * 15) * 20,
-  y: Math.floor(Math.random() * 15) * 20,
-};
-let foodLeft = 10;
-let interval;
-let gameStarted = false;
-let gameOver = false;
-let win = false;
----
-
 <div class="game-container gap-7">
   <div class="game-display">
     <canvas id="snakeCanvas" width="300" height="300"></canvas>
-    <button id="startGameBtn" class="start-btn">start-game</button>
+    <button id="startGameBtn" class="start-btn">Start Game</button>
   </div>
   <div class="game-controls">
     <div class="instructions">
@@ -174,6 +160,22 @@ let win = false;
     opacity: 0;
     pointer-events: none;
   }
+
+  /* Confetti styling */
+  .confetti {
+    position: absolute;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    background-color: hsl(${Math.random() * 360}, 100%, 50%);
+    animation: fall linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(100vh) rotateZ(360deg);
+    }
+  }
 </style>
 
 <script>
@@ -191,7 +193,8 @@ let win = false;
     let win = false;
 
     const startGame = () => {
-      if (!gameStarted) {
+      if (!gameStarted || gameOver || win) {
+        resetGame();
         gameStarted = true;
         gameOver = false;
         win = false;
@@ -199,6 +202,20 @@ let win = false;
         updateFoodIndicator();
         interval = setInterval(gameLoop, 100); // Start the game loop
         document.getElementById("alert")?.classList.add("hidden");
+      }
+    };
+
+    const resetGame = () => {
+      snake = [{ x: 150, y: 150 }];
+      direction = { x: 0, y: 0 };
+      foodLeft = 10;
+      food = {
+        x: Math.floor(Math.random() * 15) * 20,
+        y: Math.floor(Math.random() * 15) * 20,
+      };
+      const startGameBtn = document.getElementById("startGameBtn");
+      if (startGameBtn) {
+        startGameBtn.textContent = "Start Game";
       }
     };
 
@@ -224,7 +241,7 @@ let win = false;
 
       if (isGameOver()) {
         clearInterval(interval);
-        displayAlert("Game Over!");
+        displayAlert("Game Over!", "Try again 😞");
         gameOver = true;
         return;
       }
@@ -237,7 +254,14 @@ let win = false;
       }
     };
 
-    const clearCanvas = (ctx: CanvasRenderingContext2D) => {
+    const clearCanvas = (ctx: {
+      clearRect: (
+        arg0: number,
+        arg1: number,
+        arg2: number,
+        arg3: number
+      ) => void;
+    }) => {
       ctx.clearRect(0, 0, 300, 300);
     };
 
@@ -248,17 +272,31 @@ let win = false;
       });
     };
 
-    const moveSnake = (ctx?: CanvasRenderingContext2D) => {
-      const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+    const isFoodEaten = (
+      head: { x: any; y: any },
+      food: { x: any; y: any }
+    ) => {
+      const distance = Math.sqrt(
+        Math.pow(head.x - food.x, 2) + Math.pow(head.y - food.y, 2)
+      );
+      return distance < 20;
+    };
+
+    const moveSnake = (ctx: any) => {
+      const head = {
+        x: snake[0].x + direction.x,
+        y: snake[0].y + direction.y,
+      };
       snake.unshift(head);
 
-      if (head.x === food.x && head.y === food.y) {
+      if (isFoodEaten(head, food)) {
         foodLeft--;
         updateFoodIndicator();
         if (foodLeft === 0) {
           clearInterval(interval);
-          displayAlert("You Win!");
+          displayAlert("You Win!", "Well done! Play again? 🎉");
           win = true;
+          launchConfetti();
         } else {
           generateNewFood();
         }
@@ -303,9 +341,11 @@ let win = false;
       }
     };
 
-    const displayAlert = (message: string) => {
+    const displayAlert = (message: string, buttonText: string | null) => {
       const alertBox = document.getElementById("alert");
       const alertMessageElement = document.getElementById("alertMessage");
+      const startGameBtn = document.getElementById("startGameBtn");
+
       if (alertMessageElement) {
         alertMessageElement.innerText = message;
       }
@@ -313,6 +353,28 @@ let win = false;
         alertBox.classList.remove("hidden");
         alertBox.classList.add("show");
       }
+      if (startGameBtn) {
+        startGameBtn.textContent = buttonText;
+      }
+    };
+
+    const launchConfetti = () => {
+      for (let i = 0; i < 100; i++) {
+        createConfetti();
+      }
+    };
+
+    const createConfetti = () => {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      document.body.appendChild(confetti);
+
+      confetti.style.left = `${Math.random() * 100}vw`;
+      confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+
+      setTimeout(() => {
+        confetti.remove();
+      }, 5000);
     };
 
     const startGameBtn = document.getElementById("startGameBtn");
