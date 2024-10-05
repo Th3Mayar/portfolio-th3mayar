@@ -1,0 +1,268 @@
+---
+let snake = [{ x: 150, y: 150 }];
+let direction = { x: 0, y: 0 };
+let food = {
+  x: Math.floor(Math.random() * 15) * 20,
+  y: Math.floor(Math.random() * 15) * 20,
+};
+let foodLeft = 10;
+let interval;
+let gameStarted = false;
+---
+
+<div class="game-container gap-7">
+  <div class="game-display">
+    <canvas id="snakeCanvas" width="300" height="300"></canvas>
+    <button id="startGameBtn" class="start-btn">start-game</button>
+  </div>
+  <div class="game-controls">
+    <div class="instructions">
+      <p>// use keyboard</p>
+      <p>// arrows to play</p>
+      <div class="arrow-keys">
+        <div>▲</div>
+        <div>
+          <span>◄</span>
+          <span>▼</span>
+          <span>►</span>
+        </div>
+      </div>
+    </div>
+    <div class="food-indicator">
+      <p>// food left</p>
+      <div class="food-dots" id="foodDots"></div>
+    </div>
+    <button class="skip-btn">skip</button>
+  </div>
+</div>
+
+<style>
+  /* General Styling */
+  body {
+    background-color: #0b1521;
+    font-family: "Courier New", monospace;
+  }
+
+  .game-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #122338;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+  }
+
+  .game-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #0d1f33;
+    padding: 20px;
+    border-radius: 15px;
+    position: relative;
+  }
+
+  /* Canvas and Snake */
+  canvas {
+    background-color: #0b1521;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Button Styling */
+  .start-btn {
+    margin-top: 20px;
+    background-color: #ff9300;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(255, 147, 0, 0.5);
+    text-transform: uppercase;
+  }
+
+  .skip-btn {
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 5px 10px;
+    margin-top: 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  /* Instructions Styling */
+  .instructions p {
+    color: #00ff00;
+    font-family: "Courier New", monospace;
+  }
+
+  .arrow-keys {
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 24px;
+    color: #00ff00;
+  }
+
+  .arrow-keys div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .arrow-keys span {
+    padding: 5px;
+    color: white;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    margin: 2px;
+  }
+
+  /* Food Indicator Styling */
+  .food-indicator p {
+    color: #00ff00;
+    font-family: "Courier New", monospace;
+  }
+
+  .food-dots {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .food-dot {
+    width: 15px;
+    height: 15px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px #00ff00;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    let snake = [{ x: 150, y: 150 }];
+    let direction = { x: 0, y: 0 };
+    let food = {
+      x: Math.floor(Math.random() * 15) * 20,
+      y: Math.floor(Math.random() * 15) * 20,
+    };
+    let foodLeft = 10;
+    let interval: string | number | NodeJS.Timeout | undefined;
+    let gameStarted = false;
+
+    const startGame = () => {
+      if (!gameStarted) {
+        gameStarted = true;
+        document.addEventListener("keydown", changeDirection);
+        updateFoodIndicator();
+        interval = setInterval(gameLoop, 100); // Start the game loop
+      }
+    };
+
+    const changeDirection = (event: { keyCode: any }) => {
+      const keyPressed = event.keyCode;
+      const UP = 38,
+        DOWN = 40,
+        LEFT = 37,
+        RIGHT = 39;
+
+      if (keyPressed === UP && direction.y === 0) direction = { x: 0, y: -20 };
+      else if (keyPressed === DOWN && direction.y === 0)
+        direction = { x: 0, y: 20 };
+      else if (keyPressed === LEFT && direction.x === 0)
+        direction = { x: -20, y: 0 };
+      else if (keyPressed === RIGHT && direction.x === 0)
+        direction = { x: 20, y: 0 };
+    };
+
+    const gameLoop = () => {
+      const canvas = document.getElementById("snakeCanvas");
+      const ctx = (canvas as HTMLCanvasElement).getContext("2d");
+
+      if (isGameOver()) {
+        alert("Game Over!");
+        clearInterval(interval);
+        return;
+      }
+
+      if (ctx) {
+        clearCanvas(ctx);
+        drawFood(ctx);
+        moveSnake(ctx);
+        drawSnake(ctx);
+      }
+    };
+
+    const clearCanvas = (ctx: CanvasRenderingContext2D) => {
+      ctx.clearRect(0, 0, 300, 300);
+    };
+
+    const drawSnake = (ctx: CanvasRenderingContext2D) => {
+      ctx.fillStyle = "#00FF00";
+      snake.forEach((part) => {
+        ctx.fillRect(part.x, part.y, 20, 20);
+      });
+    };
+
+    const moveSnake = (ctx?: CanvasRenderingContext2D) => {
+      const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+      snake.unshift(head);
+
+      // Adjusting collision detection logic
+      if (head.x === food.x && head.y === food.y) {
+        foodLeft--;
+        updateFoodIndicator();
+        generateNewFood();
+      } else {
+        snake.pop(); // Remove the tail unless eating
+      }
+    };
+
+    const drawFood = (ctx: CanvasRenderingContext2D) => {
+      ctx.fillStyle = "#FF0000";
+      ctx.fillRect(food.x, food.y, 20, 20); // Ensure food is drawn on the grid
+    };
+
+    const generateNewFood = () => {
+      food = {
+        x: Math.floor(Math.random() * 15) * 20,
+        y: Math.floor(Math.random() * 15) * 20,
+      };
+    };
+
+    const isGameOver = () => {
+      const head = snake[0];
+      if (head.x < 0 || head.x >= 300 || head.y < 0 || head.y >= 300)
+        return true;
+      for (let i = 4; i < snake.length; i++) {
+        if (snake[i].x === head.x && snake[i].y === head.y) return true;
+      }
+      return false;
+    };
+
+    const updateFoodIndicator = () => {
+      const foodDots = document.getElementById("foodDots");
+      if (foodDots) {
+        foodDots.innerHTML = "";
+      }
+      for (let i = 0; i < foodLeft; i++) {
+        const dot = document.createElement("div");
+        dot.classList.add("food-dot");
+        if (foodDots) {
+          foodDots.appendChild(dot);
+        }
+      }
+    };
+
+    document
+      .getElementById("startGameBtn")
+      ?.addEventListener("click", startGame);
+  });
+</script>

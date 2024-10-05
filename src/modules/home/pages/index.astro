@@ -5,7 +5,7 @@ import IconByName from "@/components/atoms/IconByName.vue";
 import Button from "@/components/atoms/Button.vue";
 import Typography from "@/components/atoms/Typography.vue";
 import ImageByName from "@/components/atoms/ImageByName.vue";
-import CodeBlock from '@/components/atoms/astro/CodeBlock.astro';
+import SnakeGame from "@/components/template/Snake.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const { home: THome } = useTranslations(lang);
@@ -36,21 +36,23 @@ const {
       <Typography variant="FiraCode" as="h2" color="purple" caseType="capital">
         > {description}
       </Typography>
-      <div class="flex flex-col space-y-0 mt-14">
-        <CodeBlock language="javascript" code={`// ${comment}`} />
-        <CodeBlock language="javascript" code={`// ${commentTwo}`} />
-        <CodeBlock language="javascript" code={`const ${constDefined} = ${link};`} />
+      <div class="flex flex-col mt-14 pl-10 space-y-3">
+        <Typography variant="FiraCode" as="h6" color="dark" caseType="capital">
+          // {comment}
+        </Typography>
+        <Typography variant="FiraCode" as="h6" color="dark" caseType="capital">
+          // {commentTwo}
+        </Typography>
+        <Typography variant="FiraCode" as="h6" color="dark" caseType="capital">
+          <b class="text-purple">const</b>
+          <span class="text-green">{constDefined}</span> = <span
+            class="text-limongrass">{link}</span
+          >
+        </Typography>
       </div>
     </section>
-    <section class="game-presentation">
-      <div class="relative content-bg">
-        <div class="relative top-24">
-          <ImageByName name="bgCard" className="absolute" />
-        </div>   
-        <div class="relative -top-20 -left-20">
-          <ImageByName name="effectCard" className="w-full h-full" />
-        </div>
-      </div>          
+    <section class="game-presentation mt-16">
+      <SnakeGame client:load />
     </section>
   </main>
 </Layout>
@@ -94,22 +96,23 @@ const {
     }
   }
 
-  @media(max-width: 1300px) {
+  @media (max-width: 1300px) {
     .presentation {
       padding: 5rem 3rem;
     }
 
-    .game-presentation{
+    .game-presentation {
       display: none;
     }
   }
   @media (max-width: 926px) {
-    main{
+    main {
       display: flex;
       text-align: left;
     }
 
-    .game-presentation, .content-bg:nth-child(1){
+    .game-presentation,
+    .content-bg:nth-child(1) {
       display: flex;
       position: absolute;
       float: left;

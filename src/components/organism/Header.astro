@@ -9,7 +9,7 @@ import Toggle from '@/components/atoms/Toggle.vue';
 ---
 
 <header>
-  <nav>
+  <nav class="z-50">
     <div class="header-left">
       <Item title={TComponents.name} class="link-card" />
     </div>
@@ -234,3 +234,11 @@ import Toggle from '@/components/atoms/Toggle.vue';
     }
   }
 </style>
+
+
+<script>
+  document.addEventListener("click", (e) => {
+    const item = document.querySelector('.item');
+    e.preventDefault();
+  });
+</script>
