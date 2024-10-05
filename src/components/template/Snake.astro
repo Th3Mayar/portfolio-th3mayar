@@ -224,14 +224,19 @@
       const UP = 38,
         DOWN = 40,
         LEFT = 37,
-        RIGHT = 39;
+        RIGHT = 39,
+        W = 87,
+        A = 65,
+        S = 83,
+        D = 68;
 
-      if (keyPressed === UP && direction.y === 0) direction = { x: 0, y: -20 };
-      else if (keyPressed === DOWN && direction.y === 0)
+      if ((keyPressed === UP || keyPressed === W) && direction.y === 0)
+        direction = { x: 0, y: -20 };
+      else if ((keyPressed === DOWN || keyPressed === S) && direction.y === 0)
         direction = { x: 0, y: 20 };
-      else if (keyPressed === LEFT && direction.x === 0)
+      else if ((keyPressed === LEFT || keyPressed === A) && direction.x === 0)
         direction = { x: -20, y: 0 };
-      else if (keyPressed === RIGHT && direction.x === 0)
+      else if ((keyPressed === RIGHT || keyPressed === D) && direction.x === 0)
         direction = { x: 20, y: 0 };
     };
 
