@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "@astrojs/check": "^0.7.0",
+    "@astrojs/react": "^3.6.2",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/vue": "^4.2.0",
     "@types/node": "^20.12.12",
