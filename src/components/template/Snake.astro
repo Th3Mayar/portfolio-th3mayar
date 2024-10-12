@@ -1,12 +1,27 @@
+---
+import { useTranslations, getLangFromUrl } from "@/i18n/utils";
+import Typography from "@/components/atoms/Typography.vue";
+import Button from "../atoms/Button.vue";
+
+const lang = getLangFromUrl(Astro.url);
+const { home: THomeDescription } = useTranslations(lang);
+
+// console.log(THomeDescription);
+
+const { card } = THomeDescription;
+---
+
 <div class="game-container gap-7">
   <div class="game-display">
-    <canvas id="snakeCanvas" width="300" height="300"></canvas>
-    <button id="startGameBtn" class="start-btn">Start Game</button>
+    <canvas id="snakeCanvas" width="300" height="300" class="mb-5"></canvas>
+    <Button id="startGameBtn" variant="orange" size="medium" disabled={false}
+      >{card.startGame}</Button
+    >
   </div>
   <div class="game-controls">
     <div class="instructions">
-      <p>// use keyboard</p>
-      <p>// arrows to play</p>
+      <p>// {card.comment}</p>
+      <p>// {card.commentTwo}</p>
       <div class="arrow-keys">
         <div>▲</div>
         <div>
@@ -17,10 +32,10 @@
       </div>
     </div>
     <div class="food-indicator">
-      <p>// food left</p>
+      <p>{card.commentThree}</p>
       <div class="food-dots" id="foodDots"></div>
     </div>
-    <button class="skip-btn">skip</button>
+    <button class="skip-btn">{card.skip}</button>
   </div>
   <div id="alert" class="alert hidden">
     <p id="alertMessage"></p>
@@ -65,11 +80,11 @@
   /* Button Styling */
   .start-btn {
     margin-top: 20px;
-    background-color: #ff9300;
+    background-color: var(--orangeHover);
     border: none;
     padding: 10px 20px;
     border-radius: 10px;
-    color: white;
+    color: var(--dark-foreground);
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 5px 10px rgba(255, 147, 0, 0.5);

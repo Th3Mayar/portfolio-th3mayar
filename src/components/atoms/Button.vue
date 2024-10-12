@@ -1,5 +1,5 @@
 <template>
-  <button :class="buttonClasses" :disabled="disabled" @click="handleClick">
+  <button :class="buttonClasses" :disabled="disabled" :id="id" :className="className" @click="handleClick">
     <slot></slot>
   </button>
 </template>
@@ -45,6 +45,8 @@ const props = defineProps({
     default: false,
   },
   onClick: Function,
+  id: String,
+  className: String,
 });
 
 const buttonClasses = computed(() => {
