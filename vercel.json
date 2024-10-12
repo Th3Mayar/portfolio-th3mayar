@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "src/**/*.astro",
+      "use": "@astrojs/vercel/serverless"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
+}
