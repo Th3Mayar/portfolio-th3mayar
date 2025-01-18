@@ -1,9 +1,11 @@
 ---
 import Item from "@/components/molecule/Item.vue";
 import { useTranslations, getLangFromUrl } from "@/i18n/utils";
+
 const lang = getLangFromUrl(Astro.url);
 const { common: TCommon } = useTranslations(lang);
 const { components: TComponents } = TCommon;
+
 import Toggle from "@/components/atoms/Toggle.vue";
 ---
 
@@ -13,7 +15,7 @@ import Toggle from "@/components/atoms/Toggle.vue";
       <Item title={TComponents.name} class="link-card" />
     </div>
     <div class="header-right">
-      <Toggle class="toggle" client:load>
+      <Toggle class="toggle">
         <section class="popup-window">
           <Item
             href=`/${lang}/`
@@ -39,7 +41,11 @@ import Toggle from "@/components/atoms/Toggle.vue";
       </Toggle>
     </div>
     <ul v-if="isMenuOpen" class="items">
-      <Item href="" title={TComponents.name} class="item-name link-card" />
+      <Item
+        href=""
+        title={TComponents.name}
+        class="item-name link-card"
+      />
       <Item
         href=`/${lang}/`
         title={TComponents.hello}
@@ -55,7 +61,7 @@ import Toggle from "@/components/atoms/Toggle.vue";
         title={TComponents.projects}
         class="item-projects link-card item"
       />
-      <li class="item-hidden">{/* <LightDark client:load /> */}</li>
+      <li class="item-hidden">{/* <LightDark  /> */}</li>
       <Item
         href=`/${lang}/contacts`
         title={TComponents.contactMe}
@@ -236,20 +242,18 @@ import Toggle from "@/components/atoms/Toggle.vue";
 </style>
 
 <script>
-  import { useRouter } from "vue-router";
+const internalLinks = document.querySelectorAll('a[href^="#"]');
 
-  const router = useRouter();
+internalLinks.forEach(link => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault(); 
 
-  document.addEventListener("click", (e) => {
-    const target = (e.target as Element).closest("a");
-    if (!target || target.getAttribute("href") === "#") return;
+    const targetId = link.getAttribute('href').substring(1); 
+    const targetElement = document.getElementById(targetId);
 
-    const href = target.getAttribute("href");
-
-    e.preventDefault();
-
-    if (href) {
-      router.push(href);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
     }
   });
+});
 </script>
