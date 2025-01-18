@@ -242,18 +242,20 @@ import Toggle from "@/components/atoms/Toggle.vue";
 </style>
 
 <script>
-const internalLinks = document.querySelectorAll('a[href^="#"]');
+document.addEventListener("click", (e: Event) => {
+    e.preventDefault();
+    
+    const target = e.target as HTMLElement,
+      parent = target.parentElement as HTMLElement;
 
-internalLinks.forEach(link => {
-  link.addEventListener('click', (event) => {
-    event.preventDefault(); 
+    console.log(parent);
 
-    const targetId = link.getAttribute('href').substring(1); 
-    const targetElement = document.getElementById(targetId);
+    // Get route from parent
+    const route = parent.getAttribute("href");
 
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
+    // If route is not null, navigate to route
+    if (route) {
+      window.location.href = route;
     }
   });
-});
 </script>
