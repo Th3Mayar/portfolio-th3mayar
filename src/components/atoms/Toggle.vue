@@ -11,7 +11,7 @@
     <button class="menu-toggle" @click="toggleMenu" v-if="isMenuOpen">
       <IconByName name="X" color="simple" className="header-icon" />
     </button>
-    <ul v-if="isMenuOpen" class="items-dropdown" @click="handleLinkClick">
+    <ul v-if="isMenuOpen" class="items-dropdown">
       <slot />
     </ul>
   </div>
@@ -33,20 +33,6 @@ export default {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
       this.$emit("menuToggled", this.isMenuOpen);
-    },
-    handleLinkClick(event) {
-      const target = event.target.closest("a[href^='#']");
-      if (target) {
-        event.preventDefault(); 
-        const id = target.getAttribute("href").substring(1); 
-        const element = document.getElementById(id);
-
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" }); 
-        }
-
-        this.isMenuOpen = false;
-      }
     },
   },
 };
@@ -74,11 +60,5 @@ export default {
   align-items: center;
   border-bottom: 1px solid var(--border);
   padding: 20px 0;
-}
-
-.menu-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
 }
 </style>
