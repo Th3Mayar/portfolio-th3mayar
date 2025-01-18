@@ -21,10 +21,10 @@ import "@/styles/global.css";
   </head>
   <body>
     <div class="content">
-      <Header  />
+      <Header  client:load />
       <slot />
       <footer>
-        <Footer  />
+        <Footer client:load />
       </footer>
     </div>
   </body>
