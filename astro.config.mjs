@@ -27,5 +27,8 @@ export default defineConfig({
         "styles/*": ["src/styles/*"],
       }
     }
+  },
+  optimizeDeps: {
+    exclude: ['@astrojs/vue'],
   }
 });
