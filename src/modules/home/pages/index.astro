@@ -1,0 +1,128 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { useTranslations, getLangFromUrl } from "@/i18n/utils";
+import Typography from "@/components/atoms/Typography.vue";
+import ImageByName from "@/components/atoms/ImageByName.vue";
+import SnakeGame from "@/components/template/Snake.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const { home: THome } = useTranslations(lang);
+const { seo: TSeo } = THome;
+const { home: THomeDescription } = useTranslations(lang);
+
+const {
+  title,
+  name,
+  description,
+  comment,
+  commentTwo,
+  constDefined,
+  link,
+} = THomeDescription;
+---
+
+<Layout title={TSeo.title}>
+  <main>
+    <section class="presentation">
+      <Typography variant="FiraCode" as="h4" color="light" caseType="capital">
+        {title}
+      </Typography>
+      <Typography variant="FiraCode" as="h1" color="light" caseType="capital">
+        {name}
+      </Typography>
+      <Typography variant="FiraCode" as="h2" color="purple" caseType="capital">
+        {description}
+      </Typography>
+      <div class="flex flex-col mt-14 pl-10 space-y-3">
+        <Typography variant="FiraCode" as="h6" color="dark" caseType="capital">
+          // {comment}
+        </Typography>
+        <Typography variant="FiraCode" as="h6" color="dark" caseType="capital">
+          // {commentTwo}
+        </Typography>
+        <Typography variant="FiraCode" as="h6" color="dark" caseType="capital">
+          <b class="text-purple">const</b>
+          <span class="text-green">{constDefined}</span>
+          <span class="text-input"> = </span>
+          <span class="text-limongrass"
+            >"{link}"<span class="text-input">;</span></span
+          >
+        </Typography>
+      </div>
+    </section>
+    <section class="game-presentation">
+      <div class="relative -top-5 -left-20 z-1">
+        <ImageByName name="effectCard" className="w-full h-full" />
+      </div>
+      <div class="absolute">
+        <SnakeGame client:load />
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main {
+    display: flex;
+    height: 76vh;
+    justify-content: center;
+  }
+
+  .presentation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    width: 100%;
+    height: min-content;
+    padding: 10rem 10rem;
+    gap: 15px;
+  }
+
+  .game-presentation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: min-content;
+  }
+
+  @media (max-width: 1629px) {
+    .presentation {
+      padding: 5rem 5rem;
+    }
+  }
+
+  @media (max-width: 1357px) {
+    .presentation {
+      padding: 5rem 4rem;
+    }
+  }
+
+  @media (max-width: 1300px) {
+    .presentation {
+      padding: 5rem 3rem;
+    }
+
+    .game-presentation {
+      display: none;
+    }
+  }
+  @media (max-width: 926px) {
+    main {
+      display: flex;
+      text-align: left;
+    }
+
+    .game-presentation,
+    .content-bg:nth-child(1) {
+      display: flex;
+      position: absolute;
+      float: left;
+      width: 400px;
+      top: 100px;
+      left: 20px;
+    }
+  }
+</style>

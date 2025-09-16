@@ -1,0 +1,55 @@
+---
+import 'prismjs/themes/prism.css'; 
+const { language = 'javascript', code } = Astro.props;
+---
+
+<pre>
+  <code class={`language-${language}`}>
+    {code}
+  </code>
+</pre>
+
+<style>
+  pre {
+    background-color: var(--background); 
+    display: flex;
+    flex-direction: column;
+  }
+
+  code {
+    font-family: 'Fira Code', Arial, Helvetica, sans-serif;
+    line-height: 0.1 !important;
+  }
+
+  /* responsive */
+
+  @media (max-width: 768px) {
+    pre {
+      padding: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    pre {
+      padding: 2rem;
+    }
+  }
+
+</style>
+
+<script setup{}>
+  import Prism from 'prismjs';  
+
+  function initializePrism() {
+    const codeBlocks = document.querySelectorAll('pre code');
+    codeBlocks.forEach((codeBlock) => {
+      Prism.highlightElement(codeBlock);
+    });
+  }
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('load', () => {
+      initializePrism();
+    });
+  }
+</script>

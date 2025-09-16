@@ -1,0 +1,16 @@
+{
+  "cSpell.words": [
+    "codesys",
+    "Fira",
+    "hljs",
+    "limongrass",
+    "mayar",
+    "onclick",
+    "prismjs",
+    "translatex",
+    "typeof",
+    "zustand"
+  ],
+  "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true
+}

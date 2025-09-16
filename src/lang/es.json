@@ -1,0 +1,83 @@
+{
+  "common": {
+    "header": {},
+    "footer": {
+      "findMe": "encuéntrame en:",
+      "rights": "Todos los derechos reservados",
+      "username": "@th3mayar"
+    },
+    "components": {
+      "title": "Componentes",
+      "buttons": "Botones",
+      "cards": "Tarjetas",
+      "forms": "Formularios",
+      "modals": "modales",
+      "tables": "Tablas",
+      "buttonVariant": {
+        "orange": "Botón Naranja",
+        "outline": "Botón de esquema",
+        "secondary": "Botón secundario",
+        "primary": "Botón Principal",
+        "ghost": "Botón fantasma",
+        "Link": "Botón de enlace",
+        "Simple": "Botón simple"
+      },
+      "typography": "Tipografía",
+      "icons": "_iconos",
+      "items": "_artículos",
+      "hello": "_hola",
+      "aboutMe": "_acerca-de",
+      "projects": "_proyectos",
+      "name": "_jose-francisco",
+      "personalInfo": "_información-personal",
+      "contacts": "_contactos",
+      "contactMe": "_contactame",
+      "variant": {
+        "green": "_variante-verde",
+        "dark": "_variante-oscura",
+        "purple": "_variante-morada",
+        "pink": "_variante-rosa",
+        "limongrass": "_variante-limoncillo",
+        "orange": "_variante-naranja"
+      },
+      "example": "La vida es demasiado corta como para preocuparse por cosas sin importancia."
+    },
+    "page": {
+      "error": "error",
+      "notFound": "no-encontrado",
+      "viewProjects": "ver-proyectos"
+    }
+  },
+  "home": {
+    "seo": {
+      "title": "Portafolio | Inicio",
+      "description": "Pagina de inicio"
+    },
+    "title": "Hola a todos. Soy",
+    "name": "José Francisco",
+    "description": "Desarrollador front-end",
+    "comment": "completa el juego para continuar",
+    "commentTwo": "también puedes verlo en mi página de Github",
+    "constDefined": "githubLink",
+    "link": "https://github.com/th3mayar",
+    "card": {
+      "comment": "usar teclado",
+      "commentTwo": "flechas para jugar",
+      "commentThree": "queda comida",
+      "skip": "saltar",
+      "startGame": "iniciar-juego"
+    }
+  },
+  "components": {
+    "seo": {
+      "title": "Portafolio | Componentes",
+      "description": "Página de componentes"
+    }
+  },
+  "footer": {
+    "seo": {
+      "title": "Portafolio | Pie de página",
+      "description": " Pie de página"
+    }
+  }
+}

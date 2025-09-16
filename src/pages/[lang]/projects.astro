@@ -1,0 +1,12 @@
+---
+import type { GetStaticPaths } from "astro";
+import { languages } from "@/i18n/ui";
+import ProjectsView from "@/modules/projects/page/projects.astro";
+
+export const getStaticPaths = (() => {
+  const lang = Object.keys(languages);
+  return lang.map((lang) => ({ params: { lang } }));
+}) satisfies GetStaticPaths;
+---
+
+<ProjectsView />

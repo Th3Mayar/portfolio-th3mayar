@@ -1,0 +1,30 @@
+export const routes = {
+  projects: {
+    codesys: "assets/codesys.PNG",
+    priceNotify: "assets/price-notify.PNG",
+    effectCard: "assets/effect-card.svg",
+    bgCard: "assets/bg-card.svg",
+    luffyGear4: "assets/luffy-gear-4.png",
+    rescueTrack: "assets/rescue-track.PNG",
+    saborApp: "assets/sabor-app.png",
+    writePhrase: "assets/write-phrase.png",
+    palomoOfMonth: "assets/palomo-of-month.png",
+    gridOrFlex: "assets/grid-or-flex.png",
+  },
+  logos: {
+    css: "logos/css.svg",
+    html: "logos/html.svg",
+    js: "logos/js.svg",
+    react: "logos/react.svg",
+    node: "logos/nodejs.svg",
+    express: "logos/express.svg",
+    mongo: "logos/mongodb.svg",
+    jquery: "logos/jquery.svg",
+    tailwind: "logos/tailwindcss.svg",
+    php: "logos/php.svg",
+    vue: "logos/vue.svg",
+    next: "logos/nextjs.svg",
+    astro: "favicon.svg",
+    nuxt: "logos/nuxt.svg",
+  }
+};

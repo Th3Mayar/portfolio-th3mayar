@@ -1,0 +1,59 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+import Header from "@/components/organism/Header.astro";
+import Footer from "@/components/organism/Footer.astro";
+import "@/styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="p-[50px] bg-darkBackground text-light overflow-hidden">
+    <div
+      class="content max-h-[100%] h-[100%] rounded-[20px] border-2 bg-bg-background shadow-[0_0_50px_0px_var(--border-effect)] overflow-hidden relative"
+    >
+      <Header client:load />
+      <slot />
+      <footer>
+        <Footer client:load />
+      </footer>
+    </div>
+  </body>
+</html>
+
+<style>
+  .content {
+    border: 2px solid var(--border);
+    border-radius: 20px;
+  }
+
+  footer {
+    border-top: 2px solid var(--border);
+    border-radius: 0 0 20px 20px;
+  }
+
+  @media (max-width: 926px) {
+    body {
+      overflow-y: scroll;
+      padding: 20px;
+    }
+    .content {
+      max-height: max-content;
+    }
+    footer {
+      padding: 10px;
+      font-size: 14px;
+    }
+  }
+</style>

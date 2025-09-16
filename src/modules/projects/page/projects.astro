@@ -1,0 +1,14 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ProjectsPanel from "@/components/molecule/ProjectsPanel.vue";
+---
+
+<Layout title="Personal projects">
+  <ProjectsPanel client:only="vue" />
+</Layout>
+
+<style is:global>
+    .border-border {
+        border-color: var(--border) !important;
+    }
+</style>

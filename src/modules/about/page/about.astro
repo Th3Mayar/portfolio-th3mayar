@@ -1,0 +1,22 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import AboutPanel from "@/components/molecule/AboutPanel.vue";
+---
+
+<Layout title="About">
+  <AboutPanel client:only="vue" class="h-[75dvh]" />
+</Layout>
+
+<!-- Responsive css to height -->
+
+<style is:global>
+  @media (max-height: 700px) {
+    .h-\[75dvh\] {
+      height: 60dvh;
+    }
+  }
+
+  .border-border {
+    border-color: var(--border) !important;
+  }
+</style>

@@ -1,0 +1,83 @@
+{
+  "common": {
+    "header": {},
+    "footer": {
+      "findMe": "find me in:",
+      "rights": "All rights reserved",
+      "username": "@th3mayar"
+    },
+    "components": {
+      "title": "Components",
+      "buttons": "Buttons",
+      "cards": "Cards",
+      "forms": "Forms",
+      "modals": "Modals",
+      "tables": "Tables",
+      "buttonVariant": {
+        "orange": "Orange Button",
+        "outline": "Outline Button",
+        "secondary": "Secondary Button",
+        "primary": "Primary Button",
+        "ghost": "Ghost Button",
+        "Link": "Link Button",
+        "Simple": "Simple Button"
+      },
+      "typography": "Typography",
+      "icons": "Icons",
+      "items": "Items",
+      "hello": "_hello",
+      "aboutMe": "_about-me",
+      "projects": "_projects",
+      "name": "_jose-francisco",
+      "personalInfo": "_personal-info",
+      "contacts": "_contacts",
+      "contactMe": "_contact-me",
+      "variant": {
+        "green": "_variant-green",
+        "dark": "_variant-dark",
+        "purple": "_variant-purple",
+        "pink": "_variant-pink",
+        "limongrass": "_variant-limongrass",
+        "orange": "_variant-orange"
+      },
+      "example": "Life is too short to worry about unimportant things."
+    },
+    "page": {
+      "error": "error",
+      "notFound": "not-found",
+      "viewProjects": "view-projects"
+    }
+  },
+  "home": {
+    "seo": {
+      "title": "Portfolio | Home",
+      "description": "Home Page"
+    },
+    "title": "Hi all. I am",
+    "name": "Jose Francisco",
+    "description": "Front-end developer",
+    "comment": "complete the game to continue",
+    "commentTwo": "you can also see it on my Github page",
+    "constDefined": "githubLink",
+    "link": "https://github.com/th3mayar",
+    "card": {
+      "comment": "use keyboard",
+      "commentTwo": "arrows to play",
+      "commentThree": "food left",
+      "skip": "skip",
+      "startGame": "start-game"
+    }
+  },
+  "components": {
+    "seo": {
+      "title": "Portfolio | Components",
+      "description": "Components Page"
+    }
+  },
+  "footer": {
+    "seo": {
+      "title": "Portfolio | Footer",
+      "description": "Footer Page"
+    }
+  }
+}

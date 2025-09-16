@@ -1,0 +1,9 @@
+{
+  "framework": "astro",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
+}
