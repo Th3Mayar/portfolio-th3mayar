@@ -17,14 +17,6 @@ export default defineConfig({
     resolve: {
       alias: {
         '@': '/src',
-        "@/*": ["src/*"],
-        "types/*": ["types/*"],
-        "components/*": ["src/components/*"],
-        "layouts/*": ["src/layouts/*"],
-        "pages/*": ["src/pages/*"],
-        "i18n/*": ["src/i18n/*"],
-        "lang/*": ["src/lang/*"],
-        "styles/*": ["src/styles/*"],
       }
     }
   },

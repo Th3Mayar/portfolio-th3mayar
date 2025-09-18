@@ -1,44 +1,61 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import Button from "@/components/atoms/Button.vue";
+import IconByName from "@/components/atoms/IconByName.vue";
 ---
 
 <Layout title="Contact information">
-  <main class="flex flex-col md:flex-row h-full min-h-[70vh] w-full bg-dark-background">
-    <nav class="flex md:flex-col gap-2 md:gap-4 p-2 md:p-4 bg-dark border-r border-border min-w-[60px] md:min-w-[90px]">
-      <a href="/about" class="flex flex-col items-center group">
-        <span class="text-2xl group-hover:text-green transition-colors">🧑‍💻</span>
-        <span class="text-xs mt-1 hidden md:block text-light group-hover:text-green">about</span>
-      </a>
-      <a href="/projects" class="flex flex-col items-center group">
-        <span class="text-2xl group-hover:text-orange transition-colors">📁</span>
-        <span class="text-xs mt-1 hidden md:block text-light group-hover:text-orange">projects</span>
-      </a>
-      <a href="/contact-me" class="flex flex-col items-center group">
-        <span class="text-2xl group-hover:text-pink transition-colors">✉️</span>
-        <span class="text-xs mt-1 hidden md:block text-light group-hover:text-pink">contact</span>
-      </a>
-    </nav>
+  <main
+    class="flex flex-col md:flex-row h-full min-h-[70vh] w-full bg-dark-background"
+  >
     <section class="flex-1 p-4 flex flex-col gap-6 items-center justify-center">
-      <h2 class="font-mono text-lg text-pink mb-2">~/contact-me</h2>
-      <form class="w-full max-w-md bg-card/80 rounded-md p-6 border border-border flex flex-col gap-4">
+      <h2 class="font-mono text-lg text-default mb-2">~/contact-me</h2>
+      <form
+        class="w-full max-w-md bg-card/80 rounded-md p-6 border border-border flex flex-col gap-4"
+      >
         <label class="flex flex-col gap-1">
           <span class="font-mono text-xs text-light">Name</span>
-          <input type="text" name="name" required class="bg-dark text-light rounded px-3 py-2 outline-none focus:ring-2 focus:ring-pink" />
+          <input
+            type="text"
+            name="name"
+            required
+            class="bg-dark text-light rounded px-3 py-2 outline-none focus:ring-2 focus:ring-dark rounded-lg"
+            placeholder="Your Name" />
         </label>
         <label class="flex flex-col gap-1">
           <span class="font-mono text-xs text-light">Email</span>
-          <input type="email" name="email" required class="bg-dark text-light rounded px-3 py-2 outline-none focus:ring-2 focus:ring-pink" />
+          <input
+            type="email"
+            name="email"
+            required
+            class="bg-dark text-light rounded px-3 py-2 outline-none focus:ring-2 focus:ring-dark rounded-lg"
+            placeholder="Your Email"
+          />
         </label>
         <label class="flex flex-col gap-1">
           <span class="font-mono text-xs text-light">Message</span>
-          <textarea name="message" rows="4" required class="bg-dark text-light rounded px-3 py-2 outline-none focus:ring-2 focus:ring-pink"></textarea>
+          <textarea
+            name="message"
+            rows="4"
+            required
+            class="bg-dark text-light rounded px-3 py-2 outline-none focus:ring-2 focus:ring-dark rounded-lg"
+            placeholder="Your Message"
+          ></textarea>
         </label>
-        <button type="submit" class="bg-pink hover:bg-orange text-light font-mono rounded px-4 py-2 transition-colors">Send</button>
+        <Button type="submit" variant="secondary" class="self-end mt-2 w-full" @click={(e: { preventDefault: () => any; }) => e.preventDefault()}>
+          <span class="flex items-center gap-2">
+            <IconByName name="Send" class="w-4 h-4" />
+            Send
+          </span>
+        </Button>
       </form>
-      <div class="text-light text-xs mt-4 font-mono">Or email me at <a href="mailto:josehenriquez@gmail.com" class="text-pink underline">josehenriquez.02.26@gmail.com</a></div>
+      <div class="text-light text-xs mt-4 font-mono">
+        Or email me at <a
+          href="mailto:josehenriquez@gmail.com"
+          class="text-pink underline">josehenriquez.02.26@gmail.com</a>
+      </div>
     </section>
   </main>
 </Layout>
 
-<style>
-</style>
+<style></style>

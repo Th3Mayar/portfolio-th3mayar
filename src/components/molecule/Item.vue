@@ -1,21 +1,27 @@
-<script setup>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import Typography from "@/components/atoms/Typography.vue";
 
-defineProps({
-  title: String,
-  href: String,
-  customClass: {
-    type: [String, Object, Array],
-    default: "",
+export default defineComponent({
+  props: {
+    title: String,
+    href: String,
+    customClass: {
+      type: [String, Object, Array],
+      default: "",
+    },
+    classLink: {
+      type: String,
+      default: "",
+    },
+    IconPosition: {
+      type: String,
+      default: "left",
+      validator: (value: string) => ["left", "right", "top", "bottom"].includes(value),
+    },
   },
-  classLink: {
-    type: String,
-    default: "",
-  },
-  IconPosition: {
-    type: String,
-    default: "left",
-    validator: (value) => ["left", "right", "top", "bottom"].includes(value),
+  components: {
+    Typography,
   },
 });
 </script>

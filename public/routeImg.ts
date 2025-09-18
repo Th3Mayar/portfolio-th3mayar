@@ -5,7 +5,7 @@ export const routes = {
     effectCard: "assets/effect-card.svg",
     bgCard: "assets/bg-card.svg",
     luffyGear4: "assets/luffy-gear-4.png",
-    rescueTrack: "assets/rescue-track.PNG",
+    rescueTrack: "assets/rescue-track.png",
     saborApp: "assets/sabor-app.png",
     writePhrase: "assets/write-phrase.png",
     palomoOfMonth: "assets/palomo-of-month.png",
