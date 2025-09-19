@@ -1,18 +1,21 @@
 <template>
   <main class="flex flex-col md:flex-row h-[75dvh] w-full">
     <aside
-      class="flex flex-col gap-4 p-4 border-r bg-dark-background border-border min-w-[220px] md:min-w-[260px]"
+      class="flex flex-col gap-4 p-4 border-r bg-dark-background border-border transition-all duration-300"
+      :class="showFilters ? 'min-w-[220px] md:min-w-[260px]' : 'min-w-[60px] md:min-w-[60px] items-center justify-center'"
     >
       <div
-        class="flex items-center justify-between cursor-pointer select-none"
+        class="flex items-center justify-between cursor-pointer select-none transition-transform duration-300"
+        :class="showFilters ? 'flex-row' : 'flex-col w-[20px]'"
         @click="showFilters = !showFilters"
       >
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2" :class="showFilters ? '' : 'flex-col gap-1'">
           <Typography
             variant="FiraCode"
             as="h4"
             color="light"
-            className="font-bold text-lg"
+            className="font-bold transition-transform duration-300 !text-base"
+            :class="showFilters ? '' : 'transform -rotate-90 whitespace-nowrap'"
           >
             Projects ({{ filteredProjects.length }}/{{ allProjects.length }})
           </Typography>
@@ -25,10 +28,11 @@
         <IconByName
           :name="showFilters ? 'ChevronDown' : 'ChevronRight'"
           color="light"
-          className="text-xl transition-transform"
+          className="text-xl transition-transform duration-300"
+          :class="showFilters ? '' : 'transform rotate-90'"
         />
       </div>
-      <div v-if="showFilters" class="flex flex-col gap-2 mt-2">
+      <div v-if="showFilters" class="flex flex-col gap-2 mt-2 transition-all duration-300">
         <div class="flex flex-col gap-2 mb-2 pb-2 border-b border-border">
           <Button
             @click="selectAllFrameworks"
