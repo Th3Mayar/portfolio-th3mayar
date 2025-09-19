@@ -1,21 +1,17 @@
----
-import Layout from "@/layouts/Layout.astro";
----
-
-<Layout title="Redirecting...">
+<html>
+  <head>
+    <title>Redirecting...</title>
     <script>
-        if (window.location.pathname === "/") {
-            const lang = (navigator.language || 'en').toLowerCase();
-
-            let target = '/en/';
-
-            if (lang.startsWith('es')) target = '/es/';
-            
-            window.location.replace(target);
+      if (window.location.pathname === "/") {
+        const lang = (navigator.language || 'en').toLowerCase();
+        let target = '/en/';
+        if (lang.startsWith('es')) target = '/es/';
+        window.location.replace(target);
       }
     </script>
-
     <noscript>
-        <meta http-equiv="refresh" content="0;url=/en/" />
+      <meta http-equiv="refresh" content="0;url=/en/">
     </noscript>
-</Layout>
+  </head>
+  <body></body>
+</html>
