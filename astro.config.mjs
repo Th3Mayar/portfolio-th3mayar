@@ -34,4 +34,5 @@ export default defineConfig({
   transitions: {
     fallback: 'none'
   },
+  outDir: 'dist',
 });
