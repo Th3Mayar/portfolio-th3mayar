@@ -53,32 +53,17 @@
           >
             <div class="flex items-center gap-2">
               <IconByName
-                v-if="contact.type === 'email'"
-                name="Mail"
-                color="light"
-                @click="sendEmail(contact.value)"
-                class="action-btn cursor-pointer"
-                :aria-label="`Send email to ${contact.value}`"
-                title="Send email"
-                className="text-base mb-1 group-hover:text-orange"
-              />
-              <IconByName
-                v-else
-                @click="callNumber(contact.value)"
-                name="Phone"
+                :name="contact.icon"
                 color="light"
                 class="action-btn cursor-pointer"
                 className="text-base mb-1 group-hover:text-orange"
-                :aria-label="`Call ${contact.value}`"
-                title="Call"
+                :aria-label="getAriaLabel(contact)"
+                :title="getTitle(contact)"
+                @click="handleContactClick(contact)"
               />
               <span
                 class="text-base break-words cursor-pointer"
-                @click="
-                  contact.type === 'email'
-                    ? sendEmail(contact.value)
-                    : callNumber(contact.value)
-                "
+                @click="handleContactClick(contact)"
               >
                 {{ contact.value }}
               </span>
@@ -119,164 +104,23 @@ import "prismjs/components/prism-javascript";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+import { folders, contacts } from "@/stores/about";
+import { useAboutPanel } from "@/composables/aboutPanel";
+
+const {
+  toggleFolder,
+  selectedFile,
+  codeEl,
+  selectFile,
+  getAriaLabel,
+  getTitle,
+  handleContactClick,
+} = useAboutPanel();
 
 // get prop activeDirectory
 withDefaults(defineProps(), {
   activeDirectory: "bio",
 });
-
-const folders = ref([
-  {
-    key: "bio",
-    label: "bio",
-    open: true,
-    files: [
-      {
-        key: "about-me",
-        label: "about-me.js",
-        content: `/**
-
- * Systems Engineering student passionate about technology with years of experience in development
-
- * fullstack graduated in Development and Maintenance of Computer Applications and since then, I have been
-
- * committed to advancing in the world of software development through constant academic training and dedicated
-
- * work towards excellence. My passion for GUI and UX development is reflected in every project.
-
- */`,
-      },
-    ],
-  },
-  {
-    key: "interests",
-    label: "interests",
-    open: false,
-    files: [
-      {
-        key: "interests-file",
-        label: "interests.js",
-        content: `/**
-
- * Interests
-
- * - Coding
-
- * - Open Source
-
- * - Gaming
-
- * - UI/UX
-
- * - Coffee
-
- * - Enjoying time with friends
-
- * - Eating
-
- * - Listening to music
-
- * - Inventing new things
-
- * - Discovering new things
-
- */`,
-      },
-    ],
-  },
-  {
-    key: "education",
-    label: "education",
-    open: false,
-    files: [
-      {
-        key: "high-school",
-        label: "high-school.js",
-        content: `/**
-
- * Technician in Development and Maintenance of Computer Applications
-
- * IATESA, La Vega, Dominican Republic
-
- */
-`,
-      },
-      {
-        key: "university",
-        label: "university.js",
-        content: `/**
-
- * University
-
- * Systems Engineering Student
-
- * Senior year student of Computer Systems Engineering at UCATECI,
-
- * La Vega, Dominican Republic.
-
- * From January 2022 to the present.
-
- */
-`,
-      },
-    ],
-  },
-]);
-
-const contacts = ref([
-  { type: "email", value: "josehenriquez.02.26@gmail.com" },
-  { type: "phone", value: "+1(###) ###-####" },
-]);
-
-// sanitize phone number to digits + optional leading +
-function sanitizePhone(phone) {
-  if (!phone) return "";
-  const plus = phone.trim().startsWith("+") ? "+" : "";
-  const digits = phone.replace(/[^\d]/g, "");
-  return plus + digits;
-}
-
-// action: call phone number
-function callNumber(phone) {
-  const sanitized = sanitizePhone(phone);
-  if (!sanitized) return;
-  window.open(`tel:${sanitized}`, "_self");
-}
-
-// action: send email with subject/body template
-function sendEmail(email) {
-  if (!email) return;
-  const subject = encodeURIComponent("Hello 👋");
-  const body = encodeURIComponent("Hi,\n\nI wanted to get in touch with you.\n\n—");
-  window.open(`mailto:${email}?subject=${subject}&body=${body}`, "_self");
-}
-
-// copy to clipboard helper
-async function copyToClipboard(text) {
-  if (!text) return;
-  try {
-    await navigator.clipboard.writeText(text);
-    console.log(`Copied: ${text}`);
-  } catch (err) {
-    console.error("Copy failed", err);
-  }
-}
-
-const selectedFile = ref(null);
-const codeEl = ref(null);
-
-function toggleFolder(key) {
-  folders.value = folders.value.map((f) => (f.key === key ? { ...f, open: !f.open } : f));
-}
-
-function selectFile(file) {
-  selectedFile.value = file;
-  nextTick(() => {
-    if (codeEl.value) {
-      Prism.highlightElement(codeEl.value);
-    }
-  });
-}
 
 onMounted(() => {
   const bioFolder = folders.value.find((f) => f.key === "bio");

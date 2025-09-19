@@ -1,10 +1,26 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <div class="image-container" @click="openImageModal">
-        <ImageByName :name="image" :stroke-width="1" :className="className + ' card-img'" />
+      <div class="image-container" @click="openModal">
+        <img
+          v-if="props.gif"
+          :src="`/assets/${props.gif}.gif`"
+          class="card-gif"
+          alt="Project GIF"
+        />
+        <ImageByName
+          v-else-if="props.image"
+          :name="props.image"
+          :stroke-width="1"
+          :className="className + ' card-img'"
+        />
         <div class="logo">
           <ImageByName :name="icon" :stroke-width="1" :className="className" />
+        </div>
+        <div v-if="props.gif" class="gif-indicator">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <text x="4" y="18" font-size="16" font-family="monospace" fill="white">GIF</text>
+          </svg>
         </div>
       </div>
     </div>
@@ -23,8 +39,19 @@
       </Button>
     </div>
     <div v-if="showModal" class="modal-bg" @click="showModal = false">
-      <div class="modal-img-wrapper" @click.stop>
-        <ImageByName :name="image" :stroke-width="1" className="modal-img" />
+      <div class="modal-content-wrapper" @click.stop>
+        <img
+          v-if="props.gif && showModal"
+          :src="`/assets/${props.gif}.gif`"
+          class="modal-gif"
+          alt="Project GIF"
+        />
+        <ImageByName
+          v-else-if="props.image && showModal"
+          :name="props.image"
+          :stroke-width="1"
+          className="modal-img"
+        />
       </div>
     </div>
   </div>
@@ -36,7 +63,8 @@ import ImageByName from "../atoms/ImageByName.vue";
 import Button from "../atoms/Button.vue";
 
 interface Props {
-  image: string;
+  image?: string;
+  gif?: string;
   icon: string;
   className?: string;
   ButtonVariant?: string;
@@ -45,16 +73,24 @@ interface Props {
   url: string;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   className: "",
   ButtonVariant: "simple",
   size: "medium",
+  image: "",
+  gif: "",
 });
 
 const showModal = ref(false);
-const openImageModal = () => {
-  showModal.value = true;
+
+const openModal = () => {
+  if (props.image || props.gif) {
+    showModal.value = true;
+  }
 };
+
+
+
 const openUrl = (url: string) => {
   if (url) {
     window.open(url, "_blank");
@@ -167,6 +203,37 @@ const openUrl = (url: string) => {
   max-height: 70vh;
   border-radius: 12px;
   object-fit: contain;
+}
+
+
+.card-gif {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+
+.modal-gif {
+  max-width: 80vw;
+  max-height: 70vh;
+  border-radius: 12px;
+}
+
+
+.gif-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
 }
 
 @media (max-width: 600px) {

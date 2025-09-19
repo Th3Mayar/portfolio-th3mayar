@@ -10,6 +10,12 @@ export const routes = {
     writePhrase: "assets/write-phrase.png",
     palomoOfMonth: "assets/palomo-of-month.png",
     gridOrFlex: "assets/grid-or-flex.png",
+    factuStock1: "assets/FactuStock/factu-stock-1.JPG",
+    factuStock2: "assets/FactuStock/factu-stock-2.JPG",
+    factuStock3: "assets/FactuStock/factu-stock-3.JPG",
+    factuStock4: "assets/FactuStock/factu-stock-4.JPG",
+    gestorPass: "assets/gestor_pass.jpg",
+    encryptText: "assets/encrypt.png",
   },
   logos: {
     css: "logos/css.svg",
@@ -26,5 +32,11 @@ export const routes = {
     next: "logos/nextjs.svg",
     astro: "favicon.svg",
     nuxt: "logos/nuxt.svg",
-  }
+    api: "logos/api.png",
+    csharp: "logos/csharp.svg",
+    python: "logos/python.svg",
+  },
+  gif: {
+    FractalMetamorphosis2D: "videos/FractalMetamorphosis2D.gif",
+  },
 };

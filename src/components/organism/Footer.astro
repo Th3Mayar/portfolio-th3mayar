@@ -1,7 +1,4 @@
 ---
-import Item from "@/components/molecule/Item.vue";
-import IconByName from "../atoms/IconByName.vue";
-import Button from "@/components/atoms/Button.vue";
 import { useTranslations, getLangFromUrl } from "@/i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const { common: TCommon } = useTranslations(lang);
@@ -10,22 +7,118 @@ const { footer: TFooter } = TCommon;
 
 <div class="footer-content text-center rounded-b-[20px] text-light">
   <div class="footer-left">
-    <Item title={TFooter.findMe} class="link-card" />
+    <span class="link-card font-FiraCode text-lg lg:text-xl text-gray-300"
+      >{TFooter.findMe}</span
+    >
   </div>
   <div class="footer-center">
-    <Button variant="none" size="medium" disabled={false}>
-      <IconByName name="Code" color="simple" className="social-icon" />
-    </Button>
+    <a
+      is="a"
+      href="https://wakatime.com/th3mayar"
+      rel="noopener noreferrer external"
+      class="social-icon text-gray-100/50"
+      title="WakaTime"
+      target="_blank"
+    >
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 256 256"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        preserveAspectRatio="xMidYMid"
+        class="text-gray-100/50"
+      >
+        <g>
+          <path
+            d="M128,0 C57.308,0 0,57.308 0,128 C0,198.693 57.308,256 128,256 C198.693,256 256,198.693 256,128 C256,57.308 198.693,0 128,0 M128,33.805 C179.939,33.805 222.195,76.061 222.195,128 C222.195,179.94 179.939,222.195 128,222.195 C76.061,222.195 33.805,179.94 33.805,128 C33.805,76.061 76.061,33.805 128,33.805 M115.4993,155.6431 L115.3873,155.6431 C113.4353,155.6081 111.6083,154.6751 110.4343,153.1151 L81.5593,114.7321 C79.4553,111.9351 80.0173,107.9611 82.8143,105.8561 C85.6123,103.7511 89.5853,104.3131 91.6903,107.1111 L115.6833,139.0051 L122.5463,130.5271 C123.7493,129.0411 125.5603,128.1771 127.4723,128.1771 L127.4803,128.1771 C129.3973,128.1791 131.2093,129.0471 132.4103,130.5411 L139.0003,138.7281 L176.6923,90.1341 C178.8353,87.3681 182.8173,86.8651 185.5843,89.0111 C188.3493,91.1561 188.8533,95.1371 186.7073,97.9041 L144.1003,152.8371 C142.9143,154.3681 141.0883,155.2721 139.1503,155.2901 L139.0933,155.2901 C137.1743,155.2901 135.3583,154.4221 134.1553,152.9261 L127.4583,144.6071 L120.4253,153.2931 C119.2213,154.7811 117.4103,155.6431 115.4993,155.6431"
+            fill="rgba(245, 245, 245, 0.5)"
+          >
+          </path>
+        </g>
+      </svg>
+    </a>
     <span class="divider"></span>
-    <Button variant="none" size="medium" disabled={false}>
-      <IconByName name="Linkedin" color="simple" className="social-icon" />
-    </Button>
+    <a
+      is="a"
+      href="https://www.linkedin.com/in/jose-fhenr%C3%ADquez/"
+      target="_blank"
+      rel="noopener noreferrer external"
+      class="social-icon"
+      title="LinkedIn"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-linkedin-icon lucide-linkedin text-gray-100/50"
+        ><path
+          d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+        ></path><rect width="4" height="12" x="2" y="9"></rect><circle
+          cx="4"
+          cy="4"
+          r="2"></circle></svg
+      >
+    </a>
   </div>
   <div class="footer-right">
-    <Item title={TFooter.username} class="link-card" />
-    <Button variant="none" size="medium" disabled={false}>
-      <IconByName name="Github" color="simple" className="social-icon" />
-    </Button>
+    <a
+      is="a"
+      href="https://github.com/Th3Mayar"
+      target="_blank"
+      rel="noopener noreferrer external"
+      class="w-full flex items-center gap-2"
+    >
+      <span class="link-card font-FiraCode text-lg lg:text-xl text-gray-100/50"
+        >{TFooter.username}</span
+      >
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 48 48"
+        id="Layer_2"
+        data-name="Layer 2"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="#000000"
+        data-darkreader-inline-fill=""
+        style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000);"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"></g>
+
+        <g id="SVGRepo_iconCarrier">
+          <defs>
+            <style>
+              .cls-1 {
+                fill: none;
+                stroke: #fff;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                fill-rule: evenodd;
+              }
+            </style>
+
+            <style class="darkreader darkreader--sync" media="screen"></style>
+          </defs>
+
+          <path
+            class="cls-1"
+            d="M24,2.5a21.5,21.5,0,0,0-6.8,41.9c1.08.2,1.47-.46,1.47-1s0-1.86,0-3.65c-6,1.3-7.24-2.88-7.24-2.88A5.7,5.7,0,0,0,9,33.68c-1.95-1.33.15-1.31.15-1.31a4.52,4.52,0,0,1,3.29,2.22c1.92,3.29,5,2.34,6.26,1.79a4.61,4.61,0,0,1,1.37-2.88c-4.78-.54-9.8-2.38-9.8-10.62a8.29,8.29,0,0,1,2.22-5.77,7.68,7.68,0,0,1,.21-5.69s1.8-.58,5.91,2.2a20.46,20.46,0,0,1,10.76,0c4.11-2.78,5.91-2.2,5.91-2.2a7.74,7.74,0,0,1,.21,5.69,8.28,8.28,0,0,1,2.21,5.77c0,8.26-5,10.07-9.81,10.61a5.12,5.12,0,0,1,1.46,4c0,2.87,0,5.19,0,5.9s.39,1.24,1.48,1A21.5,21.5,0,0,0,24,2.5"
+          ></path>
+        </g>
+      </svg>
+    </a>
   </div>
 </div>
 
