@@ -36,7 +36,7 @@ import "@/styles/global.css";
     <MobileOverlay client:load />
 
     <!-- Page Loader -->
-    <div id="page-loader" class="fixed inset-0 bg-darkBackground bg-opacity-90 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="page-loader" class="fixed inset-0 bg-darkBackground bg-opacity-90 z-50 flex items-center justify-center opacity-100 pointer-events-auto transition-opacity duration-200">
       <div class="flex flex-col items-center gap-4">
         <svg class="animate-spin-fast w-12 h-12 text-orange" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -81,12 +81,10 @@ import "@/styles/global.css";
 
       // Listen for Astro navigation events
       document.addEventListener('astro:page-load', () => {
-        console.log('Astro page-load event fired');
         hideLoader();
       });
 
       document.addEventListener('astro:before-preparation', () => {
-        console.log('Astro before-preparation event fired');
         showLoader();
       });
 
@@ -133,6 +131,32 @@ import "@/styles/global.css";
   }
 
   @keyframes fade-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @view-transition-new(root) {
+    animation: fade-in 0.5s ease-in-out;
+  }
+
+  @keyframes fade-out {
     to {
       opacity: 0;
       transform: translateY(-20px);
@@ -152,7 +176,7 @@ import "@/styles/global.css";
 
   /* Fast spinning animation */
   .animate-spin-fast {
-    animation: spin-fast 0.3s linear infinite;
+    animation: spin-fast 1.2s linear infinite;
   }
 
   @keyframes spin-fast {
