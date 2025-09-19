@@ -9,7 +9,7 @@ const { card } = THomeDescription;
 ---
 
 <script>
-  import { snakeGame } from "../../functions/snake";
+  import { snakeGame } from "@/functions/snake";
   document.addEventListener("DOMContentLoaded", () => {
     snakeGame();
   });
@@ -18,7 +18,7 @@ const { card } = THomeDescription;
 <div class="game-container gap-7">
   <div class="game-display">
     <canvas id="snakeCanvas" width="300" height="300" class="mb-5"></canvas>
-    <Button id="startGameBtn" variant="orange" size="medium" disabled={false}
+    <Button id="startGameBtn" variant="orange" size="medium" disabled={false} client:load
       >{card.startGame}</Button
     >
   </div>
