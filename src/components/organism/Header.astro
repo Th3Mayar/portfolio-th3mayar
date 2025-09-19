@@ -255,8 +255,6 @@ document.addEventListener("click", (e: Event) => {
     const target = e.target as HTMLElement,
       parent = target.parentElement as HTMLElement;
 
-    console.log(parent);
-
     // Get route from parent
     const route = parent.getAttribute("href");
 
