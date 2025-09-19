@@ -90,7 +90,7 @@ function getAutocompleteSuggestion(cmd) {
             cmd.startsWith(currentPart) && cmd !== currentPart
         );
         return matchingCommands.length === 1 ? matchingCommands[0].slice(currentPart.length) : '';
-    } else if (parts[0] === 'cat' && parts.length === 2) {
+    } else if ((parts[0] === 'cat' || parts[0] === 'cd') && parts.length === 2) {
         const matchingFiles = availableFiles.filter(file =>
             file.startsWith(currentPart) && file !== currentPart
         );
@@ -196,6 +196,7 @@ function executeCommand() {
   ls            - List files in current directory
   pwd           - Print working directory
   cat <file>    - Display file contents
+  cd <file>     - Change to file and display contents
   experience    - Show detailed work experience (JSON)
   whoami        - Show current user
   date          - Show current date/time
@@ -214,7 +215,7 @@ function executeCommand() {
 💡 Pro tip: Type 'suggest' to see all available options!`;
             break;
         case 'ls':
-            response = 'about-me.txt  projects.txt  skills.txt  experience.json';
+            response = availableFiles.join('  ');
             break;
         case 'pwd':
             response = '/home/th3mayar/portfolio';
@@ -228,16 +229,37 @@ function executeCommand() {
             response = `Available commands: ${availableCommands.join(', ')}\nAvailable files: ${availableFiles.join(', ')}`;
             break;
         case 'cat':
-            if (args[1] === 'about-me.txt') {
-                response = 'Hello! I\'m Jose, a passionate full-stack developer with experience in modern web technologies.';
-            } else if (args[1] === 'projects.txt') {
+            let foundFile = null;
+            for (const folder of folders.value) {
+                foundFile = folder.files.find(f => f.label === args[1]);
+                if (foundFile) break;
+            }
+            if (foundFile) {
+                response = foundFile.content;
+            } else if (args[1] === 'projects.js') {
                 response = 'Portfolio Website (Astro + Vue)\nE-commerce Platform (Next.js)\nInventory System (PHP + MySQL)';
-            } else if (args[1] === 'skills.txt') {
-                response = 'Frontend: Vue.js, React, Next.js\nBackend: Node.js, Nest.js, Laravel\nDatabase: MySQL, PostgreSQL, Oracle\nTools: Git, Docker, Vite';
             } else if (args[1] === 'experience.json') {
                 response = JSON.stringify(experienceData, null, 2);
             } else {
                 response = `cat: ${args[1]}: No such file or directory`;
+            }
+            break;
+        case 'cd':
+            if (args[1]) {
+                const fileName = args[1];
+                let foundFile = null;
+                for (const folder of folders.value) {
+                    foundFile = folder.files.find(f => f.label === fileName);
+                    if (foundFile) break;
+                }
+                if (foundFile) {
+                    selectedFile.value = foundFile;
+                    response = foundFile.content;
+                } else {
+                    response = `cd: ${fileName}: No such file or directory`;
+                }
+            } else {
+                response = 'cd: missing operand';
             }
             break;
         case 'experience':

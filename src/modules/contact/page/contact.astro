@@ -42,9 +42,9 @@ import IconByName from "@/components/atoms/IconByName.vue";
             placeholder="Your Message"
           ></textarea>
         </label>
-        <Button type="submit" variant="dark" class="self-end mt-2 w-full" @click={(e: { preventDefault: () => any; }) => e.preventDefault()}>
+        <Button variant="dark" size="md" disabled={false} class:list="self-end mt-2 w-full" onClick={(e: Event) => e.preventDefault()}>
           <span class="flex items-center gap-2">
-            <IconByName name="Send" class="w-4 h-4" />
+            <IconByName name="Send" color="currentColor" className="w-4 h-4" />
             Send
           </span>
         </Button>

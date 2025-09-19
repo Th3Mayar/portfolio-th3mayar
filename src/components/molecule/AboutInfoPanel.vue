@@ -81,7 +81,7 @@
           {{ selectedFile.label }}
         </div>
         <pre
-          class="line-numbers m-0 p-4 text-white font-mono text-md overflow-auto !bg-bg"
+          class="line-numbers m-0 p-4 text-white font-mono text-md overflow-auto !bg-bg max-h-[65vh] w-[82em]"
         >
           <code ref="codeEl" class="language-javascript">{{ selectedFile.content }}</code>
         </pre>
@@ -155,5 +155,24 @@ onMounted(() => {
 
 .action-btn:hover svg {
   transform: translateY(-1px);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 </style>
