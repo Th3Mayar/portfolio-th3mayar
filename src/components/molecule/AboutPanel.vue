@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full h-[75dvh]">
+  <div class="flex w-full h-[76dvh] min-h-[76dvh]">
     <aside class="flex flex-col items-center gap-6 py-8 px-2 bg-bg-background border-r border-border min-w-[80px]">
       <button
         v-for="panel in panels"

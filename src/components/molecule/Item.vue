@@ -32,7 +32,7 @@ export default defineComponent({
       :href="href"
       :class="[
         'flex items-center w-full rounded-lg transition-all',
-        'text-gray-300 ',
+        'text-gray-300 h-full w-full',
         classLink,
       ]"
     >
@@ -42,7 +42,7 @@ export default defineComponent({
 
       <div
         :class="[
-          'flex items-center gap-2 w-full',
+          'flex items-center gap-2 w-full justify-center ' + classLink,
           IconPosition === 'left' ? 'flex-row' : 'flex-row-reverse',
         ]"
       >

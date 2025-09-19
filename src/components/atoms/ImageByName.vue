@@ -41,5 +41,6 @@ const ImageComponent = computed(() => {
     :height="size"
     :class="className"
     :style="{ 'stroke-width': strokeWidth + 'px' }"
+    loading="lazy"
   />
 </template>

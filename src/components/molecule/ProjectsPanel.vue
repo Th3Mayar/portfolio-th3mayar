@@ -1,5 +1,5 @@
 <template>
-  <main class="flex flex-col md:flex-row h-[75dvh] w-full">
+  <main class="flex flex-col md:flex-row h-[76dvh] w-full">
     <aside
       class="flex flex-col gap-4 p-4 border-r bg-dark-background border-border transition-all duration-300"
       :class="showFilters ? 'min-w-[220px] md:min-w-[260px]' : 'min-w-[60px] md:min-w-[60px] items-center justify-center'"

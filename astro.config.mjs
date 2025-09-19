@@ -22,5 +22,11 @@ export default defineConfig({
   },
   optimizeDeps: {
     exclude: ['@astrojs/vue'],
+  },
+  experimental: {
+    viewTransitions: true
+  },
+  transitions: {
+    fallback: 'none'
   }
 });

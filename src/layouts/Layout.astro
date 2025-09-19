@@ -2,7 +2,6 @@
 interface Props {
   title: string;
 }
-
 const { title } = Astro.props;
 import Header from "@/components/organism/Header.astro";
 import Footer from "@/components/organism/Footer.astro";
@@ -25,7 +24,9 @@ import "@/styles/global.css";
       class="content max-h-[100%] h-[100%] rounded-[20px] border-2 bg-bg-background shadow-[0_0_50px_0px_var(--border-effect)] overflow-hidden relative"
     >
       <Header client:load />
-      <slot />
+      <div data-page-content class="transition-all duration-400 ease-in-out min-h-[76dvh]">
+        <slot />
+      </div>
       <footer>
         <Footer client:load />
       </footer>
@@ -33,6 +34,70 @@ import "@/styles/global.css";
 
     <!-- Mobile Overlay -->
     <MobileOverlay client:load />
+
+    <!-- Page Loader -->
+    <div id="page-loader" class="fixed inset-0 bg-darkBackground bg-opacity-90 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+      <div class="flex flex-col items-center gap-4">
+        <svg class="animate-spin-fast w-12 h-12 text-orange" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <p class="text-light text-lg font-mono">Cargando...</p>
+      </div>
+    </div>
+
+    <script>
+      // Simple loader management
+      const loader = document.getElementById('page-loader');
+
+      // Function to show loader
+      function showLoader() {
+        if (loader) {
+          loader.style.display = 'flex';
+          loader.style.opacity = '1';
+          loader.style.pointerEvents = 'auto';
+        }
+      }
+
+      // Function to hide loader
+      function hideLoader() {
+        if (loader) {
+          loader.style.opacity = '0';
+          loader.style.pointerEvents = 'none';
+          setTimeout(() => {
+            loader.style.display = 'none';
+          }, 300);
+        }
+      }
+
+      // Make functions globally available
+      (window as any).showLoader = showLoader;
+      (window as any).hideLoader = hideLoader;
+
+      // Hide loader when page is fully loaded
+      window.addEventListener('load', () => {
+        hideLoader();
+      });
+
+      // Listen for Astro navigation events
+      document.addEventListener('astro:page-load', () => {
+        console.log('Astro page-load event fired');
+        hideLoader();
+      });
+
+      document.addEventListener('astro:before-preparation', () => {
+        console.log('Astro before-preparation event fired');
+        showLoader();
+      });
+
+      // Fallback: listen for link clicks
+      document.addEventListener('click', (e) => {
+        const link = (e.target as HTMLElement)?.closest('a[href]') as HTMLAnchorElement;
+        if (link && link.href.startsWith(window.location.origin)) {
+          showLoader();
+        }
+      });
+    </script>
   </body>
 </html>
 
@@ -45,6 +110,58 @@ import "@/styles/global.css";
   footer {
     border-top: 2px solid var(--border);
     border-radius: 0 0 20px 20px;
+  }
+
+  /* Page transition animations */
+  [data-page-content] {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  }
+
+  /* Custom view transition styles */
+  @view-transition {
+    navigation: auto;
+  }
+
+  @view-transition-old(root) {
+    animation: fade-out 0.5s ease-in-out;
+  }
+
+  @view-transition-new(root) {
+    animation: fade-in 0.5s ease-in-out;
+  }
+
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Fast spinning animation */
+  .animate-spin-fast {
+    animation: spin-fast 0.3s linear infinite;
+  }
+
+  @keyframes spin-fast {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   @media (max-width: 926px) {

@@ -20,7 +20,7 @@ import Toggle from "@/components/atoms/Toggle.vue";
           <Item
             href=`/${lang}/`
             title={TComponents.hello}
-            class="custom-item"
+            class="custom-item first"
           />
           <Item
             href=`/${lang}/about`
@@ -45,6 +45,7 @@ import Toggle from "@/components/atoms/Toggle.vue";
         href=""
         title={TComponents.name}
         class="item-name link-card"
+        classLink="!justify-start !items-start"
       />
       <Item
         href={`/${lang}/`}
@@ -73,9 +74,9 @@ import Toggle from "@/components/atoms/Toggle.vue";
 
 <style>
   .item:not(:first-child) {
-    padding: 1rem;
     border-left: 2px solid var(--border);
   }
+
   .item-projects {
     border-right: 2px solid var(--border);
   }
@@ -250,17 +251,20 @@ import Toggle from "@/components/atoms/Toggle.vue";
 
 <script>
 document.addEventListener("click", (e: Event) => {
-    e.preventDefault();
+    const target = e.target as HTMLElement;
+    const link = target.closest('a') as HTMLAnchorElement;
     
-    const target = e.target as HTMLElement,
-      parent = target.parentElement as HTMLElement;
-
-    // Get route from parent
-    const route = parent.getAttribute("href");
-
-    // If route is not null, navigate to route
-    if (route) {
-      window.location.href = route;
+    if (link && link.href) {
+      // Show loader immediately on click
+      if ((window as any).showLoader) {
+        (window as any).showLoader();
+        console.log('Loader mostrado al hacer clic');
+      }
     }
+  });
+
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', () => {
+    // Let Astro handle it
   });
 </script>
