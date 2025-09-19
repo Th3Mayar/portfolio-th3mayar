@@ -15,7 +15,7 @@ const terminalOutput = ref([
 ]);
 
 const availableCommands = [
-  'help', 'ls', 'pwd', 'cat', 'cd', 'experience', 'whoami', 'date', 'clear', 'fortune', 'sudo', 'exit', 'history', 'suggest',
+  'help', 'ls', 'pwd', 'cat', 'cd', 'nano', 'experience', 'whoami', 'date', 'clear', 'fortune', 'sudo', 'exit', 'history', 'suggest',
 ];
 
 const availableFiles = [

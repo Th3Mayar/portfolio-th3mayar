@@ -90,7 +90,7 @@ function getAutocompleteSuggestion(cmd) {
             cmd.startsWith(currentPart) && cmd !== currentPart
         );
         return matchingCommands.length === 1 ? matchingCommands[0].slice(currentPart.length) : '';
-    } else if ((parts[0] === 'cat' || parts[0] === 'cd') && parts.length === 2) {
+    } else if ((parts[0] === 'cat' || parts[0] === 'cd' || parts[0] === 'nano') && parts.length === 2) {
         const matchingFiles = availableFiles.filter(file =>
             file.startsWith(currentPart) && file !== currentPart
         );
@@ -197,6 +197,7 @@ function executeCommand() {
   pwd           - Print working directory
   cat <file>    - Display file contents
   cd <file>     - Change to file and display contents
+  nano <file>   - Open file in nano editor (read-only)
   experience    - Show detailed work experience (JSON)
   whoami        - Show current user
   date          - Show current date/time
@@ -260,6 +261,27 @@ function executeCommand() {
                 }
             } else {
                 response = 'cd: missing operand';
+            }
+            break;
+        case 'nano':
+            if (args[1]) {
+                const fileName = args[1];
+                let foundFile = null;
+                for (const folder of folders.value) {
+                    foundFile = folder.files.find(f => f.label === fileName);
+                    if (foundFile) break;
+                }
+                if (foundFile) {
+                    response = `GNU nano 7.2    ${fileName}\n\n${foundFile.content}\n\n[ Read Only ]`;
+                } else if (args[1] === 'projects.js') {
+                    response = `GNU nano 7.2    projects.js\n\nPortfolio Website (Astro + Vue)\nE-commerce Platform (Next.js)\nInventory System (PHP + MySQL)\n\n[ Read Only ]`;
+                } else if (args[1] === 'experience.json') {
+                    response = `GNU nano 7.2    experience.json\n\n${JSON.stringify(experienceData, null, 2)}\n\n[ Read Only ]`;
+                } else {
+                    response = `nano: ${fileName}: No such file or directory`;
+                }
+            } else {
+                response = 'nano: missing operand';
             }
             break;
         case 'experience':
