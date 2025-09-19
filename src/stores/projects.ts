@@ -44,7 +44,7 @@ const allProjects = [
     icon: "nuxt",
     description:
       "saborApp is a restaurant reservation application built as a monorepo containing both frontend and backend. The frontend is developed with Nuxt 3, Vue.js, and Tailwind CSS, while the backend is powered by Node.js, Express, and PostgreSQL.",
-    tags: ["nuxt", "vue", "tailwind", "node", "express", "PostgreSQL"],
+    tags: ["nuxt", "vue", "tailwind", "PostgreSQL", "shadcn-vue"],
     url: "",
   },
   {
@@ -125,7 +125,7 @@ const allProjects = [
     icon: "js",
     description:
       "This project is a web scraping script designed to extract and process product information from online sales platforms such as eBay. It allows developers to obtain detailed product data and apply custom logic to highlight products with specific alerts.",
-    tags: ["HTML", "tailwind", "CSS"],
+    tags: ["JavaScript", "Node.js", "Express"],
     url: "",
   },
   {
@@ -133,8 +133,8 @@ const allProjects = [
     carousel: ["factuStock1", "factuStock2", "factuStock3", "factuStock4"],
     icon: "csharp",
     description:
-      "A visually appealing card component with interactive effects, built using HTML and CSS. The card features hover animations, shadows, and responsive design to enhance user engagement.",
-    tags: ["HTML", "CSS"],
+      "FactuStock is a desktop application for managing inventory and invoicing in small to medium-sized businesses. It features product management, client management, invoicing, reporting, and user authentication. Built with C# and .NET Framework, it provides a user-friendly interface and robust functionality to streamline business operations.",
+    tags: ["C#"],
     url: "",
   },
   {
