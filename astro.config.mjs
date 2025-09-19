@@ -9,14 +9,22 @@ export default defineConfig({
     locales: ['en', 'es'],
     defaultLocale: 'en',
     routing: {
-      prefixDefaultLocale: false,
-      redirectToDefaultLocale: false,
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: true,
     }
   },
   vite: {
-    resolve: {
+     resolve: {
       alias: {
-        "@": new URL("./src", import.meta.url).pathname
+        '@': '/src',
+        "@/*": ["src/*"],
+        "types/*": ["types/*"],
+        "components/*": ["src/components/*"],
+        "layouts/*": ["src/layouts/*"],
+        "pages/*": ["src/pages/*"],
+        "i18n/*": ["src/i18n/*"],
+        "lang/*": ["src/lang/*"],
+        "styles/*": ["src/styles/*"],
       }
     }
   },
