@@ -50,27 +50,86 @@ import Toggle from "@/components/atoms/Toggle.vue";
       <Item
         href={`/${lang}/`}
         title={TComponents.hello}
-        class={["item-hello link-card item", Astro.url.pathname === `/${lang}/` ? "active" : ""].join(" ")}
+        class={[
+          "item-hello link-card item",
+          Astro.url.pathname === `/${lang}/` ? "active" : "",
+        ].join(" ")}
       />
       <Item
         href={`/${lang}/about`}
         title={TComponents.aboutMe}
-        class={["item-about link-card item", Astro.url.pathname === `/${lang}/about` ? "active" : ""].join(" ")}
+        class={[
+          "item-about link-card item",
+          Astro.url.pathname === `/${lang}/about` ? "active" : "",
+        ].join(" ")}
       />
       <Item
         href={`/${lang}/projects`}
         title={TComponents.projects}
-        class={["item-projects link-card item", Astro.url.pathname === `/${lang}/projects` ? "active" : ""].join(" ")}
+        class={[
+          "item-projects link-card item",
+          Astro.url.pathname === `/${lang}/projects` ? "active" : "",
+        ].join(" ")}
       />
       <li class="item-hidden">{/* <LightDark  /> */}</li>
       <Item
         href={`/${lang}/contacts`}
         title={TComponents.contactMe}
-        class={["item-contact link-card item", Astro.url.pathname === `/${lang}/contacts` ? "active" : ""].join(" ")}
+        class={[
+          "item-contact link-card item",
+          Astro.url.pathname === `/${lang}/contacts` ? "active" : "",
+        ].join(" ")}
       />
     </ul>
   </nav>
 </header>
+
+<script>
+  // @ts-ignore
+  (function () {
+    const nav = document.querySelector("nav");
+    if (!nav) return;
+
+    const items = nav.querySelectorAll("ul.items .item");
+
+    if (!items || items.length === 0) return;
+
+    let hoverCount = 0;
+    function onEnter(e) {
+      const el = e.currentTarget;
+      if (el.classList.contains("active")) return;
+      hoverCount++;
+      nav.classList.add("others-hover");
+    }
+
+    function onLeave(e) {
+      const el = e.currentTarget;
+      if (el.classList.contains("active")) return;
+      hoverCount = Math.max(0, hoverCount - 1);
+      if (hoverCount === 0) {
+        nav.classList.remove("others-hover");
+      }
+    }
+
+    items.forEach((item) => {
+      item.addEventListener("mouseenter", onEnter);
+      item.addEventListener("mouseleave", onLeave);
+      item.addEventListener("touchstart", onEnter);
+      item.addEventListener("touchend", onLeave);
+    });
+
+    // @ts-ignore
+    window.__navHoverCleanup = () => {
+      items.forEach((item) => {
+        item.removeEventListener("mouseenter", onEnter);
+        item.removeEventListener("mouseleave", onLeave);
+        item.removeEventListener("touchstart", onEnter);
+        item.removeEventListener("touchend", onLeave);
+      });
+      nav.classList.remove("others-hover");
+    };
+  })();
+</script>
 
 <style>
   .item:not(:first-child) {
@@ -156,6 +215,31 @@ import Toggle from "@/components/atoms/Toggle.vue";
 
   .custom-item {
     padding: 1rem 0 1rem 1rem;
+  }
+
+  ul.items .item {
+    transition:
+      opacity 180ms ease,
+      transform 160ms ease,
+      border-bottom-color 160ms ease;
+  }
+
+  nav.others-hover ul.items .item:not(:hover) {
+    opacity: 0.45;
+    transform: translateY(0);
+    pointer-events: none;
+    border-color: var(--border);
+  }
+
+  nav.others-hover ul.items .item:hover {
+    opacity: 1;
+    border-bottom: 4px solid var(--orangeHover);
+    margin-bottom: -4px;
+    z-index: 1000;
+  }
+
+  nav.others-hover ul.items .active {
+    opacity: 0;
   }
 
   @media (max-width: 926px) {
@@ -250,10 +334,10 @@ import Toggle from "@/components/atoms/Toggle.vue";
 </style>
 
 <script>
-document.addEventListener("click", (e: Event) => {
+  document.addEventListener("click", (e: Event) => {
     const target = e.target as HTMLElement;
-    const link = target.closest('a') as HTMLAnchorElement;
-    
+    const link = target.closest("a") as HTMLAnchorElement;
+
     if (link && link.href) {
       // Show loader immediately on click
       if ((window as any).showLoader) {
@@ -263,7 +347,7 @@ document.addEventListener("click", (e: Event) => {
   });
 
   // Handle browser back/forward buttons
-  window.addEventListener('popstate', () => {
+  window.addEventListener("popstate", () => {
     // Let Astro handle it
   });
 </script>
