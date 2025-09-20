@@ -107,10 +107,23 @@
         </div>
 
         <div v-else-if="activePanel === 'game'">
-          <div
-            class="bg-background rounded-lg p-6 text-light font-mono min-h-[300px] flex items-center justify-center"
-          >
-            <span class="opacity-60">[Game Here] Comming Soon!</span>
+          <div class="game-panel-expanded bg-background rounded-lg text-light font-mono flex flex-col items-center justify-center gap-4 w-full h-full min-h-[70dvh] p-0 mt-5">
+            <div class="flex gap-2 -mb-5 mt-4 z-10">
+              <button
+                v-for="g in games"
+                :key="g.key"
+                :class="[
+                  'px-4 py-2 rounded border text-base font-bold transition',
+                  selectedGame === g.key ? 'bg-orange text-white border-orange' : 'bg-card border-border hover:bg-orange/80 hover:text-white rounded-lg',
+                ]"
+                @click="selectedGame = g.key"
+              >
+                {{ g.label }}
+              </button>
+            </div>
+            <div class="game-canvas-wrapper w-full h-full flex-1 flex items-center justify-center">
+              <component :is="selectedGameComponent" />
+            </div>
           </div>
         </div>
       </transition>
@@ -119,10 +132,11 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import IconByName from "@/components/atoms/IconByName.vue";
 import AboutInfoPanel from "@/components/molecule/AboutInfoPanel.vue";
 import { useAboutPanel } from "@/composables/aboutPanel";
+import { TetrisMinimal, FlappyBird } from "@/components/games";
 
 const {
   activePanel,
@@ -140,6 +154,17 @@ const {
   getIndentLevel,
   formatJsonLine,
 } = useAboutPanel();
+
+// --- Game selector logic ---
+const games = [
+  { key: 'tetris', label: 'Tetris', component: TetrisMinimal },
+  { key: 'flappy', label: 'Flappy Bird', component: FlappyBird },
+];
+const selectedGame = ref('tetris');
+const selectedGameComponent = computed(() => {
+  const found = games.find(g => g.key === selectedGame.value);
+  return found ? found.component : null;
+});
 
 onMounted(() => {
   if (activePanel.value === "terminal") {
@@ -260,5 +285,28 @@ onMounted(() => {
 }
 .json-line[data-indent="4"] {
   padding-left: 4rem;
+}
+
+.game-panel-expanded {
+  width: 100%;
+  height: 100%;
+  min-height: 70dvh;
+  min-width: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.game-canvas-wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 60dvh;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  border-radius: .5rem;
 }
 </style>
