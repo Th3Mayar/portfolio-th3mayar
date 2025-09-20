@@ -31,14 +31,14 @@
     <section
       :class="[
         'flex-1',
-        activePanel === 'terminal' ? 'bg-black' : 'bg-background',
+        activePanel === 'terminal' ? 'bg-terminal' : 'bg-background',
         'animate-panel-in-up',
       ]"
     >
       <div v-if="activePanel === 'terminal'">
         <div
           ref="terminalEl"
-          class="bg-black rounded-lg p-4 text-green-400 font-mono max-h-[75dvh] overflow-auto terminal-container"
+          class="bg-terminal rounded-lg p-4 text-green-400 font-mono max-h-[75dvh] overflow-auto terminal-container"
           @scroll="onTerminalScroll"
         >
           <div class="mb-2">
