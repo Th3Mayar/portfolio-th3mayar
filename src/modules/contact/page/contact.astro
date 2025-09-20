@@ -6,20 +6,30 @@ import ImageByName from "@/components/atoms/ImageByName.vue";
 ---
 
 <Layout title="Contact information">
+  <head slot="head">
+    <link rel="preload" as="image" href="/assets/contact-me.svg" />
+    <link rel="preload" as="image" href="/assets/effect-card.svg" />
+  </head>
   <main
     class="flex flex-col md:flex-row h-full min-h-[76vh] w-full bg-dark-background"
   >
-    <section
-      class="hidden md:flex p-4 ml-20 select-none contact-illustration"
-    >
+    <section class="hidden md:flex p-4 ml-20 select-none contact-illustration">
       <ImageByName
         name="contactMe"
         className="w-screen h-[100%] max-w-xl max-h-full select-none !animate-float"
+        fetchpriority="high"
       />
     </section>
     <section class="flex-1 p-4 flex flex-col gap-6 items-center justify-center">
+      <div class="absolute !z-1 opacity-40 top-20 -left-96">
+        <ImageByName
+          name="effectCard"
+          className="w-2/3 h-full"
+          fetchpriority="high"
+        />
+      </div>
       <form
-        class="w-full max-w-2xl bg-card/80 rounded-md p-6 flex flex-col gap-4 animate-slide-down"
+        class="w-full max-w-2xl bg-card/80 rounded-md p-6 flex flex-col gap-4 animate-slide-down z-50"
       >
         <label class="flex flex-col gap-1 mb-2">
           <span class="font-FiraCode text-xs text-light">Name</span>
@@ -78,7 +88,7 @@ import ImageByName from "@/components/atoms/ImageByName.vue";
   input::placeholder,
   textarea::placeholder {
     color: hsl(0, 0%, 44%);
-    font-family: 'Fira Code', monospace;
+    font-family: "Fira Code", monospace;
   }
   .contact-illustration {
     min-width: 350px;

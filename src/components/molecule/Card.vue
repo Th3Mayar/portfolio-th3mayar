@@ -7,15 +7,19 @@
           :src="`/assets/${props.gif}.gif`"
           class="card-gif"
           alt="Project GIF"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="high"
         />
         <ImageByName
           v-else-if="props.image"
           :name="props.image"
           :stroke-width="1"
           :className="className + ' card-img'"
+          fetchpriority="high"
         />
         <div class="logo">
-          <ImageByName :name="icon" :stroke-width="1" :className="className" />
+          <ImageByName :name="icon" :stroke-width="1" :className="className" fetchpriority="high" />
         </div>
         <div v-if="props.gif" class="gif-indicator">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
@@ -38,27 +42,39 @@
         {{ button }}
       </Button>
     </div>
-    <div v-if="showModal" class="modal-bg" @click="showModal = false">
-      <div class="modal-content-wrapper" @click.stop>
-        <img
-          v-if="props.gif && showModal"
-          :src="`/assets/${props.gif}.gif`"
-          class="modal-gif"
-          alt="Project GIF"
-        />
-        <ImageByName
-          v-else-if="props.image && showModal"
-          :name="props.image"
-          :stroke-width="1"
-          className="modal-img"
-        />
+    <teleport to="body">
+      <div v-if="showModal" class="modal-bg" @click="showModal = false">
+        <div class="modal-img-wrapper" @click.stop>
+          <img
+            v-if="props.gif && showModal"
+            :src="`/assets/${props.gif}.gif`"
+            class="modal-gif"
+            alt="Project GIF"
+          />
+          <template v-else-if="props.image && showModal">
+            <ImageByName
+              :name="props.image"
+              :stroke-width="1"
+              className="modal-img"
+              fetchpriority="high"
+              @error="imageError = true"
+            />
+            <div v-if="imageError" class="flex flex-col items-center justify-center w-full h-full p-8">
+              <span class="text-light text-lg font-mono mb-2">Image not found</span>
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="text-orange">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+          </template>
+        </div>
       </div>
-    </div>
+    </teleport>
   </div>
 </template>
 
+
 <script setup lang="ts">
-import { defineProps, ref } from "vue";
+import { defineProps, ref, onMounted, onBeforeUnmount } from "vue";
 import ImageByName from "../atoms/ImageByName.vue";
 import Button from "../atoms/Button.vue";
 
@@ -81,13 +97,27 @@ const props = withDefaults(defineProps<Props>(), {
   gif: "",
 });
 
+
 const showModal = ref(false);
+const imageError = ref(false);
 
 const openModal = () => {
   if (props.image || props.gif) {
     showModal.value = true;
+    imageError.value = false;
   }
 };
+
+function handleEsc(e: KeyboardEvent) {
+  if (e.key === "Escape") showModal.value = false;
+}
+
+onMounted(() => {
+  window.addEventListener("keydown", handleEsc);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("keydown", handleEsc);
+});
 
 
 
@@ -136,13 +166,12 @@ const openUrl = (url: string) => {
 .card-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 16px 16px 0 0;
-  transition: transform 0.2s;
 }
 
 .image-container:hover .card-img {
-  transform: scale(1.04);
+  transform: none;
 }
 
 .card-body {
@@ -190,19 +219,22 @@ const openUrl = (url: string) => {
 .modal-img-wrapper {
   background: var(--card);
   border-radius: 16px;
-  padding: 1rem;
+  padding: 0;
   max-width: 90vw;
   max-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: auto;
 }
 
 .modal-img {
-  max-width: 80vw;
-  max-height: 70vh;
+  max-width: 90vw;
+  max-height: 80vh;
   border-radius: 12px;
   object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 
 

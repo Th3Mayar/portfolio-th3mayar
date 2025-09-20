@@ -13,6 +13,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  fetchpriority: {
+    type: String,
+    default: undefined,
+  },
 });
 
 const imageSrc = computed(() => {
@@ -39,6 +43,6 @@ const imageSrc = computed(() => {
     :style="{ 'stroke-width': strokeWidth + 'px' }"
     loading="lazy"
     decoding="async"
-    fetchpriority="low"
+    :fetchpriority="props.fetchpriority || 'low'"
   />
 </template>

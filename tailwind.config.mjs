@@ -152,6 +152,10 @@ module.exports = {
         '0%, 100%': { borderColor: 'transparent' },
         '50%': { borderColor: 'currentColor' },
       },
+      slideDown: {
+        from: { opacity: '0', transform: 'translateY(-50px)' },
+        to: { opacity: '1', transform: 'translateY(0)' },
+      },
     },
     animation: {
       "accordion-down": "accordion-down 0.2s ease-out",
@@ -165,6 +169,7 @@ module.exports = {
       'panel-in-up': 'panelInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both',
       typing: 'typing 3s steps(30, end) forwards',
       blink: 'blink 1s step-end infinite',
+      'slide-down': 'slideDown 0.6s cubic-bezier(0.22, 1, 0.36, 1) both',
     },
   },
 };
