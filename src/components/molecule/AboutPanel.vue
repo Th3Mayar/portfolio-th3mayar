@@ -31,87 +31,89 @@
     <section
       :class="[
         'flex-1',
-        activePanel === 'terminal' ? 'bg-black' : 'bg-background',
+        activePanel === 'terminal' ? 'bg-terminal' : 'bg-background',
         'animate-panel-in-up',
       ]"
     >
-      <div v-if="activePanel === 'terminal'">
-        <div
-          ref="terminalEl"
-          class="bg-black rounded-lg p-4 text-green-400 font-mono max-h-[75dvh] overflow-auto terminal-container"
-          @scroll="onTerminalScroll"
-        >
-          <div class="mb-2">
-            <div
-              v-for="(line, index) in terminalOutput"
-              :key="index"
-              class="terminal-line whitespace-pre-wrap"
-              :class="{
-                'text-blue-300': line.includes('th3mayar@portfolio'),
-                'text-green-400':
-                  !line.includes('th3mayar@portfolio') &&
-                  !line.includes('bash:') &&
-                  !isJsonLine(line),
-                'text-red-400': line.includes('bash:') || line.includes('not found'),
-                'text-yellow-400': line.includes('Welcome') || line.includes('Type'),
-                'text-purple-400':
-                  line.includes('Available commands') ||
-                  line.includes('Keyboard shortcuts'),
-                'json-line': isJsonLine(line),
-              }"
-              :data-indent="isJsonLine(line) ? getIndentLevel(line) : 0"
-              v-html="isJsonLine(line) ? formatJsonLine(line) : line"
-            ></div>
-          </div>
-          <div class="flex items-center agnoster-prompt">
-            <!-- Agnoster-style prompt -->
-            <div class="flex items-center mr-2">
-              <span class="text-blue-400 font-bold">th3mayar</span>
-              <span class="text-white mx-1">@</span>
-              <span class="text-green-400 font-bold">portfolio</span>
-              <span class="text-white mx-1">:</span>
-              <span class="text-yellow-400 font-bold">~</span>
-              <span class="text-blue-400 ml-1">$</span>
-            </div>
-            <div class="flex-1 relative autocomplete-container">
-              <input
-                v-model="currentCommand"
-                @keydown="handleKeyDown"
-                @input="handleInput"
-                class="terminal-input flex-1"
-                ref="commandInput"
-                autofocus
-                spellcheck="false"
-                autocomplete="off"
-                placeholder=""
-              />
-              <!-- Autocomplete suggestion -->
-              <div v-if="autocompleteSuggestion" class="autocomplete-suggestion">
-                {{ currentCommand }}{{ autocompleteSuggestion }}
-              </div>
-              <!-- Tab indicator -->
+      <transition name="tab-fade-slide" mode="out-in">
+        <div v-if="activePanel === 'terminal'">
+          <div
+            ref="terminalEl"
+            class="bg-terminal rounded-lg p-4 text-green-400 font-mono max-h-[75dvh] overflow-auto terminal-container"
+            @scroll="onTerminalScroll"
+          >
+            <div class="mb-2">
               <div
-                v-if="autocompleteSuggestion"
-                class="absolute right-2 top-0 text-xs text-gray-500 animate-pulse pointer-events-none"
-              >
-                Tab
+                v-for="(line, index) in terminalOutput"
+                :key="index"
+                class="terminal-line whitespace-pre-wrap"
+                :class="{
+                  'text-blue-300': line.includes('th3mayar@portfolio'),
+                  'text-green-400':
+                    !line.includes('th3mayar@portfolio') &&
+                    !line.includes('bash:') &&
+                    !isJsonLine(line),
+                  'text-red-400': line.includes('bash:') || line.includes('not found'),
+                  'text-yellow-400': line.includes('Welcome') || line.includes('Type'),
+                  'text-purple-400':
+                    line.includes('Available commands') ||
+                    line.includes('Keyboard shortcuts'),
+                  'json-line': isJsonLine(line),
+                }"
+                :data-indent="isJsonLine(line) ? getIndentLevel(line) : 0"
+                v-html="isJsonLine(line) ? formatJsonLine(line) : line"
+              ></div>
+            </div>
+            <div class="flex items-center agnoster-prompt">
+              <!-- Agnoster-style prompt -->
+              <div class="flex items-center mr-2">
+                <span class="text-blue-400 font-bold">th3mayar</span>
+                <span class="text-white mx-1">@</span>
+                <span class="text-green-400 font-bold">portfolio</span>
+                <span class="text-white mx-1">:</span>
+                <span class="text-yellow-400 font-bold">~</span>
+                <span class="text-blue-400 ml-1">$</span>
+              </div>
+              <div class="flex-1 relative autocomplete-container">
+                <input
+                  v-model="currentCommand"
+                  @keydown="handleKeyDown"
+                  @input="handleInput"
+                  class="terminal-input flex-1"
+                  ref="commandInput"
+                  autofocus
+                  spellcheck="false"
+                  autocomplete="off"
+                  placeholder=""
+                />
+                <!-- Autocomplete suggestion -->
+                <div v-if="autocompleteSuggestion" class="autocomplete-suggestion">
+                  {{ currentCommand }}{{ autocompleteSuggestion }}
+                </div>
+                <!-- Tab indicator -->
+                <div
+                  v-if="autocompleteSuggestion"
+                  class="absolute right-2 top-0 text-xs text-gray-500 animate-pulse pointer-events-none"
+                >
+                  Tab
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div v-else-if="activePanel === 'info'">
-        <AboutInfoPanel activeDirectory="bio" />
-      </div>
-
-      <div v-else-if="activePanel === 'game'">
-        <div
-          class="bg-background rounded-lg p-6 text-light font-mono min-h-[300px] flex items-center justify-center"
-        >
-          <span class="opacity-60">[Game Here] Comming Soon!</span>
+        <div v-else-if="activePanel === 'info'">
+          <AboutInfoPanel activeDirectory="bio" />
         </div>
-      </div>
+
+        <div v-else-if="activePanel === 'game'">
+          <div
+            class="bg-background rounded-lg p-6 text-light font-mono min-h-[300px] flex items-center justify-center"
+          >
+            <span class="opacity-60">[Game Here] Comming Soon!</span>
+          </div>
+        </div>
+      </transition>
     </section>
   </div>
 </template>
@@ -163,6 +165,31 @@ onMounted(() => {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.tab-fade-slide-enter-active,
+.tab-fade-slide-leave-active {
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tab-fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(-50px) scale(0.98);
+}
+
+.tab-fade-slide-enter-to {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.tab-fade-slide-leave-from {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.tab-fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-50px) scale(0.98);
 }
 
 .agnoster-prompt {

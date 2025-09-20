@@ -24,6 +24,7 @@ module.exports = {
         pink: "hsl(var(--pink))",
         orange: "hsl(var(--orange))",
         button: "hsl(var(--button))",
+        terminal: "hsl(var(--terminal))",
 
         background: theme.background,
         "background-foreground": theme.backgroundForeground,

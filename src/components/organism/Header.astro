@@ -2,7 +2,11 @@
 import Item from "@/components/molecule/Item.vue";
 import { useTranslations, getLangFromUrl } from "@/i18n/utils";
 
-const lang = getLangFromUrl(Astro.url);
+let lang = getLangFromUrl(Astro.url);
+// Si la ruta es '/', redirigir visualmente a '/en' para el header
+if (Astro.url.pathname === '/') {
+  lang = 'en';
+}
 const { common: TCommon } = useTranslations(lang);
 const { components: TComponents } = TCommon;
 
@@ -52,7 +56,7 @@ import Toggle from "@/components/atoms/Toggle.vue";
         title={TComponents.hello}
         class={[
           "item-hello link-card item",
-          Astro.url.pathname === `/${lang}/` ? "active" : "",
+          ([`/${lang}/`, `/${lang}`].includes(Astro.url.pathname) || Astro.url.pathname === '/') ? "active" : "",
         ].join(" ")}
       />
       <Item

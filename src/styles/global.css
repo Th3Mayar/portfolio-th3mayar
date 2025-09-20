@@ -35,6 +35,7 @@
     --lightHover: hsl(48 71% 99%);
     --light: 48 71% 99%;
     --light-foreground: 199 80.36% 43.92%;
+    --terminal: 206.84 64.1% 6.81%;
 
     --card: hsl(207.27 100% 6.47%);
     --card-foreground: 222.2 84% 4.9%;
@@ -113,6 +114,8 @@
     --hover-button: 210 21.95% 48.24%;
 
     --border-effect: hsl(0, 0%, 100%);
+
+    --terminal: 206.84 64.1% 6.81%;
   }
 
   .text-foreground {
