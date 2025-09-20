@@ -3,10 +3,11 @@ import Item from "@/components/molecule/Item.vue";
 import { useTranslations, getLangFromUrl } from "@/i18n/utils";
 
 let lang = getLangFromUrl(Astro.url);
-// Si la ruta es '/', redirigir visualmente a '/en' para el header
+
 if (Astro.url.pathname === '/') {
   lang = 'en';
 }
+
 const { common: TCommon } = useTranslations(lang);
 const { components: TComponents } = TCommon;
 
