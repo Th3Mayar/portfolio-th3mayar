@@ -10,7 +10,7 @@ const { home: THome } = useTranslations(lang);
 const { seo: TSeo } = THome;
 const { home: THomeDescription } = useTranslations(lang);
 
-const { title, name, description, comment, commentTwo, constDefined } =
+const { title, name, description, comment, commentTwo } =
   THomeDescription;
 ---
 
@@ -123,7 +123,7 @@ const { title, name, description, comment, commentTwo, constDefined } =
   }
 </style>
 
-<script type="module">
+<script type="module" is:inline>
   const constText = "githubLink";
   const linkText = '"https://github.com/th3mayar"';
   const semicolon = ";";
