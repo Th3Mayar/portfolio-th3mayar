@@ -56,7 +56,7 @@ import Toggle from "@/components/atoms/Toggle.vue";
         title={TComponents.hello}
         class={[
           "item-hello link-card item",
-          Astro.url.pathname === `/${lang}/` ? "active" : "",
+          (Astro.url.pathname === `/${lang}/` || Astro.url.pathname === '/' || Astro.url.pathname === `/`) ? "active" : "",
         ].join(" ")}
       />
       <Item
