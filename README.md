@@ -1,40 +1,71 @@
-# Astro Starter Kit: Basics
 
-```sh
-npm create astro@latest -- --template basics
-```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+# Th3Mayar's Portfolio
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+
+Personal portfolio built with Astro, Vue 3, TailwindCSS, and TypeScript. Showcases my projects, experience, contact, and skills in a modern, responsive design with advanced visual effects.
+
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+The portfolio is organized as follows:
+
 
 ```text
 /
-├── public/
-│   └── favicon.svg
+├── public/           # Images, SVGs, static assets
 ├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
+│   ├── components/   # Vue and Astro components (atoms, molecule, organism)
+│   ├── layouts/      # Base layouts
+│   ├── modules/      # Sectioned pages (home, about, contact, projects)
+│   ├── pages/        # Astro route entrypoints
+│   ├── stores/       # Pinia stores and data
+│   ├── styles/       # Global CSS and themes
+│   └── data/         # Experience and projects JSONs
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## ✨ Features
 
-Any static assets, like images, can be placed in the `public/` directory.
+- Image modal for projects, full and responsive view
+- Smooth animations and transitions (SPA-like)
+- Glassmorphism and neon effects
+- Multilanguage support (i18n)
+- Dark/Light mode
+- Optimized image loading (preload, fetchpriority)
+- Responsive and mobile-first
+- Reusable, type-safe components with TypeScript
+- Contact via form and mailto
+
+## 🛠️ Main Technologies
+
+- [Astro](https://astro.build/) (main framework)
+- [Vue 3](https://vuejs.org/) (interactive components)
+- [TailwindCSS](https://tailwindcss.com/) (utility-first CSS)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Pinia](https://pinia.vuejs.org/) (state management)
+
+## 📦 Installation & Usage
+
+```sh
+pnpm install # or npm install / bun install
+pnpm run dev # or npm run dev / bun run dev
+```
+
+Open http://localhost:4321 to view the portfolio in development mode.
+
+## 📁 Useful Scripts
+
+| Command            | Action                                    |
+|--------------------|-------------------------------------------|
+| `pnpm install`     | Install dependencies                      |
+| `pnpm run dev`     | Local server at `localhost:4321`          |
+| `pnpm run build`   | Build the site for production             |
+| `pnpm run preview` | Preview the build locally                 |
+
+Made with ❤️ by Th3Mayar
 
 ## 🧞 Commands
 
