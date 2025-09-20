@@ -25,7 +25,10 @@ import "@/styles/global.css";
       class="content max-h-[100%] h-[100%] rounded-[20px] border-2 bg-bg-background shadow-[0_0_50px_0px_var(--border-effect)] overflow-hidden relative"
     >
       <Header client:load />
-      <div data-page-content class="transition-all duration-400 ease-in-out min-h-[76dvh]">
+      <div
+        data-page-content
+        class="transition-all duration-400 ease-in-out min-h-[76dvh]"
+      >
         <slot />
       </div>
       <footer>
@@ -37,11 +40,29 @@ import "@/styles/global.css";
     <MobileOverlay client:load />
 
     <!-- Page Loader -->
-    <div id="page-loader" class="fixed inset-0 bg-darkBackground bg-opacity-90 z-50 flex items-center justify-center opacity-100 pointer-events-auto transition-opacity duration-200">
+    <div
+      id="page-loader"
+      class="fixed inset-0 bg-darkBackground bg-opacity-90 z-50 flex items-center justify-center opacity-100 pointer-events-auto transition-opacity duration-200"
+    >
       <div class="flex flex-col items-center gap-4">
-        <svg class="animate-spin-fast w-12 h-12 text-orange" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        <svg
+          class="animate-spin-fast w-12 h-12 text-orange"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
         </svg>
         <p class="text-light text-lg font-mono">Loading...</p>
       </div>
@@ -50,26 +71,25 @@ import "@/styles/global.css";
     <script>
       // Declare the property on the Window interface
       // @ts-ignore
-      if (!window.__astro_loader_installed) {
-        // Simple loader management
-        const loader = document.getElementById('page-loader');
+      if (!window.hasOwnProperty("__astro_loader_installed")) {
+        (window as any).__astro_loader_installed = true;
+        const loader = document.getElementById("page-loader");
+        let initialLoad = true;
 
-        // Function to show loader
         function showLoader() {
           if (loader) {
-            loader.style.display = 'flex';
-            loader.style.opacity = '1';
-            loader.style.pointerEvents = 'auto';
+            loader.style.display = "flex";
+            loader.style.opacity = "1";
+            loader.style.pointerEvents = "auto";
           }
         }
 
-        // Function to hide loader
         function hideLoader() {
           if (loader) {
-            loader.style.opacity = '0';
-            loader.style.pointerEvents = 'none';
+            loader.style.opacity = "0";
+            loader.style.pointerEvents = "none";
             setTimeout(() => {
-              loader.style.display = 'none';
+              loader.style.display = "none";
             }, 300);
           }
         }
@@ -78,28 +98,21 @@ import "@/styles/global.css";
         (window as any).showLoader = showLoader;
         (window as any).hideLoader = hideLoader;
 
-        // Hide loader when page is fully loaded
-        window.addEventListener('load', () => {
+        // Hide loader only on initial page load
+        window.addEventListener("load", () => {
           hideLoader();
+          initialLoad = false;
         });
 
-        // Listen for Astro navigation events
-        document.addEventListener('astro:page-load', () => {
-          hideLoader();
+        // Astro navigation events (SPA navigation only)
+        document.addEventListener("astro:before-preparation", () => {
+          // Only show loader if NOT initial load
+          if (!initialLoad) showLoader();
         });
-
-        document.addEventListener('astro:before-preparation', () => {
-          showLoader();
+        document.addEventListener("astro:page-load", () => {
+          if (!initialLoad) hideLoader();
         });
-
-        // Fallback: listen for link clicks
-        document.addEventListener('click', (e) => {
-          const link = (e.target as HTMLElement)?.closest('a[href]') as HTMLAnchorElement;
-          if (link && link.href.startsWith(window.location.origin)) {
-            showLoader();
-          }
-      });
-    }
+      }
     </script>
   </body>
 </html>
@@ -119,7 +132,9 @@ import "@/styles/global.css";
   [data-page-content] {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transition:
+      opacity 0.5s ease-in-out,
+      transform 0.5s ease-in-out;
   }
 
   /* Custom view transition styles */
@@ -127,11 +142,11 @@ import "@/styles/global.css";
     navigation: auto;
   }
 
-  @view-transition-old(root) {
+  @view-transition-old (root) {
     animation: fade-out 0.5s ease-in-out;
   }
 
-  @view-transition-new(root) {
+  @view-transition-new (root) {
     animation: fade-in 0.5s ease-in-out;
   }
 
@@ -157,7 +172,7 @@ import "@/styles/global.css";
     }
   }
 
-  @view-transition-new(root) {
+  @view-transition-new (root) {
     animation: fade-in 0.5s ease-in-out;
   }
 

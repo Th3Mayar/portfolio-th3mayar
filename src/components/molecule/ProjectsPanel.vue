@@ -2,7 +2,11 @@
   <main class="flex flex-col md:flex-row h-[76dvh] w-full">
     <aside
       class="flex flex-col gap-4 p-4 border-r bg-dark-background border-border transition-all duration-300"
-      :class="showFilters ? 'min-w-[220px] md:min-w-[260px]' : 'min-w-[60px] md:min-w-[60px] items-center justify-center'"
+      :class="
+        showFilters
+          ? 'min-w-[220px] md:min-w-[260px]'
+          : 'min-w-[60px] md:min-w-[60px] items-center justify-center'
+      "
     >
       <div
         class="flex items-center justify-between cursor-pointer select-none transition-transform duration-300"
@@ -32,7 +36,10 @@
           :class="showFilters ? '' : 'transform rotate-90'"
         />
       </div>
-      <div v-if="showFilters" class="flex flex-col gap-2 mt-2 transition-all duration-300">
+      <div
+        v-if="showFilters"
+        class="flex flex-col gap-2 mt-2 transition-all duration-300 animate-filters-in"
+      >
         <div class="flex flex-col gap-2 mb-2 pb-2 border-b border-border">
           <Button
             @click="selectAllFrameworks"
@@ -48,7 +55,7 @@
             color="light"
             className="text-light/60 font-mono text-xs text-center opacity-60"
           >
-            {{ frameworks.filter(fw => fw.checked).length }}/{{ frameworks.length }}
+            {{ frameworks.filter((fw) => fw.checked).length }}/{{ frameworks.length }}
           </Typography>
           <Button
             @click="deselectAllFrameworks"
@@ -104,7 +111,7 @@
       </div>
       <div v-else class="flex flex-wrap gap-5 justify-center">
         <Card
-          v-for="project in filteredProjects"
+          v-for="(project, i) in filteredProjects"
           :key="project.icon + (project.image || project.video)"
           :image="project.image"
           :video="project.video"
@@ -113,7 +120,11 @@
           size="medium"
           button="view-project"
           :url="project.url"
-          class="flex-1 min-w-[280px] max-w-[350px] basis-1/3"
+          :class="[
+            'flex-1 min-w-[280px] max-w-[350px] basis-1/3 animate-card-in',
+            { [`delay-${i}`]: true },
+          ]"
+          :style="{ animationDelay: 0.07 * i + 's' }"
         >
           <div class="flex flex-col h-full">
             <Typography

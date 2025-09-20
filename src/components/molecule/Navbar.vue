@@ -1,7 +1,7 @@
 <!-- Create card with vue -->
 <template>
   <li class="link-card">
-    <a :href="href">
+  <a :href="href" is="link">
       <h2>
         {{ title }}
         <span>&rarr;</span>

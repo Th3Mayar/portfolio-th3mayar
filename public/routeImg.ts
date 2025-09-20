@@ -16,6 +16,7 @@ export const routes = {
     factuStock4: "assets/FactuStock/factu-stock-4.JPG",
     gestorPass: "assets/gestor_pass.jpg",
     encryptText: "assets/encrypt.png",
+    contactMe: "assets/contact-me.svg",
   },
   logos: {
     css: "logos/css.svg",

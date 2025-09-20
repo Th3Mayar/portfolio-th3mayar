@@ -10,20 +10,13 @@ const { home: THome } = useTranslations(lang);
 const { seo: TSeo } = THome;
 const { home: THomeDescription } = useTranslations(lang);
 
-const {
-  title,
-  name,
-  description,
-  comment,
-  commentTwo,
-  constDefined,
-  link,
-} = THomeDescription;
+const { title, name, description, comment, commentTwo, constDefined } =
+  THomeDescription;
 ---
 
 <Layout title={TSeo.title}>
   <main>
-    <section class="presentation">
+    <section class="presentation animate-panel-in-left">
       <Typography variant="FiraCode" as="h4" color="light" caseType="capital">
         {title}
       </Typography>
@@ -42,11 +35,11 @@ const {
         </Typography>
         <Typography variant="FiraCode" as="h6" color="dark" caseType="capital">
           <b class="text-purple">const</b>
-          <span class="text-green">{constDefined}</span>
+          <span id="typed-const" class="text-green"></span>
           <span class="text-input"> = </span>
-          <span class="text-limongrass"
-            >"{link}"<span class="text-input">;</span></span
-          >
+          <span class="text-limongrass" id="typed-link"></span><span
+            id="typed-semicolon"
+            class="text-white"></span>
         </Typography>
       </div>
     </section>
@@ -125,4 +118,41 @@ const {
       left: 20px;
     }
   }
+  .animate-panel-in-left {
+    animation: panelInLeft 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
 </style>
+
+<script type="module">
+  const constText = "githubLink";
+  const linkText = '"https://github.com/th3mayar"';
+  const semicolon = ";";
+
+  const constEl = document.getElementById("typed-const");
+  const linkEl = document.getElementById("typed-link");
+  const semicolonEl = document.getElementById("typed-semicolon");
+
+  const speed = 50;
+
+  function typeText(text, el, callback) {
+    let i = 0;
+    function typing() {
+      if (i < text.length) {
+        el.textContent += text[i];
+        i++;
+        setTimeout(typing, speed);
+      } else if (callback) {
+        callback();
+      }
+    }
+    typing();
+  }
+
+  if (constEl && linkEl && semicolonEl) {
+    typeText(constText, constEl, () => {
+      typeText(linkText, linkEl, () => {
+        typeText(semicolon, semicolonEl);
+      });
+    });
+  }
+</script>

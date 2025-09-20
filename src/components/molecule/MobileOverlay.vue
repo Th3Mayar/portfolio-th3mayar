@@ -1,7 +1,7 @@
 <template>
   <div v-if="isMobile" class="mobile-overlay">
     <div class="overlay-content">
-      <div class="construction-icon justify-center items-center flex">
+      <div class="construction-icon !justify-center !items-center !flex">
         <svg
           width="80"
           height="80"

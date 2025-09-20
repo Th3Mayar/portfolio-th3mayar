@@ -2,49 +2,66 @@
 import Layout from "@/layouts/Layout.astro";
 import Button from "@/components/atoms/Button.vue";
 import IconByName from "@/components/atoms/IconByName.vue";
+import ImageByName from "@/components/atoms/ImageByName.vue";
 ---
 
 <Layout title="Contact information">
   <main
     class="flex flex-col md:flex-row h-full min-h-[76vh] w-full bg-dark-background"
   >
+    <section
+      class="hidden md:flex p-4 ml-20 select-none contact-illustration"
+    >
+      <ImageByName
+        name="contactMe"
+        alt="Contact Illustration"
+        class="w-screen h-[100%] max-w-xl max-h-full select-none !animate-float"
+        loading="eager"
+      />
+    </section>
     <section class="flex-1 p-4 flex flex-col gap-6 items-center justify-center">
-      <h2 class="font-mono text-lg text-default mb-2">~/contact-me</h2>
       <form
-        class="w-full max-w-md bg-card/80 rounded-md p-6 border-2 border-dark/90 flex flex-col gap-4 shadow-2xl"
+        class="w-full max-w-2xl bg-card/80 rounded-md p-6 flex flex-col gap-4 animate-slide-down"
       >
-        <label class="flex flex-col gap-1">
-          <span class="font-mono text-xs text-light">Name</span>
+        <label class="flex flex-col gap-1 mb-2">
+          <span class="font-FiraCode text-xs text-light">Name</span>
           <input
             type="text"
             name="name"
             required
-            class="bg-dark/30 text-light rounded px-3 py-2 outline-none focus:ring-2 focus:ring-dark rounded-lg"
-            placeholder="Your Name" />
+            class="bg-dark/30 text-light rounded px-3 py-3 outline-none focus:ring-2 focus:ring-orange focus:shadow-none rounded-lg shadow-md shadow-orange"
+            placeholder="Your Name"
+          />
         </label>
-        <label class="flex flex-col gap-1">
-          <span class="font-mono text-xs text-light">Email</span>
+        <label class="flex flex-col gap-1 mb-2">
+          <span class="font-FiraCode text-xs text-light">Email</span>
           <input
             type="email"
             name="email"
             required
-            class="bg-dark/30 text-light rounded px-3 py-2 outline-none focus:ring-2 focus:ring-dark rounded-lg"
+            class="bg-dark/30 text-light rounded px-3 py-3 outline-none focus:ring-2 focus:ring-orange focus:shadow-none rounded-lg shadow-md shadow-orange"
             placeholder="Your Email"
           />
         </label>
-        <label class="flex flex-col gap-1">
-          <span class="font-mono text-xs text-light">Message</span>
+        <label class="flex flex-col gap-1 mb-2">
+          <span class="font-FiraCode text-xs text-light">Message</span>
           <textarea
             name="message"
             rows="4"
             required
-            class="bg-dark/30 text-light rounded px-3 py-2 outline-none focus:ring-2 focus:ring-dark rounded-lg"
-            placeholder="Your Message"
-          ></textarea>
+            class="bg-dark/30 text-light rounded px-3 py-3 outline-none focus:ring-2 focus:ring-orange focus:shadow-none rounded-lg shadow-md shadow-orange"
+            placeholder="Your Message"></textarea>
         </label>
-        <Button variant="dark" size="md" disabled={false} class:list="self-end mt-2 w-full" onClick={(e: Event) => e.preventDefault()}>
-          <span class="flex items-center gap-2">
-            <IconByName name="Send" color="currentColor" className="w-4 h-4" />
+        <Button
+          variant="orange"
+          size="md"
+          disabled={false}
+          class:list="self-end mt-2 w-full"
+          onClick={(e: Event) => e.preventDefault()}
+          disabled
+        >
+          <span class="flex items-center gap-2 font-bold">
+            <IconByName name="Send" color="light" className="w-4 h-4" />
             Send
           </span>
         </Button>
@@ -52,10 +69,34 @@ import IconByName from "@/components/atoms/IconByName.vue";
       <div class="text-light text-xs mt-4 font-mono">
         Or email me at <a
           href="mailto:josehenriquez@gmail.com"
-          class="text-pink underline">josehenriquez.02.26@gmail.com</a>
+          class="text-pink underline">josehenriquez.02.26@gmail.com</a
+        >
       </div>
     </section>
   </main>
 </Layout>
 
-<style></style>
+<style>
+  input::placeholder,
+  textarea::placeholder {
+    color: hsl(0, 0%, 44%);
+    font-family: 'Fira Code', monospace;
+  }
+  .contact-illustration {
+    min-width: 350px;
+    min-height: 350px;
+    width: 400px;
+    height: -webkit-fill-available;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (max-width: 1024px) {
+    .contact-illustration {
+      min-width: 220px;
+      min-height: 220px;
+      width: 240px;
+      height: 240px;
+    }
+  }
+</style>

@@ -15,32 +15,30 @@ const props = defineProps({
   },
 });
 
-const ImageComponent = computed(() => {
+const imageSrc = computed(() => {
   const imageName = props.name;
-
-  let imageSrc = "";
   let modifyUrl = "/";
-
   if (routes.logos[imageName as keyof typeof routes.logos]) {
-    imageSrc = modifyUrl + routes.logos[imageName as keyof typeof routes.logos];
+    return modifyUrl + routes.logos[imageName as keyof typeof routes.logos];
   } else if (routes.projects[imageName as keyof typeof routes.projects]) {
-    imageSrc = modifyUrl + routes.projects[imageName as keyof typeof routes.projects];
+    return modifyUrl + routes.projects[imageName as keyof typeof routes.projects];
   } else {
     console.error(`Image not found for name: ${imageName}`);
+    return "";
   }
-
-  return imageSrc;
 });
 </script>
 
 <template>
   <img
-    :src="ImageComponent"
+    :src="imageSrc"
     :alt="props.name"
     :width="size"
     :height="size"
     :class="className"
     :style="{ 'stroke-width': strokeWidth + 'px' }"
     loading="lazy"
+    decoding="async"
+    fetchpriority="low"
   />
 </template>

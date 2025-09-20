@@ -1,21 +1,40 @@
 <template>
   <div class="flex w-full h-[76dvh] min-h-[76dvh]">
-    <aside class="flex flex-col items-center gap-6 py-8 px-2 bg-bg-background border-r border-border min-w-[80px]">
+    <aside
+      class="flex flex-col items-center gap-6 py-8 px-2 bg-bg-background border-r border-border min-w-[80px] animate-panel-in-left"
+    >
       <button
         v-for="panel in panels"
         :key="panel.key"
         :class="[
           'flex flex-col items-center group p-2 rounded-lg transition-all',
-          activePanel === panel.key ? 'bg-card/80 ring-2 ring-orange' : 'hover:bg-card/60'
+          activePanel === panel.key
+            ? 'bg-card/80 ring-2 ring-orange'
+            : 'hover:bg-card/60',
         ]"
-        @click="() => { activePanel = panel.key; onPanelOpen(panel.key); }"
+        @click="
+          () => {
+            activePanel = panel.key;
+            onPanelOpen(panel.key);
+          }
+        "
       >
-        <IconByName :name="panel.icon" color="light" class="text-3xl mb-1 group-hover:text-orange" />
+        <IconByName
+          :name="panel.icon"
+          color="light"
+          class="text-3xl mb-1 group-hover:text-orange"
+        />
         <span class="text-xs text-light group-hover:text-orange">{{ panel.label }}</span>
       </button>
     </aside>
 
-    <section :class="['flex-1', activePanel === 'terminal' ? 'bg-black' : 'bg-background']">
+    <section
+      :class="[
+        'flex-1',
+        activePanel === 'terminal' ? 'bg-black' : 'bg-background',
+        'animate-panel-in-up',
+      ]"
+    >
       <div v-if="activePanel === 'terminal'">
         <div
           ref="terminalEl"
@@ -29,11 +48,16 @@
               class="terminal-line whitespace-pre-wrap"
               :class="{
                 'text-blue-300': line.includes('th3mayar@portfolio'),
-                'text-green-400': !line.includes('th3mayar@portfolio') && !line.includes('bash:') && !isJsonLine(line),
+                'text-green-400':
+                  !line.includes('th3mayar@portfolio') &&
+                  !line.includes('bash:') &&
+                  !isJsonLine(line),
                 'text-red-400': line.includes('bash:') || line.includes('not found'),
                 'text-yellow-400': line.includes('Welcome') || line.includes('Type'),
-                'text-purple-400': line.includes('Available commands') || line.includes('Keyboard shortcuts'),
-                'json-line': isJsonLine(line)
+                'text-purple-400':
+                  line.includes('Available commands') ||
+                  line.includes('Keyboard shortcuts'),
+                'json-line': isJsonLine(line),
               }"
               :data-indent="isJsonLine(line) ? getIndentLevel(line) : 0"
               v-html="isJsonLine(line) ? formatJsonLine(line) : line"
@@ -62,10 +86,7 @@
                 placeholder=""
               />
               <!-- Autocomplete suggestion -->
-              <div
-                v-if="autocompleteSuggestion"
-                class="autocomplete-suggestion"
-              >
+              <div v-if="autocompleteSuggestion" class="autocomplete-suggestion">
                 {{ currentCommand }}{{ autocompleteSuggestion }}
               </div>
               <!-- Tab indicator -->
@@ -85,7 +106,9 @@
       </div>
 
       <div v-else-if="activePanel === 'game'">
-        <div class="bg-background rounded-lg p-6 text-light font-mono min-h-[300px] flex items-center justify-center">
+        <div
+          class="bg-background rounded-lg p-6 text-light font-mono min-h-[300px] flex items-center justify-center"
+        >
           <span class="opacity-60">[Game Here] Comming Soon!</span>
         </div>
       </div>
@@ -94,10 +117,10 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from 'vue';
-import IconByName from '@/components/atoms/IconByName.vue';
-import AboutInfoPanel from '@/components/molecule/AboutInfoPanel.vue';
-import { useAboutPanel } from '@/composables/aboutPanel';
+import { onMounted, computed } from "vue";
+import IconByName from "@/components/atoms/IconByName.vue";
+import AboutInfoPanel from "@/components/molecule/AboutInfoPanel.vue";
+import { useAboutPanel } from "@/composables/aboutPanel";
 
 const {
   activePanel,
@@ -117,8 +140,8 @@ const {
 } = useAboutPanel();
 
 onMounted(() => {
-  if (activePanel.value === 'terminal') {
-    onPanelOpen('terminal');
+  if (activePanel.value === "terminal") {
+    onPanelOpen("terminal");
   }
 });
 </script>
@@ -143,7 +166,7 @@ onMounted(() => {
 }
 
 .agnoster-prompt {
-  font-family: 'Fira Code', 'Source Code Pro', 'DejaVu Sans Mono', monospace;
+  font-family: "Fira Code", "Source Code Pro", "DejaVu Sans Mono", monospace;
   font-size: 14px;
   line-height: 1.2;
 }
@@ -163,7 +186,7 @@ onMounted(() => {
 }
 
 .terminal-input {
-  font-family: 'Fira Code', 'Source Code Pro', 'DejaVu Sans Mono', monospace;
+  font-family: "Fira Code", "Source Code Pro", "DejaVu Sans Mono", monospace;
   font-size: 14px;
   line-height: 1.2;
   background: transparent;
@@ -185,7 +208,7 @@ onMounted(() => {
 
 /* JSON Syntax Highlighting */
 .json-line {
-  font-family: 'Fira Code', 'Source Code Pro', 'DejaVu Sans Mono', monospace;
+  font-family: "Fira Code", "Source Code Pro", "DejaVu Sans Mono", monospace;
   line-height: 1.4;
   color: #a3e635 !important; /* lime-400, terminal green */
   background: transparent !important;
@@ -199,8 +222,16 @@ onMounted(() => {
   font-weight: 400;
 }
 
-.json-line[data-indent="1"] { padding-left: 1rem; }
-.json-line[data-indent="2"] { padding-left: 2rem; }
-.json-line[data-indent="3"] { padding-left: 3rem; }
-.json-line[data-indent="4"] { padding-left: 4rem; }
+.json-line[data-indent="1"] {
+  padding-left: 1rem;
+}
+.json-line[data-indent="2"] {
+  padding-left: 2rem;
+}
+.json-line[data-indent="3"] {
+  padding-left: 3rem;
+}
+.json-line[data-indent="4"] {
+  padding-left: 4rem;
+}
 </style>
