@@ -1,7 +1,7 @@
 <template>
-  <component :is="Tag" :class="classes" tabindex="0" v-bind="otherProps">
-    <slot />
-  </component>
+    <component :is="Tag" :class="classes" tabindex="0" v-bind="otherProps">
+      <slot />
+    </component>
 </template>
 
 <script>
@@ -15,14 +15,15 @@ const variantClasses = {
 const colorClasses = {
   light: "text-light",
   dark: "text-dark",
-  purple: "text-purple", 
-  limongrass: "text-limongrass", 
-  green: "text-green", 
-  orange: "text-orange", 
-  pink: "text-pink", 
+  purple: "text-purple",
+  limongrass: "text-limongrass",
+  green: "text-green",
+  orange: "text-orange",
+  pink: "text-pink",
   primary: "text-primary",
   secondary: "text-secondary",
   neutral: "text-neutral-300",
+  muted: "!text-gray",
 };
 
 const tagClasses = {
@@ -85,7 +86,7 @@ export default {
         as: undefined,
         variant: undefined,
         color: undefined,
-        className: undefined, 
+        className: undefined,
         caseType: undefined,
       },
     };

@@ -1,85 +1,44 @@
 <template>
   <main class="flex flex-col md:flex-row h-[76dvh] w-full">
-    <aside
-      class="flex flex-col gap-4 p-4 border-r bg-dark-background border-border transition-all duration-300"
-      :class="
-        showFilters
-          ? 'min-w-[220px] md:min-w-[260px]'
-          : 'min-w-[60px] md:min-w-[60px] items-center justify-center'
-      "
-    >
-      <div
-        class="flex items-center justify-between cursor-pointer select-none transition-transform duration-300"
-        :class="showFilters ? 'flex-row' : 'flex-col w-[20px]'"
-        @click="showFilters = !showFilters"
-      >
+    <aside class="flex flex-col gap-4 p-4 border-r bg-dark-background border-border transition-all duration-300" :class="showFilters
+      ? 'min-w-[220px] md:min-w-[260px]'
+      : 'min-w-[60px] md:min-w-[60px] items-center justify-center'
+      ">
+      <div class="flex items-center justify-between cursor-pointer select-none transition-transform duration-300"
+        :class="showFilters ? 'flex-row' : 'flex-col w-[20px]'" @click="showFilters = !showFilters">
         <div class="flex items-center gap-2" :class="showFilters ? '' : 'flex-col gap-1'">
-          <Typography
-            variant="FiraCode"
-            as="h4"
-            color="light"
-            className="font-bold transition-transform duration-300 !text-base"
-            :class="showFilters ? '' : 'transform -rotate-90 whitespace-nowrap'"
-          >
+          <Typography variant="FiraCode" as="p" color="light"
+            className="font-bold transition-transform duration-300"
+            :class="showFilters ? '' : 'transform -rotate-90 whitespace-nowrap'">
             Projects ({{ filteredProjects.length }}/{{ allProjects.length }})
           </Typography>
-          <div
-            v-if="frameworks.filter((fw) => fw.checked).length < frameworks.length"
-            class="w-2 h-2 bg-orange rounded-full animate-pulse"
-            title="Filters active"
-          ></div>
+          <div v-if="frameworks.filter((fw) => fw.checked).length < frameworks.length"
+            class="w-2 h-2 bg-orange rounded-full animate-pulse" title="Filters active"></div>
         </div>
-        <IconByName
-          :name="showFilters ? 'ChevronDown' : 'ChevronRight'"
-          color="light"
-          className="text-xl transition-transform duration-300"
-          :class="showFilters ? '' : 'transform rotate-90'"
-        />
+        <IconByName :name="showFilters ? 'ChevronDown' : 'ChevronRight'" color="light"
+          className="text-xl transition-transform duration-300" :class="showFilters ? '' : 'transform rotate-90'" />
       </div>
-      <div
-        v-if="showFilters"
-        class="flex flex-col gap-2 mt-2 transition-all duration-300 animate-filters-in"
-      >
+      <div v-if="showFilters" class="flex flex-col gap-2 mt-2 transition-all duration-300 animate-filters-in">
         <div class="flex flex-col gap-2 mb-2 pb-2 border-b border-border">
-          <Button
-            @click="selectAllFrameworks"
-            variant="simple"
-            size="sm"
-            class="text-orange font-mono hover:text-orange/80 transition-colors"
-          >
+          <Button @click="selectAllFrameworks" variant="simple" size="sm"
+            class="text-orange font-mono hover:text-orange/80 transition-colors">
             Select All
           </Button>
-          <Typography
-            variant="FiraCode"
-            as="div"
-            color="light"
-            className="text-light/60 font-mono text-xs text-center opacity-60"
-          >
-            {{ frameworks.filter((fw) => fw.checked).length }}/{{ frameworks.length }}
+          <Typography variant="FiraCode" as="div" color="light"
+            className="text-light/60 font-mono text-xs text-center opacity-60">
+            {{frameworks.filter((fw) => fw.checked).length}}/{{ frameworks.length }}
           </Typography>
-          <Button
-            @click="deselectAllFrameworks"
-            variant="simple"
-            size="sm"
-            class="text-red-400 font-mono hover:text-red-300 transition-colors"
-          >
+          <Button @click="deselectAllFrameworks" variant="simple" size="sm"
+            class="text-red-400 font-mono hover:text-red-300 transition-colors">
             Clear All
           </Button>
         </div>
 
         <section class="flex flex-col gap-2 max-h-[500px] overflow-y-auto pr-1">
-          <div
-            v-for="fw in frameworks"
-            :key="fw.key"
+          <div v-for="fw in frameworks" :key="fw.key"
             class="flex items-center gap-2 cursor-pointer text-light font-mono text-base hover:bg-card/20 p-1 rounded transition-colors"
-            @click="toggleFramework(fw)"
-          >
-            <input
-              type="checkbox"
-              :checked="fw.checked"
-              class="accent-orange w-4 h-4 pointer-events-none"
-              readonly
-            />
+            @click="toggleFramework(fw)">
+            <input type="checkbox" :checked="fw.checked" class="accent-orange w-4 h-4 pointer-events-none" readonly />
             <IconByName :name="fw.icon" color="light" className="text-lg" />
             <Typography variant="FiraCode" as="span" color="light" className="text-sm">
               {{ fw.label }}
@@ -89,65 +48,44 @@
       </div>
     </aside>
     <section class="flex-1 p-4 overflow-auto">
-      <div
-        v-if="filteredProjects.length === 0"
-        class="flex flex-col items-center justify-center h-full text-center"
-      >
-        <IconByName name="Search" color="light" className="text-6xl mb-4 opacity-50" />
-        <Typography variant="FiraCode" as="h3" color="light" className="text-xl mb-2">
+      <div v-if="filteredProjects.length === 0" class="flex flex-col items-center justify-center h-full text-center">
+        <IconByName name="Search" color="light" size="42" className="mb-4 opacity-50" />
+        <Typography variant="FiraCode" as="p" color="light" className="text-xl mb-2">
           No projects found
         </Typography>
         <Typography variant="FiraCode" as="p" color="light" className="opacity-70 mb-4">
           Try selecting different technologies or clear all filters
         </Typography>
-        <Button
-          @click="selectAllFrameworks"
-          variant="orange"
-          size="default"
-          class="px-4 py-2 rounded font-mono transition-colors mt-4"
-        >
+        <Button @click="selectAllFrameworks" variant="orange" size="default"
+          class="px-4 py-2 rounded font-mono transition-colors mt-4">
           Show All Projects
         </Button>
       </div>
       <div v-else class="flex flex-wrap gap-5 justify-center">
-        <Card
-          v-for="(project, i) in filteredProjects"
-          :key="project.icon + (project.image || project.video)"
-          :image="project.image"
-          :video="project.video"
-          :icon="project.icon"
-          ButtonVariant="simple"
-          size="medium"
-          button="view-project"
-          :url="project.url"
-          :class="[
+        <Card v-for="(project, i) in filteredProjects" :key="project.icon + (project.image || project.video)"
+          :image="project.image" :video="project.video" :icon="project.icon" :tooltip="project.description"
+          ButtonVariant="simple" size="medium" button="view-project" :url="project.url" :class="[
             'flex-1 min-w-[280px] max-w-[350px] basis-1/3 animate-card-in',
             { [`delay-${i}`]: true },
-          ]"
-          :style="{ animationDelay: 0.07 * i + 's' }"
-        >
-          <div class="flex flex-col h-full">
-            <Typography
-              variant="FiraCode"
-              as="p"
-              color="dark"
-              caseType="capital"
-              className="flex-1 mb-4"
-            >
-              {{ project.description }}
-            </Typography>
-
-            <div class="flex flex-wrap gap-2 mb-4">
-              <Typography
-                v-for="tag in project.tags"
-                :key="tag"
-                variant="FiraCode"
-                as="span"
-                color="orange"
-                className="text-xs bg-orange/20 px-3 py-1 rounded-full font-mono border border-orange/30"
-              >
-                {{ tag }}
-              </Typography>
+          ]" :style="{ animationDelay: 0.07 * i + 's' }">
+          <template #tags>
+            <div class="flex flex-wrap gap-2 mb-2 justify-center">
+              <Badge v-for="tech in project.tags" :key="tech" :color="randomColor()"
+                className="text-xs px-3 py-1 rounded-se-lg rounded-t-lg font-mono">
+                <span class="!text-gray">
+                  {{ tech }}
+                </span>
+              </Badge>
+            </div>
+          </template>
+          <div class="flex flex-col overflow-auto min-h-40">
+            <div class="relative flex items-start mb-2">
+              <Tooltip :text="project.description" client:only="hover" side="top">
+                <Typography variant="mono" as="p" color="muted" caseType="capital"
+                  className="description-scroll flex-1">
+                  {{ project.description }}
+                </Typography>
+              </Tooltip>
             </div>
           </div>
         </Card>
@@ -157,6 +95,7 @@
 </template>
 
 <script setup>
+import Tooltip from "../atoms/Tooltip.vue";
 import { onMounted, watch } from "vue";
 import Card from "@/components/molecule/Card.vue";
 import Typography from "@/components/atoms/Typography.vue";
@@ -164,6 +103,12 @@ import IconByName from "@/components/atoms/IconByName.vue";
 import Button from "../atoms/Button.vue";
 import { usePanelProjects } from "@/composables/panelProjects";
 import { frameworks, allProjects } from "@/stores/projects";
+import Badge from "../atoms/Badge.vue";
+
+const randomColor = () => {
+  const colors = ["red", "blue", "green", "yellow", "purple", "pink", "orange", "gray"];
+  return colors[Math.floor(Math.random() * colors.length)];
+};
 
 const {
   showFilters,
@@ -187,6 +132,14 @@ onMounted(() => {
   loadFiltersFromStorage();
 });
 </script>
+
+<style scoped>
+.description-scroll {
+  max-height: 70px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+</style>
 
 <style lang="css" scoped>
 ::-webkit-scrollbar {
