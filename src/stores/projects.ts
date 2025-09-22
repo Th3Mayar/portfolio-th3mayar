@@ -28,13 +28,14 @@ const frameworks = reactive([
   { key: "GraphQL", label: "GraphQL", icon: "GraphQL", checked: true },
   { key: "C#", label: "C#", icon: "CSharp", checked: true },
   { key: "Python", label: "Python", icon: "Python", checked: true },
-  { key: "SQL Server", label: "SQL Server", icon: "Database", checked: true },
+  { key: "sql-server", label: "SQL Server", icon: "Database", checked: true },
   { key: "N-tier", label: "N-tier Architecture", icon: "Architecture", checked: true },
   { key: "Tkinter", label: "Tkinter", icon: "GUI", checked: true },
   { key: "Cryptography", label: "Cryptography", icon: "Security", checked: true },
   { key: "SQLite", label: "SQLite", icon: "Database", checked: true },
   { key: "GUI", label: "GUI", icon: "GUI", checked: true },
   { key: "winforms", label: "WinForms", icon: "Windows", checked: true },
+  { key: "Socket", label: "Socket", icon: "Network", checked: true },
 ]);
 
 const allProjects = [
@@ -44,15 +45,15 @@ const allProjects = [
     description:
       "Codesys is a web-based code snippet manager that allows users to save, organize, and share code snippets in various programming languages. It features a user-friendly interface with syntax highlighting, tagging, and search functionality for easy retrieval of snippets. Built with PHP, jQuery, and MySQL.",
     tags: ["php", "jquery", "mysql", "javaScript", "html", "css"],
-    url: "",
+    url: "https://github.com/Th3Mayar/codesys-v1",
   },
   {
     image: "saborApp",
     icon: "nuxt",
     description:
-      "saborApp is a restaurant reservation application built as a monorepo containing both frontend and backend. The frontend is developed with Nuxt 3, Vue.js, and Tailwind CSS, while the backend is powered by Node.js, Express, and PostgreSQL.",
+      "SaborApp is a restaurant reservation application built as a monorepo containing both frontend and backend. The frontend is developed with Nuxt 3, Vue.js, and Tailwind CSS, while the backend is powered by Node.js, Express, and PostgreSQL.",
     tags: ["nuxt", "vue", "tailwind", "postgreSQL", "shadcn-vue"],
-    url: "",
+    url: "https://github.com/Th3Mayar/sabor_app",
   },
   {
     image: "rescueTrack",
@@ -75,8 +76,8 @@ const allProjects = [
     icon: "vue",
     description:
       "PriceNotify is a web application that allows users to track product prices on e-commerce websites and receive notifications when prices drop. Built with React.js, Tailwind CSS, Node.js, Express, and MongoDB.",
-    tags: ["react", "tailwind", "node", "express", "mongodb", "graqhql"],
-    url: "",
+    tags: ["react", "tailwind", "node", "express", "mongodb", "graphql"],
+    url: "https://github.com/Th3Mayar/price-notify-new",
   },
   {
     // video: "luffyGear4",
@@ -85,31 +86,31 @@ const allProjects = [
     description:
       "Epic animation inspired by Luffy Gear 4. Built with HTML, CSS and JavaScript, featuring effects and SoundCloud integration.",
     tags: ["HTML", "CSS", "JavaScript"],
-    url: "",
+    url: "https://github.com/Th3Mayar/gear-4",
   },
   {
     image: "writePhrase",
     icon: "astro",
     description:
       "Game Write Phrase is a fun typing challenge game built with Astro, React, and TypeScript. The goal is to type the displayed phrase as quickly and accurately as possible to earn points and unlock new levels. The project follows a modular structure with Astro pages, reusable React components, and TypeScript stores for state management.",
-    tags: ["astro", "react", "TypeScript", "JavaScript"],
-    url: "",
+    tags: ["astro", "react", "typeScript", "javaScript"],
+    url: "https://github.com/Th3Mayar/write_phrase",
   },
   {
     image: "palomoOfMonth",
     icon: "nuxt",
     description:
       "Palomo of the Month is a Nuxt 3 application designed to recognize the outstanding palomo of the month through a comprehensive voting and management system. It features a modern UI with shadcn-vue components, dark/light theme support, secure authentication, responsive design, and customizable settings for themes, colors, and preferences. Built for optimal performance with Nuxt 3 and TypeScript.",
-    tags: ["nuxt", "tailwind", "shadcn-vue", "TypeScript", "Bun", "sql-server"],
-    url: "",
+    tags: ["nuxt", "tailwind", "shadcn-vue", "typeScript", "bun", "sql-server"],
+    url: "https://github.com/Th3Mayar/palomoOfMonth",
   },
   {
     image: "gridOrFlex",
     icon: "react",
     description:
-      "gridOrFlex is a dynamic UI feature that allows switching between Grid and Flex views in a user list, enhancing the user experience by adapting the layout as needed. It uses Redux for global state management, Framer Motion for smooth transitions, and is designed to be reusable in any list component. Built with React and Next.js.",
-    tags: ["react", "Next.js", "Redux Toolkit", "Framer Motion"],
-    url: "",
+      "GridOrFlex is a dynamic UI feature that allows switching between Grid and Flex views in a user list, enhancing the user experience by adapting the layout as needed. It uses Redux for global state management, Framer Motion for smooth transitions, and is designed to be reusable in any list component. Built with React and Next.js.",
+    tags: ["react", "next.js", "redux toolkit", "framer motion"],
+    url: "https://github.com/Th3Mayar/grid-or-flex-layout",
   },
   {
     video: "FractalMetamorphosis2D",
@@ -117,7 +118,7 @@ const allProjects = [
     description:
       "Fractal Metamorphosis 2D with three.js and Astro An animated fractal transformation visualizer that morphs between different fractal patterns in a 2D space, creating mesmerizing visual effects. Built with React, Three.js, and Tailwind CSS.",
     tags: ["threejs", "css", "javaScript"],
-    url: "",
+    url: "https://github.com/Th3Mayar/FractalMetamorphosis2D",
   },
   {
     image: "api",
@@ -125,7 +126,7 @@ const allProjects = [
     description:
       "API for PriceNotify, a web application that allows users to track product prices on e-commerce websites and receive notifications when prices drop. Built with Node.js, Express, and MongoDB.",
     tags: ["node", "express", "mongodb", "javaScript", "typeScript", "graphql"],
-    url: "",
+    url: "https://github.com/Th3Mayar/api-PriceNotify",
   },
   {
     image: "api",
@@ -133,7 +134,7 @@ const allProjects = [
     description:
       "This project is a web scraping script designed to extract and process product information from online sales platforms such as eBay. It allows developers to obtain detailed product data and apply custom logic to highlight products with specific alerts.",
     tags: ["javaScript", "node.js", "express"],
-    url: "",
+    url: "https://github.com/Th3Mayar/api_consult_price",
   },
   {
     image: "factuStock1",
@@ -142,7 +143,7 @@ const allProjects = [
     description:
       "FactuStock is a desktop application for managing inventory and invoicing in small to medium-sized businesses. It features product management, client management, invoicing, reporting, and user authentication. Built with C# and .NET Framework, it provides a user-friendly interface and robust functionality to streamline business operations.",
     tags: ["C#", "sql-server", "n-tier", "winforms"],
-    url: "",
+    url: "https://github.com/Th3Mayar/FactuStock",
   },
   {
     image: "gestorPass",
@@ -150,7 +151,7 @@ const allProjects = [
     description:
       "This program is a password manager that creates and saves passwords from a series of options that you can alter to obtain more secure passwords.",
     tags: ["python", "tkinter", "sqlite", "gui"],
-    url: "",
+    url: "https://github.com/Th3Mayar/Gestor_PasswordPython",
   },
   {
     image: "encryptText",
@@ -158,7 +159,15 @@ const allProjects = [
     description:
       "This tool allows users to encrypt and decrypt text messages securely using the cryptography library. The application provides a simple interface for encrypting text, saving the encrypted data, and decrypting it with authorization.",
     tags: ["python", "tkinter", "cryptography", "sqlite", "gui"],
-    url: "",
+    url: "https://github.com/Th3Mayar/encrypt_text",
+  },
+  {
+    image: "encryptText",
+    icon: "python",
+    description:
+      "This is a Python application using Tkinter that allows you to encrypt and send files between a client and a server. The application provides a graphical user interface (GUI) for selecting files, encrypting them.",
+    tags: ["python", "tkinter", "cryptography", "socket", "gui"],
+    url: "https://github.com/Th3Mayar/encrypt_decrypt_file"
   }
 ];
 
