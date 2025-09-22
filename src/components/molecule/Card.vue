@@ -23,7 +23,7 @@
       <slot name="tags" />
     </div>
     <div class="justify-end flex bottom-0 absolute w-full">
-      <Button :variant="ButtonVariant" :size="size" :disabled="false" class="w-44 rounded-[0px] rounded-ss-lg" @click="openUrl(url)">
+      <Button :variant="ButtonVariant" :size="size" :disabled="false" class="w-44 rounded-[0px] rounded-t-lg rounded-r-[0px]" @click="openUrl(url)">
         {{ button }}
       </Button>
     </div>
