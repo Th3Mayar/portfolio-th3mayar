@@ -2,63 +2,39 @@
   <div class="card">
     <div class="card-header">
       <div class="image-container" @click="openModal">
-        <img
-          v-if="props.video"
-          :src="`/videos/${props.video}.gif`"
-          class="card-gif"
-          alt="Project GIF"
-          loading="lazy"
-          decoding="async"
-          fetchpriority="high"
-        />
-        <ImageByName
-          v-else-if="props.image"
-          :name="props.image"
-          :stroke-width="1"
-          :className="className + ' card-img'"
-          fetchpriority="high"
-        />
+        <img v-if="props.video" :src="`/videos/${props.video}.gif`" class="card-gif" alt="Project GIF" loading="lazy"
+          decoding="async" fetchpriority="high" />
+        <ImageByName v-else-if="props.image" :name="props.image" :stroke-width="1" :className="className + ' card-img'"
+          fetchpriority="high" />
         <div class="logo">
           <ImageByName :name="icon" :stroke-width="1" :className="className" fetchpriority="high" />
         </div>
         <div v-if="props.video" class="gif-indicator">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-            <text x="4" y="18" font-size="16" font-family="monospace" fill="white">GIF</text>
+            <text x="4" y="16" font-size="12" font-family="monospace" fill="white">GIF</text>
           </svg>
         </div>
       </div>
     </div>
-    <div class="card-body">
+    <div class="card-body min-h-fit">
       <slot />
     </div>
-    <div class="card-footer">
-      <Button
-        :variant="ButtonVariant"
-        :size="size"
-        :disabled="false"
-        class="w-44 rounded-xl"
-        @click="openUrl(url)"
-      >
+    <div class="card-tags flex flex-wrap gap-2 mb-16 justify-center p-2">
+      <slot name="tags" />
+    </div>
+    <div class="justify-end flex bottom-0 absolute w-full">
+      <Button :variant="ButtonVariant" :size="size" :disabled="false" class="w-44 !rounded-[0px] !rounded-tl-lg" @click="openUrl(url)">
         {{ button }}
       </Button>
     </div>
     <teleport to="body">
       <div v-if="showModal" class="modal-bg" @click="showModal = false">
         <div class="modal-img-wrapper" @click.stop>
-          <img
-            v-if="props.video && showModal"
-            :src="`/videos/${props.video}.gif`"
-            class="modal-gif"
-            alt="Project GIF"
-          />
+          <img v-if="props.video && showModal" :src="`/videos/${props.video}.gif`" class="modal-gif"
+            alt="Project GIF" />
           <template v-else-if="props.image && showModal">
-            <ImageByName
-              :name="props.image"
-              :stroke-width="1"
-              className="modal-img"
-              fetchpriority="high"
-              @error="imageError = true"
-            />
+            <ImageByName :name="props.image" :stroke-width="1" className="modal-img" fetchpriority="high"
+              @error="imageError = true" />
             <div v-if="imageError" class="flex flex-col items-center justify-center w-full h-full p-8">
               <span class="text-light text-lg font-mono mb-2">Image not found</span>
               <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="text-orange">
@@ -133,9 +109,6 @@ const openUrl = (url: string) => {
   width: 350px;
   min-width: 300px;
   max-width: 350px;
-  height: 480px;
-  min-height: 480px;
-  max-height: 480px;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -145,6 +118,7 @@ const openUrl = (url: string) => {
   gap: 2rem;
   align-items: stretch;
   justify-content: stretch;
+  height: auto;
 }
 
 .card-header {
@@ -182,13 +156,6 @@ const openUrl = (url: string) => {
   min-height: 80px;
   max-height: 120px;
   overflow: hidden;
-}
-
-.card-footer {
-  display: flex;
-  padding: 0 0 2.5rem 2.5rem;
-  align-items: flex-end;
-  flex: 0 0 auto;
 }
 
 .logo {

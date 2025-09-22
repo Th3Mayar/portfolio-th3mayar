@@ -17,6 +17,7 @@ export const routes = {
     gestorPass: "assets/gestor_pass.jpg",
     encryptText: "assets/encrypt.png",
     contactMe: "assets/contact-me.svg",
+    encryptFile: "assets/encryptFile.png"
   },
   logos: {
     css: "logos/css.svg",
