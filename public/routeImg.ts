@@ -39,5 +39,6 @@ export const routes = {
   },
   gif: {
     FractalMetamorphosis2D: "videos/FractalMetamorphosis2D.gif",
+    luffyGear4: "videos/LuffyGearFour.gif",
   },
 };

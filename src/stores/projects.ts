@@ -28,6 +28,13 @@ const frameworks = reactive([
   { key: "GraphQL", label: "GraphQL", icon: "GraphQL", checked: true },
   { key: "C#", label: "C#", icon: "CSharp", checked: true },
   { key: "Python", label: "Python", icon: "Python", checked: true },
+  { key: "SQL Server", label: "SQL Server", icon: "Database", checked: true },
+  { key: "N-tier", label: "N-tier Architecture", icon: "Architecture", checked: true },
+  { key: "Tkinter", label: "Tkinter", icon: "GUI", checked: true },
+  { key: "Cryptography", label: "Cryptography", icon: "Security", checked: true },
+  { key: "SQLite", label: "SQLite", icon: "Database", checked: true },
+  { key: "GUI", label: "GUI", icon: "GUI", checked: true },
+  { key: "winforms", label: "WinForms", icon: "Windows", checked: true },
 ]);
 
 const allProjects = [
@@ -36,7 +43,7 @@ const allProjects = [
     icon: "php",
     description:
       "Codesys is a web-based code snippet manager that allows users to save, organize, and share code snippets in various programming languages. It features a user-friendly interface with syntax highlighting, tagging, and search functionality for easy retrieval of snippets. Built with PHP, jQuery, and MySQL.",
-    tags: ["php", "jquery", "mysql"],
+    tags: ["php", "jquery", "mysql", "javaScript", "html", "css"],
     url: "",
   },
   {
@@ -44,14 +51,14 @@ const allProjects = [
     icon: "nuxt",
     description:
       "saborApp is a restaurant reservation application built as a monorepo containing both frontend and backend. The frontend is developed with Nuxt 3, Vue.js, and Tailwind CSS, while the backend is powered by Node.js, Express, and PostgreSQL.",
-    tags: ["nuxt", "vue", "tailwind", "PostgreSQL", "shadcn-vue"],
+    tags: ["nuxt", "vue", "tailwind", "postgreSQL", "shadcn-vue"],
     url: "",
   },
   {
     image: "rescueTrack",
     icon: "nuxt",
     description:
-      "RescueTrack is a management platform for towing and roadside assistance services in the Dominican Republic. It connects drivers in vehicle emergencies with reliable providers across the country. Users can share their current location or manually enter an address to request quick and secure assistance. Stack: Nuxt, Node.js, MongoDB.",
+      "RescueTrack is a management platform for towing and roadside assistance services in the Dominican Republic. It connects drivers in vehicle emergencies with reliable providers across the country. Users can share their current location or manually enter an address to request quick and secure assistance. Stack: nuxt, node.js, mongodb.",
     tags: [
       "nuxt",
       "vue",
@@ -68,10 +75,11 @@ const allProjects = [
     icon: "vue",
     description:
       "PriceNotify is a web application that allows users to track product prices on e-commerce websites and receive notifications when prices drop. Built with React.js, Tailwind CSS, Node.js, Express, and MongoDB.",
-    tags: ["react", "tailwind", "node", "express", "mongodb"],
+    tags: ["react", "tailwind", "node", "express", "mongodb", "graqhql"],
     url: "",
   },
   {
+    // video: "luffyGear4",
     image: "luffyGear4",
     icon: "html",
     description:
@@ -92,7 +100,7 @@ const allProjects = [
     icon: "nuxt",
     description:
       "Palomo of the Month is a Nuxt 3 application designed to recognize the outstanding palomo of the month through a comprehensive voting and management system. It features a modern UI with shadcn-vue components, dark/light theme support, secure authentication, responsive design, and customizable settings for themes, colors, and preferences. Built for optimal performance with Nuxt 3 and TypeScript.",
-    tags: ["nuxt", "tailwind", "shadcn-vue", "TypeScript", "Bun"],
+    tags: ["nuxt", "tailwind", "shadcn-vue", "TypeScript", "Bun", "sql-server"],
     url: "",
   },
   {
@@ -108,7 +116,7 @@ const allProjects = [
     icon: "react",
     description:
       "Fractal Metamorphosis 2D with three.js and Astro An animated fractal transformation visualizer that morphs between different fractal patterns in a 2D space, creating mesmerizing visual effects. Built with React, Three.js, and Tailwind CSS.",
-    tags: ["ThreeJs", "Css", "JavaScript"],
+    tags: ["threejs", "css", "javaScript"],
     url: "",
   },
   {
@@ -116,7 +124,7 @@ const allProjects = [
     icon: "js",
     description:
       "API for PriceNotify, a web application that allows users to track product prices on e-commerce websites and receive notifications when prices drop. Built with Node.js, Express, and MongoDB.",
-    tags: ["node", "express", "mongodb", "JavaScript", "TypeScript", "GraphQL"],
+    tags: ["node", "express", "mongodb", "javaScript", "typeScript", "graphql"],
     url: "",
   },
   {
@@ -124,7 +132,7 @@ const allProjects = [
     icon: "js",
     description:
       "This project is a web scraping script designed to extract and process product information from online sales platforms such as eBay. It allows developers to obtain detailed product data and apply custom logic to highlight products with specific alerts.",
-    tags: ["JavaScript", "Node.js", "Express"],
+    tags: ["javaScript", "node.js", "express"],
     url: "",
   },
   {
@@ -133,7 +141,7 @@ const allProjects = [
     icon: "csharp",
     description:
       "FactuStock is a desktop application for managing inventory and invoicing in small to medium-sized businesses. It features product management, client management, invoicing, reporting, and user authentication. Built with C# and .NET Framework, it provides a user-friendly interface and robust functionality to streamline business operations.",
-    tags: ["C#"],
+    tags: ["C#", "sql-server", "n-tier", "winforms"],
     url: "",
   },
   {
@@ -141,7 +149,7 @@ const allProjects = [
     icon: "python",
     description:
       "This program is a password manager that creates and saves passwords from a series of options that you can alter to obtain more secure passwords.",
-    tags: ["python"],
+    tags: ["python", "tkinter", "sqlite", "gui"],
     url: "",
   },
   {
@@ -149,7 +157,7 @@ const allProjects = [
     icon: "python",
     description:
       "This tool allows users to encrypt and decrypt text messages securely using the cryptography library. The application provides a simple interface for encrypting text, saving the encrypted data, and decrypting it with authorization.",
-    tags: ["python"],
+    tags: ["python", "tkinter", "cryptography", "sqlite", "gui"],
     url: "",
   }
 ];
