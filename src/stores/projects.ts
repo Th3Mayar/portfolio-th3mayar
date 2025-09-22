@@ -104,8 +104,7 @@ const allProjects = [
     url: "",
   },
   {
-    image: "",
-    gif: "FractalMetamorphosis2D",
+    video: "FractalMetamorphosis2D",
     icon: "react",
     description:
       "Fractal Metamorphosis 2D with three.js and Astro An animated fractal transformation visualizer that morphs between different fractal patterns in a 2D space, creating mesmerizing visual effects. Built with React, Three.js, and Tailwind CSS.",

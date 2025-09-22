@@ -3,8 +3,8 @@
     <div class="card-header">
       <div class="image-container" @click="openModal">
         <img
-          v-if="props.gif"
-          :src="`/assets/${props.gif}.gif`"
+          v-if="props.video"
+          :src="`/videos/${props.video}.gif`"
           class="card-gif"
           alt="Project GIF"
           loading="lazy"
@@ -21,7 +21,7 @@
         <div class="logo">
           <ImageByName :name="icon" :stroke-width="1" :className="className" fetchpriority="high" />
         </div>
-        <div v-if="props.gif" class="gif-indicator">
+        <div v-if="props.video" class="gif-indicator">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
             <text x="4" y="18" font-size="16" font-family="monospace" fill="white">GIF</text>
           </svg>
@@ -46,8 +46,8 @@
       <div v-if="showModal" class="modal-bg" @click="showModal = false">
         <div class="modal-img-wrapper" @click.stop>
           <img
-            v-if="props.gif && showModal"
-            :src="`/assets/${props.gif}.gif`"
+            v-if="props.video && showModal"
+            :src="`/videos/${props.video}.gif`"
             class="modal-gif"
             alt="Project GIF"
           />
@@ -80,7 +80,7 @@ import Button from "../atoms/Button.vue";
 
 interface Props {
   image?: string;
-  gif?: string;
+  video?: string;
   icon: string;
   className?: string;
   ButtonVariant?: string;
@@ -94,15 +94,14 @@ const props = withDefaults(defineProps<Props>(), {
   ButtonVariant: "simple",
   size: "medium",
   image: "",
-  gif: "",
+  video: "",
 });
-
 
 const showModal = ref(false);
 const imageError = ref(false);
 
 const openModal = () => {
-  if (props.image || props.gif) {
+  if (props.image || props.video) {
     showModal.value = true;
     imageError.value = false;
   }

@@ -9,9 +9,9 @@ const { card } = THomeDescription;
 ---
 
 <script>
-  import { snakeGame } from "@/functions/snake";
+  import { useSnake } from "@/composables/gamePanel";
   document.addEventListener("DOMContentLoaded", () => {
-    snakeGame();
+    useSnake();
   });
 </script>
 
