@@ -162,7 +162,7 @@ const allProjects = [
     url: "https://github.com/Th3Mayar/encrypt_text",
   },
   {
-    image: "encryptText",
+    image: "encryptFile",
     icon: "python",
     description:
       "This is a Python application using Tkinter that allows you to encrypt and send files between a client and a server. The application provides a graphical user interface (GUI) for selecting files, encrypting them.",
