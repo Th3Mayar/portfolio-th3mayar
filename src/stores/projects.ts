@@ -80,7 +80,6 @@ const allProjects = [
     url: "https://github.com/Th3Mayar/price-notify-new",
   },
   {
-    // video: "luffyGear4",
     image: "luffyGear4",
     icon: "html",
     description:

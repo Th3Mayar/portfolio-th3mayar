@@ -7,8 +7,8 @@
       <div class="flex items-center justify-between cursor-pointer select-none transition-transform duration-300"
         :class="showFilters ? 'flex-row' : 'flex-col w-[20px]'" @click="showFilters = !showFilters">
         <div class="flex items-center gap-2" :class="showFilters ? '' : 'flex-col gap-1'">
-          <Typography variant="FiraCode" as="h4" color="light"
-            className="font-bold transition-transform duration-300 !text-base"
+          <Typography variant="FiraCode" as="p" color="light"
+            className="font-bold transition-transform duration-300"
             :class="showFilters ? '' : 'transform -rotate-90 whitespace-nowrap'">
             Projects ({{ filteredProjects.length }}/{{ allProjects.length }})
           </Typography>
@@ -49,8 +49,8 @@
     </aside>
     <section class="flex-1 p-4 overflow-auto">
       <div v-if="filteredProjects.length === 0" class="flex flex-col items-center justify-center h-full text-center">
-        <IconByName name="Search" color="light" className="text-6xl mb-4 opacity-50" />
-        <Typography variant="FiraCode" as="h3" color="light" className="text-xl mb-2">
+        <IconByName name="Search" color="light" size="42" className="mb-4 opacity-50" />
+        <Typography variant="FiraCode" as="p" color="light" className="text-xl mb-2">
           No projects found
         </Typography>
         <Typography variant="FiraCode" as="p" color="light" className="opacity-70 mb-4">
