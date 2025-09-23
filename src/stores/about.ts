@@ -354,8 +354,15 @@ if (getClientLang() === "en") {
           content: `/**
  * Técnico en Desarrollo y Mantenimiento de Aplicaciones Informáticas
  * IATESA, La Vega, República Dominicana
- */
-`,
+ */`,
+        },
+        {
+          key: "bachillerato",
+          label: "bachillerato.js",
+          content: `/**
+ * Bachillerato en Ciencias y Letras
+ * Liceo Juan Pablo Duarte, La Vega, República Dominicana
+ */`,
         },
         {
           key: "university",
@@ -366,8 +373,7 @@ if (getClientLang() === "en") {
  * Estudiante de último año de Ingeniería en Sistemas Computacionales en UCATECI,
  * La Vega, República Dominicana.
  * Desde enero de 2022 hasta la actualidad.
- */
-`,
+ */`,
         },
       ],
       experience: [
@@ -470,6 +476,23 @@ if (getClientLang() === "en") {
       ],
     },
     {
+      key: "projects",
+      label: "proyectos",
+      open: false,
+      files: [
+        {
+          key: "projects-file",
+          label: "proyectos.js",
+          content: `/**
+ * Proyectos destacados
+ * - Sitio Web de Portafolio (Astro + Vue)
+ * - Plataforma E-commerce (Next.js)
+ * - Sistema de Inventario (PHP + MySQL)
+ */`,
+        },
+      ],
+    },
+    {
       key: "skills",
       label: "habilidades",
       open: false,
@@ -512,8 +535,8 @@ if (getClientLang() === "en") {
           content: JSON.stringify(getClientLang() === "en" ? work_experience_en : work_experience_es, null, 2),
         }
       ],
-    },
-  ]
+    }
+  ];
 }
 
 const contacts = ref([

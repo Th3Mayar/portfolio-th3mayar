@@ -173,7 +173,7 @@ export function useFlappyBird(canvas) {
 		if (gameOver) {
 			ctx.fillStyle = '#f72585';
 			ctx.font = 'bold 32px Fira Code, monospace';
-			ctx.fillText('Game Over', width / 2 - 80, height / 2);
+			ctx.fillText(`${getClientLang() === "en" ? "Game Over" : "Has perdido"}`, width / 2 - 80, height / 2);
 		}
 	}
 	function gameLoop() {

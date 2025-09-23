@@ -96,6 +96,9 @@
         "user": "th3mayar",
         "portfolio": "portafolio"
       }
+    },
+    "games": {
+      "score": "Puntos"
     }
   },
   "projects": {
@@ -110,7 +113,8 @@
       "clearAll": "Limpiar todo",
       "try": "Prueba a seleccionar diferentes tecnologías o borra todos los filtros.",
       "showAll": "Mostrar todo",
-      "label": "Proyectos"
+      "label": "Proyectos",
+      "viewProject": "ver-proyecto"
     },
     "card": {
       "imageNotFound": "Imagen no encontrada"
