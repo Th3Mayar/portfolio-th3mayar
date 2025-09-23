@@ -7,6 +7,7 @@ const { title } = Astro.props;
 import Header from "@/components/organism/Header.astro";
 import Footer from "@/components/organism/Footer.astro";
 import MobileOverlay from "@/components/molecule/MobileOverlay.vue";
+import UserTypeModal from "@/components/atoms/UserTypeModal.vue";
 import "@/styles/global.css";
 ---
 
@@ -21,6 +22,7 @@ import "@/styles/global.css";
     <title>{title}</title>
   </head>
   <body class="p-[50px] bg-darkBackground text-light overflow-hidden">
+
     <div
       class="content max-h-[100%] h-[100%] rounded-[20px] border-2 bg-bg-background shadow-[0_0_50px_0px_var(--border-effect)] overflow-hidden relative"
       id="main-content-container"
@@ -36,6 +38,7 @@ import "@/styles/global.css";
         <Footer client:load />
       </footer>
     </div>
+    <UserTypeModal client:load />
 
     <!-- Mobile Overlay -->
     <MobileOverlay client:load />
