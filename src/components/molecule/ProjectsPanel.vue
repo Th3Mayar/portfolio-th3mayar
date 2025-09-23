@@ -10,7 +10,7 @@
           <Typography variant="FiraCode" as="p" color="light"
             className="font-bold transition-transform duration-300"
             :class="showFilters ? '' : 'transform -rotate-90 whitespace-nowrap'">
-            Projects ({{ filteredProjects.length }}/{{ allProjects.length }})
+            {{ info.label }} ({{ filteredProjects.length }}/{{ allProjects.length }})
           </Typography>
           <div v-if="frameworks.filter((fw) => fw.checked).length < frameworks.length"
             class="w-2 h-2 bg-orange rounded-full animate-pulse" title="Filters active"></div>
@@ -22,7 +22,7 @@
         <div class="flex flex-col gap-2 mb-2 pb-2 border-b border-border">
           <Button @click="selectAllFrameworks" variant="simple" size="sm"
             class="text-orange font-mono hover:text-orange/80 transition-colors">
-            Select All
+            {{ info.selectAll }}
           </Button>
           <Typography variant="FiraCode" as="div" color="light"
             className="text-light/60 font-mono text-xs text-center opacity-60">
@@ -30,7 +30,7 @@
           </Typography>
           <Button @click="deselectAllFrameworks" variant="simple" size="sm"
             class="text-red-400 font-mono hover:text-red-300 transition-colors">
-            Clear All
+            {{ info.clearAll }}
           </Button>
         </div>
 
@@ -49,16 +49,16 @@
     </aside>
     <section class="flex-1 p-4 overflow-auto">
       <div v-if="filteredProjects.length === 0" class="flex flex-col items-center justify-center h-full text-center">
-        <IconByName name="Search" color="light" size="42" className="mb-4 opacity-50" />
+        <IconByName name="Search" color="light" :size="42" className="mb-4 opacity-50" />
         <Typography variant="FiraCode" as="p" color="light" className="text-xl mb-2">
-          No projects found
+          {{ info.noProjects }}
         </Typography>
         <Typography variant="FiraCode" as="p" color="light" className="opacity-70 mb-4">
-          Try selecting different technologies or clear all filters
+          {{ info.try }}
         </Typography>
         <Button @click="selectAllFrameworks" variant="orange" size="default"
           class="px-4 py-2 rounded font-mono transition-colors mt-4">
-          Show All Projects
+          {{ info.showAll }}
         </Button>
       </div>
       <div v-else class="flex flex-wrap gap-5 justify-center">
@@ -94,7 +94,7 @@
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Tooltip from "../atoms/Tooltip.vue";
 import { onMounted, watch } from "vue";
 import Card from "@/components/molecule/Card.vue";
@@ -104,6 +104,14 @@ import Button from "../atoms/Button.vue";
 import { usePanelProjects } from "@/composables/panelProjects";
 import { frameworks, allProjects } from "@/stores/projects";
 import Badge from "../atoms/Badge.vue";
+import { useTranslations } from "@/i18n/utils";
+
+const props = defineProps<{
+  lang: "en" | "es";
+}>()
+
+const { projects: TProjects } = useTranslations(props.lang);
+const { info } = TProjects;
 
 const randomColor = () => {
   const colors = ["red", "blue", "green", "yellow", "purple", "pink", "orange", "gray"];

@@ -4,7 +4,7 @@
       class="w-1/5 min-w-[220px] bg-bg-background border-r border-border flex flex-col gap-4 p-6"
     >
       <div>
-        <div class="font-mono text-light text-base mb-2">personal-info</div>
+        <div class="font-mono text-light text-base mb-2">{{ aboutPanelInfo.personalInfo }}</div>
         <ul>
           <li v-for="folder in folders" :key="folder.key" class="mb-2">
             <button
@@ -44,7 +44,7 @@
         </ul>
       </div>
       <div>
-        <div class="font-mono text-light text-base mb-2">contacts</div>
+        <div class="font-mono text-light text-base mb-2">{{ aboutPanelInfo.contacts }}</div>
         <ul>
           <li
             v-for="contact in contacts"
@@ -90,13 +90,13 @@
         v-else
         class="flex items-center justify-center h-full text-muted font-mono opacity-60"
       >
-        Select a file to view its content.
+        {{ aboutPanelInfo.selectFile }}
       </div>
     </section>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref, nextTick } from "vue";
 import IconByName from "../atoms/IconByName.vue";
 import Prism from "prismjs";
@@ -106,6 +106,19 @@ import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import { folders, contacts } from "@/stores/about";
 import { useAboutPanel } from "@/composables/aboutPanel";
+import { useTranslations } from "@/i18n/utils";
+
+// get prop activeDirectory
+const props = withDefaults(defineProps<{
+  activeDirectory?: string;
+  lang?: "en" | "es";
+}>(), {
+  activeDirectory: "bio",
+  lang: "en",
+});
+
+const { about: TAbout } = useTranslations(props.lang);
+const { aboutPanelInfo } = TAbout;
 
 const {
   toggleFolder,
@@ -116,11 +129,6 @@ const {
   getTitle,
   handleContactClick,
 } = useAboutPanel();
-
-// get prop activeDirectory
-withDefaults(defineProps(), {
-  activeDirectory: "bio",
-});
 
 onMounted(() => {
   const bioFolder = folders.value.find((f) => f.key === "bio");

@@ -1,5 +1,6 @@
 import { ref } from "vue";
 import { sendContactMessage } from "@/composables/supabase";
+import { getClientLang } from "@/composables/client/getLang";
 
 export const contactForm = ref({
   name: "",
@@ -18,19 +19,25 @@ export async function submitContactForm() {
   const result = await sendContactMessage({ name, email, message });
 
   if (result.success) {
-    alert.value = { type: "success", message: "Message sent successfully!" };
+    alert.value = { type: "success", message: getClientLang() === "en" 
+        ? "Message sent successfully!" 
+        : "¡Mensaje enviado con éxito!" };
     contactForm.value = { name: "", email: "", message: "" };
   } else if (result.reason === "wait") {
     alert.value = {
       type: "warning",
-      message: `A recent message with this email already exists. Please wait ${result.minutesLeft} minutes before sending again.`,
+      message: getClientLang() === "en" 
+        ? `A recent message with this email already exists. Please wait ${result.minutesLeft} minutes before sending again.` 
+        : `Ya existe un mensaje reciente con este correo electrónico. Por favor espera ${result.minutesLeft} minutos antes de enviar otro.`,
     };
   } else {
     alert.value = {
       type: "error",
       message: result.error
         ? `Error: ${result.error}`
-        : "An error occurred while sending the message. Please try again.",
+        : getClientLang() === "en" 
+            ? "An error occurred while sending the message. Please try again." 
+            : "Ocurrió un error al enviar el mensaje. Por favor, inténtalo de nuevo.",
     };
   }
   sending.value = false;
