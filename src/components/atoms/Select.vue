@@ -10,7 +10,7 @@
         </button>
         <transition name="fade">
             <ul v-if="open" :id="dropdownId"
-                class="absolute right-0 z-30 mt-14 min-w-[9rem] w-36 bg-background border border-border rounded-md shadow-lg py-1 max-h-64 overflow-y-auto animate-fadeIn"
+                class="absolute right-0 z-30 mt-14 min-w-[9rem] w-36 bg-background border rounded-md shadow-lg py-1 max-h-64 overflow-y-auto animate-fadeIn border-border"
                 role="listbox" @keydown.esc="closeDropdown">
                 <li v-for="option in options" :key="option.value" @click="handleChange(option.value)" role="option"
                     :aria-selected="option.value === modelValue" :class="[
@@ -62,6 +62,7 @@ onMounted(() => {
 .rotate-180 {
     transform: rotate(180deg);
 }
+
 .border-border {
     border-color: hsl(210.97 34.07% 17.84%) !important;
 }
