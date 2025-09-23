@@ -33,7 +33,7 @@ if (getClientLang() === "en") {
   ];
 } else {
   availableFiles = [
-    'sobre-mi.js', 'intereses.js', 'bachillerato.js', 'universidad.js', 'proyectos.js', 'habilidades.js', 'experiencia.json'
+    'sobre-mi.js', 'intereses.js', 'bachillerato.js', 'universidad.js', 'habilidades.js', 'experiencia.json'
   ];
 }
 
@@ -350,29 +350,21 @@ if (getClientLang() === "en") {
       files: [
         {
           key: "high-school",
-          label: "secundaria.js",
+          label: "bachillerato.js",
           content: `/**
  * Técnico en Desarrollo y Mantenimiento de Aplicaciones Informáticas
  * IATESA, La Vega, República Dominicana
  */`,
         },
         {
-          key: "bachillerato",
-          label: "bachillerato.js",
-          content: `/**
- * Bachillerato en Ciencias y Letras
- * Liceo Juan Pablo Duarte, La Vega, República Dominicana
- */`,
-        },
-        {
-          key: "university",
+          key: "universidad",
           label: "universidad.js",
           content: `/**
  * Universidad
  * Estudiante de Ingeniería en Sistemas
- * Estudiante de último año de Ingeniería en Sistemas Computacionales en UCATECI,
+ * Estudiante de último año de Ingeniería en Sistemas de Computación en UCATECI,
  * La Vega, República Dominicana.
- * Desde enero de 2022 hasta la actualidad.
+ * Desde Enero 2022 hasta la actualidad.
  */`,
         },
       ],
@@ -473,23 +465,6 @@ if (getClientLang() === "en") {
             "CSS3"
           ]
         }
-      ],
-    },
-    {
-      key: "projects",
-      label: "proyectos",
-      open: false,
-      files: [
-        {
-          key: "projects-file",
-          label: "proyectos.js",
-          content: `/**
- * Proyectos destacados
- * - Sitio Web de Portafolio (Astro + Vue)
- * - Plataforma E-commerce (Next.js)
- * - Sistema de Inventario (PHP + MySQL)
- */`,
-        },
       ],
     },
     {
