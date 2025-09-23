@@ -67,9 +67,9 @@
             <div class="flex items-center agnoster-prompt">
               <!-- Agnoster-style prompt -->
               <div class="flex items-center mr-2">
-                <span class="text-blue-400 font-bold">th3mayar</span>
+                <span class="text-blue-400 font-bold">{{ aboutPanel["agnoster-prompt"].user  }}</span>
                 <span class="text-white mx-1">@</span>
-                <span class="text-green-400 font-bold">portfolio</span>
+                <span class="text-green-400 font-bold">{{ aboutPanel["agnoster-prompt"].portfolio }}</span>
                 <span class="text-white mx-1">:</span>
                 <span class="text-yellow-400 font-bold">~</span>
                 <span class="text-blue-400 ml-1">$</span>
@@ -95,7 +95,7 @@
                   v-if="autocompleteSuggestion"
                   class="absolute right-2 top-0 text-xs text-gray-500 animate-pulse pointer-events-none"
                 >
-                  Tab
+                  {{ aboutPanel.tab }}
                 </div>
               </div>
             </div>
@@ -103,7 +103,7 @@
         </div>
 
         <div v-else-if="activePanel === 'info'">
-          <AboutInfoPanel activeDirectory="bio" />
+          <AboutInfoPanel activeDirectory="bio" :lang="props.lang" />
         </div>
 
         <div v-else-if="activePanel === 'game'">
@@ -131,12 +131,20 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import IconByName from "@/components/atoms/IconByName.vue";
 import AboutInfoPanel from "@/components/molecule/AboutInfoPanel.vue";
 import { useAboutPanel } from "@/composables/aboutPanel";
 import { TetrisMinimal, FlappyBird } from "@/components/games";
+import { useTranslations } from "@/i18n/utils";
+
+const props = defineProps<{
+  lang: "en" | "es";
+}>()
+
+const { about: TAbout } = useTranslations(props.lang);
+const { aboutPanel } = TAbout;
 
 const {
   activePanel,
@@ -160,6 +168,7 @@ const games = [
   { key: 'tetris', label: 'Tetris', component: TetrisMinimal },
   { key: 'flappy', label: 'Flappy Bird', component: FlappyBird },
 ];
+
 const selectedGame = ref('tetris');
 const selectedGameComponent = computed(() => {
   const found = games.find(g => g.key === selectedGame.value);

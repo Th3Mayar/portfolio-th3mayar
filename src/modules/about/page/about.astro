@@ -1,10 +1,29 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import AboutPanel from "@/components/molecule/AboutPanel.vue";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+let lang = getLangFromUrl(Astro.url);
+
+const { about: TAbout } = useTranslations(lang);
+const { seo } = TAbout;
+
+Astro.cookies.set("lang", lang, {
+  path: "/",
+  maxAge: 60 * 60 * 24 * 30,
+  sameSite: "strict",
+  secure: true,
+});
 ---
 
-<Layout title="About">
-  <AboutPanel client:only="vue" class="h-[75dvh]" />
+<Layout title={ seo.title }>
+  <AboutPanel
+    client:only="vue"
+    class:list="h-[75dvh]"
+    lang={Astro.params.lang === "en" || Astro.params.lang === "es"
+      ? Astro.params.lang
+      : "en"}
+  />
 </Layout>
 
 <!-- Responsive css to height -->

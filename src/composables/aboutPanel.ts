@@ -1,6 +1,7 @@
 import { nextTick } from "vue";
 import { ref } from "vue";
-import experience from "@/data/experience.json";
+import { getClientLang } from "@/composables/client/getLang";
+import { work_experience_en, work_experience_es } from "@/data/experience.json";
 import { availableCommands, availableFiles, panels, terminalOutput, folders } from "@/stores/about";
 import Prism from "prismjs";
 import "prismjs/components/prism-javascript";
@@ -26,7 +27,9 @@ const activePanel = ref('info'),
     searchResults = ref([]),
     searchIndex = ref(-1),
 
-    experienceData = experience,
+    experienceData = ref(getClientLang() === "en"
+        ? work_experience_en
+        : work_experience_es),
 
     selectedFile = ref(null),
     codeEl = ref(null);
@@ -42,34 +45,34 @@ function scrollToBottom(smooth = false) {
 }
 
 const isJsonLine = (line: string) => {
-  const trimmed = line.trim();
-  return trimmed.startsWith('{') || 
-         trimmed.startsWith('}') || 
-         trimmed.startsWith('[') || 
-         trimmed.startsWith(']') ||
-         trimmed.includes('":') || 
-         trimmed.includes('",') ||
-         /^\s*"[^"]*":\s*".*"/.test(line) ||
-         /^\s*"[^"]*":\s*\d+/.test(line) ||
-         /^\s*"[^"]*":\s*\d+\.\d+/.test(line) ||
-         /^\s*"[^"]*":\s*(true|false|null)/.test(line) ||
-         /^\s*"[^"]*":\s*\[/.test(line) ||
-         /^\s*"[^"]*":\s*\{/.test(line);
+    const trimmed = line.trim();
+    return trimmed.startsWith('{') ||
+        trimmed.startsWith('}') ||
+        trimmed.startsWith('[') ||
+        trimmed.startsWith(']') ||
+        trimmed.includes('":') ||
+        trimmed.includes('",') ||
+        /^\s*"[^"]*":\s*".*"/.test(line) ||
+        /^\s*"[^"]*":\s*\d+/.test(line) ||
+        /^\s*"[^"]*":\s*\d+\.\d+/.test(line) ||
+        /^\s*"[^"]*":\s*(true|false|null)/.test(line) ||
+        /^\s*"[^"]*":\s*\[/.test(line) ||
+        /^\s*"[^"]*":\s*\{/.test(line);
 };
 
 const getIndentLevel = (line) => {
-  const match = line.match(/^(\s*)/);
-  return Math.floor((match ? match[1].length : 0) / 2);
+    const match = line.match(/^(\s*)/);
+    return Math.floor((match ? match[1].length : 0) / 2);
 };
 
 const formatJsonLine = (line) => {
-  if (!isJsonLine(line)) return line;
-  return line
-    .replace(/"([^"]+)":/g, '<span class="json-green">"$1"</span>:')
-    .replace(/:\s*"([^"]*)"/g, ': <span class="json-green">"$1"</span>')
-    .replace(/:\s*(-?\d+(\.\d+)?)/g, ': <span class="json-green">$1</span>')
-    .replace(/:\s*(true|false|null)/g, ': <span class="json-green">$1</span>')
-    .replace(/([\{\[\]\},])/g, '<span class="json-green">$1</span>');
+    if (!isJsonLine(line)) return line;
+    return line
+        .replace(/"([^"]+)":/g, '<span class="json-green">"$1"</span>:')
+        .replace(/:\s*"([^"]*)"/g, ': <span class="json-green">"$1"</span>')
+        .replace(/:\s*(-?\d+(\.\d+)?)/g, ': <span class="json-green">$1</span>')
+        .replace(/:\s*(true|false|null)/g, ': <span class="json-green">$1</span>')
+        .replace(/([\{\[\]\},])/g, '<span class="json-green">$1</span>');
 };
 
 function onTerminalScroll() {
@@ -187,9 +190,11 @@ function executeCommand() {
 
     let response = '';
 
+
     switch (command) {
         case 'help':
-            response = `🚀 Jose's Portfolio Terminal v2.0
+            response = getClientLang() === "en"
+                ? `🚀 Jose's Portfolio Terminal v2.0
 
 📋 Available commands:
   help          - Show this help menu
@@ -213,7 +218,32 @@ function executeCommand() {
   ↑/↓           - Navigate command history
   Ctrl+R        - Search command history (coming soon)
 
-💡 Pro tip: Type 'suggest' to see all available options!`;
+💡 Pro tip: Type 'suggest' to see all available options!`
+                : `🚀 Terminal de Portafolio de Jose v2.0
+
+📋 Comandos disponibles:
+  help          - Muestra este menú de ayuda
+  ls            - Lista archivos en el directorio actual
+  pwd           - Muestra el directorio de trabajo
+  cat <archivo> - Muestra el contenido de un archivo
+  cd <archivo>  - Cambia a un archivo y muestra su contenido
+  nano <archivo>- Abre archivo en nano (solo lectura)
+  experience    - Muestra experiencia laboral (JSON)
+  whoami        - Muestra el usuario actual
+  date          - Muestra fecha/hora actual
+  clear         - Limpia la terminal
+  fortune       - Mensaje aleatorio
+  history       - Historial de comandos
+  suggest       - Comandos y archivos disponibles
+  sudo          - Ejecuta como superusuario (limitado)
+  exit          - Salir de la terminal (panel info)
+
+⌨️  Atajos de teclado:
+  Tab           - Autocompletar comandos/archivos
+  ↑/↓           - Navegar historial de comandos
+  Ctrl+R        - Buscar en historial (próximamente)
+
+💡 Consejo: Escribe 'suggest' para ver todas las opciones!`;
             break;
         case 'ls':
             response = availableFiles.join('  ');
@@ -227,9 +257,11 @@ function executeCommand() {
             ).join('\n');
             break;
         case 'suggest':
-            response = `Available commands: ${availableCommands.join(', ')}\nAvailable files: ${availableFiles.join(', ')}`;
+            response = getClientLang() === "en"
+                ? `Available commands: ${availableCommands.join(', ')}\nAvailable files: ${availableFiles.join(', ')}`
+                : `Comandos disponibles: ${availableCommands.join(', ')}\nArchivos disponibles: ${availableFiles.join(', ')}`;
             break;
-        case 'cat':
+        case 'cat': {
             let foundFile = null;
             for (const folder of folders.value) {
                 foundFile = folder.files.find(f => f.label === args[1]);
@@ -238,13 +270,18 @@ function executeCommand() {
             if (foundFile) {
                 response = foundFile.content;
             } else if (args[1] === 'projects.js') {
-                response = 'Portfolio Website (Astro + Vue)\nE-commerce Platform (Next.js)\nInventory System (PHP + MySQL)';
+                response = getClientLang() === "en"
+                    ? 'Portfolio Website (Astro + Vue)\nE-commerce Platform (Next.js)\nInventory System (PHP + MySQL)'
+                    : 'Sitio Web de Portafolio (Astro + Vue)\nPlataforma E-commerce (Next.js)\nSistema de Inventario (PHP + MySQL)';
             } else if (args[1] === 'experience.json') {
                 response = JSON.stringify(experienceData, null, 2);
             } else {
-                response = `cat: ${args[1]}: No such file or directory`;
+                response = getClientLang() === "en"
+                    ? `cat: ${args[1]}: No such file or directory`
+                    : `cat: ${args[1]}: No existe el archivo o directorio`;
             }
             break;
+        }
         case 'cd':
             if (args[1]) {
                 const fileName = args[1];
@@ -257,10 +294,14 @@ function executeCommand() {
                     selectedFile.value = foundFile;
                     response = foundFile.content;
                 } else {
-                    response = `cd: ${fileName}: No such file or directory`;
+                    response = getClientLang() === "en"
+                        ? `cd: ${fileName}: No such file or directory`
+                        : `cd: ${fileName}: No existe el archivo o directorio`;
                 }
             } else {
-                response = 'cd: missing operand';
+                response = getClientLang() === "en"
+                    ? 'cd: missing operand'
+                    : 'cd: falta operando';
             }
             break;
         case 'nano':
@@ -272,16 +313,26 @@ function executeCommand() {
                     if (foundFile) break;
                 }
                 if (foundFile) {
-                    response = `GNU nano 7.2    ${fileName}\n\n${foundFile.content}\n\n[ Read Only ]`;
+                    response = getClientLang() === "en"
+                        ? `GNU nano 7.2    ${fileName}\n\n${foundFile.content}\n\n[ Read Only ]`
+                        : `GNU nano 7.2    ${fileName}\n\n${foundFile.content}\n\n[ Solo lectura ]`;
                 } else if (args[1] === 'projects.js') {
-                    response = `GNU nano 7.2    projects.js\n\nPortfolio Website (Astro + Vue)\nE-commerce Platform (Next.js)\nInventory System (PHP + MySQL)\n\n[ Read Only ]`;
+                    response = getClientLang() === "en"
+                        ? `GNU nano 7.2    projects.js\n\nPortfolio Website (Astro + Vue)\nE-commerce Platform (Next.js)\nInventory System (PHP + MySQL)\n\n[ Read Only ]`
+                        : `GNU nano 7.2    projects.js\n\nSitio Web de Portafolio (Astro + Vue)\nPlataforma E-commerce (Next.js)\nSistema de Inventario (PHP + MySQL)\n\n[ Solo lectura ]`;
                 } else if (args[1] === 'experience.json') {
-                    response = `GNU nano 7.2    experience.json\n\n${JSON.stringify(experienceData, null, 2)}\n\n[ Read Only ]`;
+                    response = getClientLang() === "en"
+                        ? `GNU nano 7.2    experience.json\n\n${JSON.stringify(experienceData, null, 2)}\n\n[ Read Only ]`
+                        : `GNU nano 7.2    experience.json\n\n${JSON.stringify(experienceData, null, 2)}\n\n[ Solo lectura ]`;
                 } else {
-                    response = `nano: ${fileName}: No such file or directory`;
+                    response = getClientLang() === "en"
+                        ? `nano: ${fileName}: No such file or directory`
+                        : `nano: ${fileName}: No existe el archivo o directorio`;
                 }
             } else {
-                response = 'nano: missing operand';
+                response = getClientLang() === "en"
+                    ? 'nano: missing operand'
+                    : 'nano: falta operando';
             }
             break;
         case 'experience':
@@ -301,30 +352,47 @@ function executeCommand() {
                 autoScroll.value = true;
             });
             return;
-        case 'fortune':
-            const fortunes = [
-                'You will find great success in your coding journey!',
-                'A new opportunity will present itself soon.',
-                'Your creativity will lead to amazing projects.',
-                'Keep learning, the tech world is your oyster!',
-                'The best way to predict the future is to create it.',
-                'Code is poetry written in logic.',
-                'Every expert was once a beginner.'
-            ];
+        case 'fortune': {
+            const fortunes = getClientLang() === "en"
+                ? [
+                    'You will find great success in your coding journey!',
+                    'A new opportunity will present itself soon.',
+                    'Your creativity will lead to amazing projects.',
+                    'Keep learning, the tech world is your oyster!',
+                    'The best way to predict the future is to create it.',
+                    'Code is poetry written in logic.',
+                    'Every expert was once a beginner.'
+                ]
+                : [
+                    '¡Encontrarás mucho éxito en tu camino como programador!',
+                    'Pronto se presentará una nueva oportunidad.',
+                    'Tu creatividad te llevará a grandes proyectos.',
+                    '¡Sigue aprendiendo, el mundo tech es tuyo!',
+                    'La mejor forma de predecir el futuro es crearlo.',
+                    'El código es poesía escrita en lógica.',
+                    'Todo experto fue alguna vez principiante.'
+                ];
             response = fortunes[Math.floor(Math.random() * fortunes.length)];
             break;
+        }
         case 'sudo':
             if (args[1] === 'rm' && args[2] === '-rf' && args[3] === '/') {
-                response = 'Nice try! But this is a portfolio terminal. You can\'t delete the root filesystem here! 😄';
+                response = getClientLang() === "en"
+                    ? "Nice try! But this is a portfolio terminal. You can't delete the root filesystem here! 😄"
+                    : "¡Buen intento! Pero esta es una terminal de portafolio. ¡No puedes borrar el sistema aquí! 😄";
             } else {
-                response = 'sudo: command not found (or you don\'t have permission)';
+                response = getClientLang() === "en"
+                    ? "sudo: command not found (or you don't have permission)"
+                    : "sudo: comando no encontrado (o no tienes permiso)";
             }
             break;
         case 'exit':
             activePanel.value = 'info';
             return;
         default:
-            response = `bash: ${command}: command not found`;
+            response = getClientLang() === "en"
+                ? `bash: ${command}: command not found`
+                : `bash: ${command}: comando no encontrado`;
     }
 
     if (response) {
@@ -357,70 +425,70 @@ function onPanelOpen(key) {
 
 // sanitize phone number to digits + optional leading +
 function sanitizePhone(phone) {
-  if (!phone) return "";
-  const plus = phone.trim().startsWith("+") ? "+" : "";
-  const digits = phone.replace(/[^\d]/g, "");
-  return plus + digits;
+    if (!phone) return "";
+    const plus = phone.trim().startsWith("+") ? "+" : "";
+    const digits = phone.replace(/[^\d]/g, "");
+    return plus + digits;
 }
 
 // action: call phone number
 function callNumber(phone) {
-  const sanitized = sanitizePhone(phone);
-  if (!sanitized) return;
-  window.open(`tel:${sanitized}`, "_self");
+    const sanitized = sanitizePhone(phone);
+    if (!sanitized) return;
+    window.open(`tel:${sanitized}`, "_self");
 }
 
 // action: send email with subject/body template
 function sendEmail(email) {
-  if (!email) return;
-  const subject = encodeURIComponent("Hello 👋");
-  const body = encodeURIComponent("Hi,\n\nI wanted to get in touch with you.\n\n—");
-  window.open(`mailto:${email}?subject=${subject}&body=${body}`, "_self");
+    if (!email) return;
+    const subject = encodeURIComponent("Hello 👋");
+    const body = encodeURIComponent("Hi,\n\nI wanted to get in touch with you.\n\n—");
+    window.open(`mailto:${email}?subject=${subject}&body=${body}`, "_self");
 }
 
 function toggleFolder(key) {
-  folders.value = folders.value.map((f) => (f.key === key ? { ...f, open: !f.open } : f));
+    folders.value = folders.value.map((f) => (f.key === key ? { ...f, open: !f.open } : f));
 }
 
 function selectFile(file) {
-  selectedFile.value = file;
-  nextTick(() => {
-    if (codeEl.value) {
-      Prism.highlightElement(codeEl.value);
-    }
-  });
+    selectedFile.value = file;
+    nextTick(() => {
+        if (codeEl.value) {
+            Prism.highlightElement(codeEl.value);
+        }
+    });
 }
 
 // Helpers for contact rendering
 function getAriaLabel(contact) {
-  if (contact.type === 'email') return `Send email to ${contact.value}`;
-  if (contact.type === 'phone') return `Call ${contact.value}`;
-  return `Open ${contact.type}: ${contact.value}`;
+    if (contact.type === 'email') return getClientLang() === "en" ? `Send email to ${contact.value}` : `Enviar correo a ${contact.value}`;
+    if (contact.type === 'phone') return getClientLang() === "en" ? `Call ${contact.value}` : `Llamar a ${contact.value}`;
+    return getClientLang() === "en" ? `Open ${contact.type}: ${contact.value}` : `Abrir ${contact.type}: ${contact.value}`;
 }
 
 function getTitle(contact) {
-  if (contact.type === 'email') return 'Send email';
-  if (contact.type === 'phone') return 'Call';
-  return `Open ${contact.type}`;
+    if (contact.type === 'email') return getClientLang() === "en" ? 'Send email' : 'Enviar correo';
+    if (contact.type === 'phone') return getClientLang() === "en" ? 'Call' : 'Llamar';
+    return getClientLang() === "en" ? `Open ${contact.type}` : `Abrir ${contact.type}`;
 }
 
 function handleContactClick(contact) {
-  if (contact.type === 'email') {
-    sendEmail(contact.value);
-  } else if (contact.type === 'phone') {
-    callNumber(contact.value);
-  } else {
-    // For other types, open in new tab with https if not present
-    let url = contact.value;
-    if (!/^https?:\/\//i.test(url)) {
-      if (contact.type === 'github') url = 'https://' + (url.startsWith('github.com') ? url : 'github.com/' + url);
-      else if (contact.type === 'linkedin') url = 'https://' + (url.startsWith('linkedin.com') ? url : 'linkedin.com/' + url);
-      else if (contact.type === 'wakatime') url = 'https://' + (url.startsWith('wakatime.com') ? url : 'wakatime.com/' + url);
-      else if (contact.type === 'instagram') url = 'https://' + (url.startsWith('instagram.com') ? url : 'instagram.com/' + url);
-      else url = 'https://' + url;
+    if (contact.type === 'email') {
+        sendEmail(contact.value);
+    } else if (contact.type === 'phone') {
+        callNumber(contact.value);
+    } else {
+        // For other types, open in new tab with https if not present
+        let url = contact.value;
+        if (!/^https?:\/\//i.test(url)) {
+            if (contact.type === 'github') url = 'https://' + (url.startsWith('github.com') ? url : 'github.com/' + url);
+            else if (contact.type === 'linkedin') url = 'https://' + (url.startsWith('linkedin.com') ? url : 'linkedin.com/' + url);
+            else if (contact.type === 'wakatime') url = 'https://' + (url.startsWith('wakatime.com') ? url : 'wakatime.com/' + url);
+            else if (contact.type === 'instagram') url = 'https://' + (url.startsWith('instagram.com') ? url : 'instagram.com/' + url);
+            else url = 'https://' + url;
+        }
+        window.open(url, '_blank');
     }
-    window.open(url, '_blank');
-  }
 }
 
 export function useAboutPanel() {

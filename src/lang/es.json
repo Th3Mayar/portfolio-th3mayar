@@ -31,7 +31,7 @@
       "name": "_jose-francisco",
       "personalInfo": "_información-personal",
       "contacts": "_contactos",
-      "contactMe": "_contactame",
+      "contactMe": "_contáctame",
       "variant": {
         "green": "_variante-verde",
         "dark": "_variante-oscura",
@@ -78,6 +78,62 @@
     "seo": {
       "title": "Portafolio | Pie de página",
       "description": " Pie de página"
+    }
+  },
+  "about": {
+    "seo": {
+      "title": "Portafolio | Acerca de mí",
+      "description": "Página acerca de mí"
+    },
+    "aboutPanelInfo": {
+      "personalInfo": "información-personal",
+      "contacts": "contactos",
+      "selectFile": "Selecciona un archivo para ver su contenido."
+    },
+    "aboutPanel": {
+      "tab": "Tab",
+      "agnoster-prompt": {
+        "user": "th3mayar",
+        "portfolio": "portafolio"
+      }
+    }
+  },
+  "projects": {
+    "seo": {
+      "title": "Portafolio | Proyectos",
+      "description": "Página de proyectos"
+    },
+     "info": {
+      "noProjects": "No se encontraron proyectos",
+      "allProjects": "Todos los proyectos",
+      "selectAll": "Seleccionar todo",
+      "clearAll": "Limpiar todo",
+      "try": "Prueba a seleccionar diferentes tecnologías o borra todos los filtros.",
+      "showAll": "Mostrar todo",
+      "label": "Proyectos"
+    },
+    "card": {
+      "imageNotFound": "Imagen no encontrada"
+    }
+  },
+  "contact": {
+    "seo": {
+        "title": "Portafolio | Contacto",
+        "description": "Página de contacto"
+    },
+    "info": {
+      "orEmail": "O envíame un correo a",
+      "joseEmail": "josehenriquez.02.26@gmail.com"
+    },
+    "fields": {
+      "name": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Tu correo electrónico",
+      "message": "Mensaje",
+      "messagePlaceholder": "Tu mensaje",
+      "send": "Enviar",
+      "sending": "Enviando..."
     }
   }
 }

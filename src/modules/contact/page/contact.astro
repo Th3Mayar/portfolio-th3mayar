@@ -2,9 +2,22 @@
 import Layout from "@/layouts/Layout.astro";
 import ImageByName from "@/components/atoms/ImageByName.vue";
 import ContactForm from "@/components/organism/ContactForm.vue";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+let lang = getLangFromUrl(Astro.url);
+
+const { contact: TContact } = useTranslations(lang);
+const { info, seo } = TContact;
+
+Astro.cookies.set("lang", lang, {
+  path: "/",
+  maxAge: 60 * 60 * 24 * 30,
+  sameSite: "strict",
+  secure: true,
+});
 ---
 
-<Layout title="Contact information">
+<Layout title={ seo.title }>
   <head slot="head">
     <link rel="preload" as="image" href="/assets/contact-me.svg" />
     <link rel="preload" as="image" href="/assets/effect-card.svg" />
@@ -27,11 +40,16 @@ import ContactForm from "@/components/organism/ContactForm.vue";
           fetchpriority="high"
         />
       </div>
-      <ContactForm client:load />
+      <ContactForm
+        client:load
+        lang={Astro.params.lang === "en" || Astro.params.lang === "es"
+          ? Astro.params.lang
+          : "en"}
+      />
       <div class="text-light text-xs mt-4 font-mono">
-        Or email me at <a
+        {info.orEmail} <a
           href="mailto:josehenriquez@gmail.com"
-          class="text-pink underline">josehenriquez.02.26@gmail.com</a
+          class="text-pink underline">{info.joseEmail}</a
         >
       </div>
     </section>
