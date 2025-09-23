@@ -270,10 +270,6 @@ function executeCommand() {
             }
             if (foundFile) {
                 response = foundFile.content;
-            } else if (args[1] === `${getClientLang() === "en" ? "projects.js" : "proyectos.js"}`) {
-                response = getClientLang() === "en"
-                    ? 'Portfolio Website (Astro + Vue)\nE-commerce Platform (Next.js)\nInventory System (PHP + MySQL)'
-                    : 'Sitio Web de Portafolio (Astro + Vue)\nPlataforma E-commerce (Next.js)\nSistema de Inventario (PHP + MySQL)';
             } else if (args[1] === 'experience.json') {
                 response = JSON.stringify(experienceData, null, 2);
             } else {
