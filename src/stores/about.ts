@@ -310,11 +310,17 @@ if (getClientLang() === "en") {
           key: "about-me",
           label: "sobre-mi.js",
           content: `/**
+
  * Estudiante de Ingeniería en Sistemas apasionado por la tecnología, con años de experiencia en desarrollo.
+
  * Desarrollador fullstack graduado en Desarrollo y Mantenimiento de Aplicaciones Informáticas y, desde entonces,
+
  * he estado comprometido con avanzar en el mundo del desarrollo de software a través de constante formación académica
+
  * y un trabajo dedicado hacia la excelencia. Mi pasión por el desarrollo de interfaces gráficas y experiencia de usuario
+
  * se refleja en cada proyecto.
+
  */`,
         },
       ],
@@ -328,17 +334,29 @@ if (getClientLang() === "en") {
           key: "interests-file",
           label: "intereses.js",
           content: `/**
+
  * Intereses
+
  * - Programación
+ 
  * - Código abierto
+ 
  * - Videojuegos
+ 
  * - UI/UX
+ 
  * - Café
+ 
  * - Disfrutar tiempo con amigos
+ 
  * - Comer
+ 
  * - Escuchar música
+ 
  * - Inventar cosas nuevas
+ 
  * - Descubrir cosas nuevas
+ 
  */`,
         },
       ],
@@ -352,19 +370,28 @@ if (getClientLang() === "en") {
           key: "high-school",
           label: "bachillerato.js",
           content: `/**
+
  * Técnico en Desarrollo y Mantenimiento de Aplicaciones Informáticas
+
  * IATESA, La Vega, República Dominicana
+ 
  */`,
         },
         {
           key: "universidad",
           label: "universidad.js",
           content: `/**
+
  * Universidad
+ 
  * Estudiante de Ingeniería en Sistemas
+ 
  * Estudiante de último año de Ingeniería en Sistemas de Computación en UCATECI,
+ 
  * La Vega, República Dominicana.
+ 
  * Desde Enero 2022 hasta la actualidad.
+ 
  */`,
         },
       ],
@@ -476,25 +503,45 @@ if (getClientLang() === "en") {
           key: "skills-file",
           label: "habilidades.js",
           content: `/**
+
  * Habilidades
+
  * - JavaScript
+
  * - TypeScript
+
  * - Vue.js
+
  * - React
+
  * - Next.js
+
  * - Node.js
+
  * - PHP
+
  * - MySQL
+
  * - PostgreSQL
+
  * - Oracle
+
  * - Git
+
  * - Docker
+
  * - Vite
+
  * - Nuxt
+
  * - MongoDB
+
  * - GraphQL
+
  * - NodeJS
+
  * - Express
+          
  */`,
         },
       ],
