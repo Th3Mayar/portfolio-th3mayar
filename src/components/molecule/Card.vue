@@ -2,17 +2,29 @@
   <div class="card">
     <div class="card-header">
       <div class="image-container" @click="openModal">
-        <img v-if="props.video" :src="`/videos/${props.video}.gif`" class="card-gif" alt="Project GIF" loading="lazy"
-          decoding="async" fetchpriority="high" />
-        <ImageByName v-else-if="props.image" :name="props.image" :stroke-width="1" :className="className + ' card-img'"
-          fetchpriority="high" />
+        <img
+          v-if="props.video"
+          :src="`/videos/${props.video}.gif`"
+          class="card-gif"
+          alt="Project GIF"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="high"
+        />
+        <ImageByName
+          v-else-if="props.image"
+          :name="props.image"
+          :stroke-width="1"
+          :className="className + ' card-img'"
+          fetchpriority="high"
+        />
         <div class="logo">
-          <ImageByName :name="icon" :stroke-width="1" :className="className" fetchpriority="high" />
-        </div>
-        <div v-if="props.video" class="gif-indicator">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-            <text x="4" y="16" font-size="12" font-family="monospace" fill="white">GIF</text>
-          </svg>
+          <ImageByName
+            :name="icon"
+            :stroke-width="1"
+            :className="className"
+            fetchpriority="high"
+          />
         </div>
       </div>
     </div>
@@ -23,22 +35,52 @@
       <slot name="tags" />
     </div>
     <div class="justify-end flex bottom-0 absolute w-full">
-      <Button :variant="ButtonVariant" :size="size" :disabled="false" class="w-44 !rounded-[0px] !rounded-tl-lg" @click="openUrl(url)">
+      <Button
+        :variant="ButtonVariant"
+        :size="size"
+        class="w-44 !rounded-[0px] !rounded-tl-lg"
+        @click="openUrl(url)"
+        :disabled="url === ''"
+      >
         {{ button }}
       </Button>
     </div>
     <teleport to="body">
       <div v-if="showModal" class="modal-bg" @click="showModal = false">
         <div class="modal-img-wrapper" @click.stop>
-          <img v-if="props.video && showModal" :src="`/videos/${props.video}.gif`" class="modal-gif"
-            alt="Project GIF" />
+          <img
+            v-if="props.video && showModal"
+            :src="`/videos/${props.video}.gif`"
+            class="modal-gif"
+            alt="Project GIF"
+          />
           <template v-else-if="props.image && showModal">
-            <ImageByName :name="props.image" :stroke-width="1" className="modal-img" fetchpriority="high"
-              @error="imageError = true" />
-            <div v-if="imageError" class="flex flex-col items-center justify-center w-full h-full p-8">
+            <ImageByName
+              :name="props.image"
+              :stroke-width="1"
+              className="modal-img"
+              fetchpriority="high"
+              @error="imageError = true"
+            />
+            <div
+              v-if="imageError"
+              class="flex flex-col items-center justify-center w-full h-full p-8"
+            >
               <span class="text-light text-lg font-mono mb-2">Image not found</span>
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="text-orange">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                width="48"
+                height="48"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="text-orange"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </div>
           </template>
@@ -47,7 +89,6 @@
     </teleport>
   </div>
 </template>
-
 
 <script setup lang="ts">
 import { defineProps, ref, onMounted, onBeforeUnmount } from "vue";
@@ -90,11 +131,10 @@ function handleEsc(e: KeyboardEvent) {
 onMounted(() => {
   window.addEventListener("keydown", handleEsc);
 });
+
 onBeforeUnmount(() => {
   window.removeEventListener("keydown", handleEsc);
 });
-
-
 
 const openUrl = (url: string) => {
   if (url) {
@@ -203,7 +243,6 @@ const openUrl = (url: string) => {
   margin: 0 auto;
 }
 
-
 .card-gif {
   width: 100%;
   height: 200px;
@@ -212,13 +251,11 @@ const openUrl = (url: string) => {
   cursor: pointer;
 }
 
-
 .modal-gif {
   max-width: 80vw;
   max-height: 70vh;
   border-radius: 12px;
 }
-
 
 .gif-indicator {
   position: absolute;
