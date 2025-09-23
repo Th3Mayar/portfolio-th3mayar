@@ -2,14 +2,21 @@
   <div class="flappy-container">
     <canvas ref="canvas" :width="width" :height="height" class="flappy-canvas terminal-bg"></canvas>
     <div class="flappy-ui">
-      <span class="font-FiraCode">Score: {{ score }}</span>
+      <span class="font-FiraCode">{{ games.score }}: {{ score }}</span>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import { useFlappyBird } from '@/composables/gamePanel';
+import { useTranslations } from "@/i18n/utils";
+import { getClientLang } from "@/composables/client/getLang";
+
+const lang = getClientLang() as "en" | "es";
+
+const { about: TAbout } = useTranslations(lang);
+const { games } = TAbout;
 
 const canvas = ref(null);
 const { width, height, score } = useFlappyBird(canvas);

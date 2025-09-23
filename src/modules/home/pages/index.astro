@@ -12,6 +12,13 @@ const { home: THomeDescription } = useTranslations(lang);
 
 const { title, name, description, comment, commentTwo } =
   THomeDescription;
+
+Astro.cookies.set("lang", lang, {
+  path: "/",
+  maxAge: 60 * 60 * 24 * 30,
+  sameSite: "strict",
+  secure: true,
+});
 ---
 
 <Layout title={TSeo.title}>

@@ -66,7 +66,7 @@
               v-if="imageError"
               class="flex flex-col items-center justify-center w-full h-full p-8"
             >
-              <span class="text-light text-lg font-mono mb-2">Image not found</span>
+              <span class="text-light text-lg font-mono mb-2">{{ card.imageNotFound }}</span>
               <svg
                 width="48"
                 height="48"
@@ -94,6 +94,7 @@
 import { defineProps, ref, onMounted, onBeforeUnmount } from "vue";
 import ImageByName from "../atoms/ImageByName.vue";
 import Button from "../atoms/Button.vue";
+import { useTranslations } from "@/i18n/utils";
 
 interface Props {
   image?: string;
@@ -104,15 +105,16 @@ interface Props {
   size?: string;
   button: string;
   url: string;
+  lang: "en" | "es";
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  className: "",
-  ButtonVariant: "simple",
-  size: "medium",
-  image: "",
-  video: "",
+  activeDirectory: "bio",
+  lang: "en",
 });
+
+const { projects: TProjects } = useTranslations(props.lang);
+const { card } = TProjects;
 
 const showModal = ref(false);
 const imageError = ref(false);

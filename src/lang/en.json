@@ -79,5 +79,65 @@
       "title": "Portfolio | Footer",
       "description": "Footer Page"
     }
+  },
+  "about": {
+    "seo": {
+      "title": "Portfolio | About Me",
+      "description": "About Me Page"
+    },
+    "aboutPanelInfo": {
+      "personalInfo": "personal-info",
+      "contacts": "contacts",
+      "selectFile": "Select a file to view its content."
+    },
+    "aboutPanel": {
+      "tab": "Tab",
+      "agnoster-prompt": {
+        "user": "th3mayar",
+        "portfolio": "portfolio"
+      }
+    },
+    "games": {
+      "score": "Score"
+    }
+  },
+  "projects": {
+    "seo": {
+      "title": "Portfolio | Projects",
+      "description": "Projects Page"
+    },
+    "info": {
+      "noProjects": "No projects found",
+      "allProjects": "All Projects",
+      "selectAll": "Select All",
+      "clearAll": "Clear All",
+      "try": "Try selecting different technologies or clear all filters.",
+      "showAll": "Show All Projects",
+      "label": "Projects",
+      "viewProject": "view-project"
+    },
+    "card": {
+      "imageNotFound": "Image not found"
+    }
+  },
+  "contact": {
+    "seo": {
+      "title": "Portfolio | Contact",
+      "description": "Contact Page"
+    },
+    "info": {
+      "orEmail": "Or email me at",
+      "joseEmail": "josehenriquez.02.26@gmail.com"
+    },
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "Your Name",
+      "email": "Email",
+      "emailPlaceholder": "Your Email",
+      "message": "Message",
+      "messagePlaceholder": "Your Message",
+      "send": "Send",
+      "sending": "Sending..."
+    }
   }
 }

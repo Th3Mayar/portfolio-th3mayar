@@ -157,6 +157,10 @@ module.exports = {
         from: { opacity: '0', transform: 'translateY(-50px)' },
         to: { opacity: '1', transform: 'translateY(0)' },
       },
+      fadeIn: {
+        from: { opacity: '0', transform: 'translateY(-8px)' },
+        to: { opacity: '1', transform: 'translateY(0)' },
+      },
     },
     animation: {
       "accordion-down": "accordion-down 0.2s ease-out",
@@ -171,6 +175,7 @@ module.exports = {
       typing: 'typing 3s steps(30, end) forwards',
       blink: 'blink 1s step-end infinite',
       'slide-down': 'slideDown 0.6s cubic-bezier(0.22, 1, 0.36, 1) both',
+      "animate-fadeIn": 'fadeIn 0.18s cubic-bezier(.4, 0, .2, 1)',
     },
   },
 };

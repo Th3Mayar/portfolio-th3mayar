@@ -1,11 +1,12 @@
 ---
 import Item from "@/components/molecule/Item.vue";
 import { useTranslations, getLangFromUrl } from "@/i18n/utils";
+import Select from "@/components/atoms/Select.vue";
 
 let lang = getLangFromUrl(Astro.url);
 
-if (Astro.url.pathname === '/') {
-  lang = 'en';
+if (Astro.url.pathname === "/") {
+  lang = "en";
 }
 
 const { common: TCommon } = useTranslations(lang);
@@ -57,7 +58,10 @@ import Toggle from "@/components/atoms/Toggle.vue";
         title={TComponents.hello}
         class={[
           "item-hello link-card item",
-          ([`/${lang}/`, `/${lang}`].includes(Astro.url.pathname) || Astro.url.pathname === '/') ? "active" : "",
+          [`/${lang}/`, `/${lang}`].includes(Astro.url.pathname) ||
+          Astro.url.pathname === "/"
+            ? "active"
+            : "",
         ].join(" ")}
       />
       <Item
@@ -76,7 +80,16 @@ import Toggle from "@/components/atoms/Toggle.vue";
           Astro.url.pathname === `/${lang}/projects` ? "active" : "",
         ].join(" ")}
       />
-      <li class="item-hidden">{/* <LightDark  /> */}</li>
+      <li class="item-hidden">
+        <Select
+          client:load
+          modelValue={lang}
+          options={[
+            { label: "English", value: "en" },
+            { label: "Español", value: "es" },
+          ]}
+        />
+      </li>
       <Item
         href={`/${lang}/contacts`}
         title={TComponents.contactMe}
@@ -336,6 +349,17 @@ import Toggle from "@/components/atoms/Toggle.vue";
       text-align: center;
     }
   }
+
+  .select-container {
+    button {
+      border: 2px solid var(--border);
+    }
+
+    ul {
+      border: 2px solid var(--border);
+      box-shadow: 0 0 20px 0 var(--border-effect);
+    }
+  }
 </style>
 
 <script>
@@ -349,10 +373,5 @@ import Toggle from "@/components/atoms/Toggle.vue";
         (window as any).showLoader();
       }
     }
-  });
-
-  // Handle browser back/forward buttons
-  window.addEventListener("popstate", () => {
-    // Let Astro handle it
   });
 </script>
