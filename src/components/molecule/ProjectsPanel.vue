@@ -64,7 +64,7 @@
       <div v-else class="flex flex-wrap gap-5 justify-center">
         <Card v-for="(project, i) in filteredProjects" :key="project.icon + (project.image || project.video)"
           :image="project.image" :video="project.video" :icon="project.icon" :tooltip="project.description"
-          ButtonVariant="simple" size="medium" button="view-project" :url="project.url" :class="[
+          ButtonVariant="simple" size="medium" :button="info.viewProject" :url="project.url" :class="[
             'flex-1 min-w-[280px] max-w-[350px] basis-1/3 animate-card-in',
             { [`delay-${i}`]: true },
           ]" :style="{ animationDelay: 0.07 * i + 's' }">

@@ -20,7 +20,7 @@
         type="email"
         name="email"
         required
-        v-model="fields.email"
+        v-model="contactForm.email"
         class="bg-dark/30 text-light rounded px-3 py-3 outline-none focus:ring-2 focus:ring-orange focus:shadow-none rounded-lg shadow-md shadow-orange"
         :placeholder="fields.emailPlaceholder"
       />
@@ -31,7 +31,7 @@
         name="message"
         rows="4"
         required
-        v-model="fields.message"
+        v-model="contactForm.message"
         class="bg-dark/30 text-light rounded px-3 py-3 outline-none focus:ring-2 focus:ring-orange focus:shadow-none rounded-lg shadow-md shadow-orange"
         :placeholder="fields.messagePlaceholder"
       ></textarea>

@@ -181,9 +181,10 @@ function executeCommand() {
     if (commandHistory.value[commandHistory.value.length - 1] !== cmd) {
         commandHistory.value.push(cmd);
     }
+    
     historyIndex.value = -1; // Reset history navigation
 
-    pushLine(`th3mayar@portfolio:~$ ${cmd}`);
+    pushLine(`th3mayar@${getClientLang() === "en" ? "portfolio" : "portafolio"}:~$ ${cmd}`);
 
     const args = cmd.split(' ');
     const command = args[0].toLowerCase();
@@ -249,7 +250,7 @@ function executeCommand() {
             response = availableFiles.join('  ');
             break;
         case 'pwd':
-            response = '/home/th3mayar/portfolio';
+            response = `/home/th3mayar/${getClientLang() === "en" ? "portfolio" : "portafolio"}`;
             break;
         case 'history':
             response = commandHistory.value.map((cmd, index) =>
@@ -269,7 +270,7 @@ function executeCommand() {
             }
             if (foundFile) {
                 response = foundFile.content;
-            } else if (args[1] === 'projects.js') {
+            } else if (args[1] === `${getClientLang() === "en" ? "projects.js" : "proyectos.js"}`) {
                 response = getClientLang() === "en"
                     ? 'Portfolio Website (Astro + Vue)\nE-commerce Platform (Next.js)\nInventory System (PHP + MySQL)'
                     : 'Sitio Web de Portafolio (Astro + Vue)\nPlataforma E-commerce (Next.js)\nSistema de Inventario (PHP + MySQL)';
@@ -287,7 +288,7 @@ function executeCommand() {
                 const fileName = args[1];
                 let foundFile = null;
                 for (const folder of folders.value) {
-                    foundFile = folder.files.find(f => f.label === fileName);
+                    foundFile = folder.files.find(f => f.label.trim().toLowerCase() === fileName.trim().toLowerCase());
                     if (foundFile) break;
                 }
                 if (foundFile) {
