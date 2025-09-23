@@ -1,5 +1,103 @@
 {
-  "work_experience": [
+  "work_experience_es": [
+    {
+      "title": "Desarrollador Frontend",
+      "company": "Hytech Nexo",
+      "type": "Tiempo completo",
+      "period": {
+        "start": "Mayo 2024",
+        "end": "Presente",
+        "duration": "1 año 5 meses"
+      },
+      "location": {
+        "city": "Santiago de los Caballeros",
+        "address": "Bella Terra Mall, Av. Juan Pablo Duarte",
+        "mode": "Presencial"
+      },
+      "achievements": [
+        "Desarrollé funciones personalizadas como un calendario de programación para gestionar visitas de técnicos a los hogares de los clientes, optimizando auditorías y la entrega de servicios.",
+        "Me enfoqué en la optimización del frontend migrando los recursos del proyecto Laravel de Webpack a Vite, logrando compilaciones más rápidas, reducción en los tiempos de construcción y mejor rendimiento general.",
+        "Refactoricé y mantuve sistemas dinámicos de gestión de roles y permisos (proyecto Gizmo), incluyendo funciones avanzadas como clonación de roles con atributos editables, renderizado dinámico de permisos de módulos y accesos a registros.",
+        "Mejoré tablas de datos complejas con AG Grid, incluyendo filtros avanzados (selección simple y múltiple), columnas fijadas, exportación a Excel y capacidades de guardado automático.",
+        "Contribuí a mejoras de UI/UX refactorizando el menú lateral con HTML semántico, lógica de acceso basada en roles y optimizaciones de rendimiento.",
+        "Colaboré estrechamente con el equipo backend, asegurando soluciones escalables e integración fluida."
+      ],
+      "skills": [
+        "Vue.js",
+        "AG Grid",
+        "Vite",
+        "Laravel",
+        "Git"
+      ]
+    },
+    {
+      "title": "Desarrollador Full-stack",
+      "company": "EMEDIA",
+      "type": "Tiempo completo",
+      "period": {
+        "start": "Febrero 2022",
+        "end": "Mayo 2024",
+        "duration": "2 años 4 meses"
+      },
+      "location": {
+        "city": "La Vega",
+        "address": "Las Maras",
+        "mode": "Híbrido"
+      },
+      "achievements": [
+        "Lideré el desarrollo de una plataforma completa de eCommerce con módulo de ventas, panel de administración, chat en vivo, notificaciones en tiempo real y filtros de búsqueda avanzados.",
+        "Construí y personalicé componentes reutilizables de UI con Next.js 13, Ant Design y Styled Components, creando una experiencia inspirada en Amazon.",
+        "Actué como Líder del Equipo Frontend, gestionando tareas con Trello, distribuyendo tickets, mentoreando desarrolladores y estableciendo estándares de código limpio.",
+        "Contribuí al desarrollo backend con Nest.js, TypeORM y Oracle DB, incluyendo diseño de APIs, consultas optimizadas y un sistema de notificaciones para usuarios.",
+        "Apliqué patrones de diseño y arquitectura modular para garantizar escalabilidad, mantenibilidad y rendimiento a largo plazo.",
+        "Integré funcionalidad de chat en tiempo real, mejorando la comunicación entre clientes y administradores de ventas.",
+        "Optimizé el rendimiento con refactorización de código, mejoras en consultas y estrategias de carga diferida para tiempos de carga más rápidos."
+      ],
+      "skills": [
+        "React.js",
+        "Next.js",
+        "Nest.js",
+        "Oracle DB",
+        "TypeORM",
+        "Styled Components",
+        "Ant Design",
+        "Git"
+      ]
+    },
+    {
+      "title": "Administrador de Sistemas",
+      "company": "Yafreisi Comunicaciones",
+      "type": "Freelance",
+      "period": {
+        "start": "Mayo 2020",
+        "end": "Mayo 2024",
+        "duration": "4 años 1 mes"
+      },
+      "location": {
+        "city": "La Vega",
+        "mode": "Remoto"
+      },
+      "achievements": [
+        "Diseñé, desarrollé y mantuve un sistema de gestión de inventario personalizado para una empresa de telecomunicaciones.",
+        "Construí la plataforma desde cero utilizando PHP, MySQL, jQuery, AJAX, JavaScript, HTML5 y CSS3, garantizando fiabilidad y usabilidad.",
+        "Actué como administrador de sistemas y desarrollador, gestionando mejoras continuas, resolución de problemas y nuevas funcionalidades.",
+        "Implementé funciones para gestionar control de stock, seguimiento de ventas y reportes, ayudando a optimizar las operaciones diarias.",
+        "Optimicé la base de datos con PhpMyAdmin y apliqué buenas prácticas para mejorar rendimiento y escalabilidad.",
+        "Este proyecto se convirtió en mi primer sistema real adoptado por clientes, mejorando significativamente mis habilidades en resolución de problemas, disciplina de codificación y desarrollo full-stack."
+      ],
+      "skills": [
+        "PHP",
+        "MySQL",
+        "PhpMyAdmin",
+        "jQuery",
+        "AJAX",
+        "JavaScript",
+        "HTML5",
+        "CSS3"
+      ]
+    }
+  ],
+  "work_experience_en": [
     {
       "title": "Frontend Developer",
       "company": "Hytech Nexo",
