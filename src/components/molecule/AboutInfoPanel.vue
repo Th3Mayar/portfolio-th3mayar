@@ -97,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, nextTick } from "vue";
+import { onMounted, nextTick } from "vue";
 import IconByName from "../atoms/IconByName.vue";
 import Prism from "prismjs";
 import "prismjs/components/prism-javascript";
