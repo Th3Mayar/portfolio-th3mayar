@@ -51,6 +51,11 @@ const filteredProjects = computed(() => {
   });
 });
 
+const randomColor = () => {
+  const colors = ["red", "blue", "green", "yellow", "purple", "pink", "orange", "gray"];
+  return colors[Math.floor(Math.random() * colors.length)];
+};
+
 function selectAllFrameworks() {
   frameworks.forEach((fw) => (fw.checked = true));
 }
@@ -98,5 +103,6 @@ export function usePanelProjects() {
     toggleFramework,
     saveFiltersToStorage,
     loadFiltersFromStorage,
+    randomColor,
   };
 }
