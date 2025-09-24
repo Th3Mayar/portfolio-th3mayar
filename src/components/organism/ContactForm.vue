@@ -44,21 +44,41 @@
       type="submit"
     >
       <span class="flex items-center gap-2 font-bold">
-        <IconByName name="Send" color="light" className="w-4 h-4" />
-        <span v-if="sending">{{ fields.sending }}...</span>
+        <IconByName
+          v-if="sending"
+          name="Circle"
+          color="light"
+          className="w-4 h-4 animate-spin"
+        />
+        <IconByName
+          v-else
+          name="Send"
+          color="light"
+          className="w-4 h-4"
+        />
+        <span v-if="sending">{{ fields.sending }}</span>
         <span v-else>{{ fields.send }}</span>
       </span>
     </Button>
-    <Alert v-if="alert" :type="alert.type" @close="alert = null">
-      {{ alert.message }}
-    </Alert>
-  </form>
+</form>
+
+<Toast
+  v-if="alert"
+  :type="alert.type"
+  :show="!!alert"
+  :duration="3000"
+  @close="alert = null"
+>
+  {{ alert.message }}
+</Toast>
+
+
 </template>
 
 <script setup lang="ts">
 import Button from "@/components/atoms/Button.vue";
 import IconByName from "@/components/atoms/IconByName.vue";
-import Alert from "@/components/atoms/Alert.vue";
+import Toast from "@/components/atoms/Toast.vue";
 import { contactForm, sending, alert, submitContactForm } from "@/stores/contact";
 import { useTranslations } from "@/i18n/utils";
 
