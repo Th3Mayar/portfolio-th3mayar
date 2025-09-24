@@ -1,8 +1,9 @@
-import { nextTick } from "vue";
+import { computed, nextTick } from "vue";
 import { ref } from "vue";
 import { getClientLang } from "@/core/helper/getLang";
 import { work_experience_en, work_experience_es } from "@/data/experience.json";
 import { availableCommands, availableFiles, panels, terminalOutput, folders } from "@/stores/about";
+import { TetrisMinimal, FlappyBird } from "@/components/games";
 import Prism from "prismjs";
 import "prismjs/components/prism-javascript";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
@@ -10,6 +11,8 @@ import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 
 const activePanel = ref('info'),
+
+    isPanelReady = ref(false),
 
     currentCommand = ref(''),
     commandInput = ref(null),
@@ -32,7 +35,20 @@ const activePanel = ref('info'),
         : work_experience_es),
 
     selectedFile = ref(null),
-    codeEl = ref(null);
+    codeEl = ref(null),
+
+    games = [
+        { key: 'tetris', label: 'Tetris', component: TetrisMinimal },
+        { key: 'flappy', label: 'Flappy Bird', component: FlappyBird },
+    ],
+
+    selectedGame = ref('tetris'),
+    selectedGameComponent = computed(() => {
+        const found = games.find(g => g.key === selectedGame.value);
+        return found ? found.component : null;
+    }),
+
+    ABOUT_PANEL_STORAGE_KEY = 'aboutPanelState';
 
 function scrollToBottom(smooth = false) {
     if (!terminalEl.value) return;
@@ -181,7 +197,7 @@ function executeCommand() {
     if (commandHistory.value[commandHistory.value.length - 1] !== cmd) {
         commandHistory.value.push(cmd);
     }
-    
+
     historyIndex.value = -1; // Reset history navigation
 
     pushLine(`th3mayar@${getClientLang() === "en" ? "portfolio" : "portafolio"}:~$ ${cmd}`);
@@ -488,10 +504,72 @@ function handleContactClick(contact) {
     }
 }
 
+function getPanelFromUrl() {
+    if (typeof window === 'undefined') return null;
+    const params = new URLSearchParams(window.location.search);
+    return params.get('section');
+}
+
+function saveAboutPanelState() {
+    if (typeof window === 'undefined') return;
+
+    let folderKey = null, fileKey = null;
+
+    if (selectedFile.value && selectedFile.value.key) {
+        if (folders.value) {
+            const folder = folders.value.find(f => f.files.some(fl => fl.key === selectedFile.value.key));
+            if (folder) folderKey = folder.key;
+        }
+        fileKey = selectedFile.value.key;
+    }
+    const state = {
+        activePanel: activePanel.value,
+        selectedGame: selectedGame.value,
+        folderKey,
+        fileKey,
+    };
+
+    localStorage.setItem(ABOUT_PANEL_STORAGE_KEY, JSON.stringify(state));
+}
+
+function loadAboutPanelState() {
+    if (typeof window === 'undefined') return;
+
+    const saved = localStorage.getItem(ABOUT_PANEL_STORAGE_KEY);
+
+    if (!saved) return;
+
+    try {
+        const state = JSON.parse(saved);
+
+        if (state.activePanel) activePanel.value = state.activePanel;
+        if (state.selectedGame) selectedGame.value = state.selectedGame;
+
+        if (state.folderKey && state.fileKey && folders.value) {
+            const folder = folders.value.find(f => f.key === state.folderKey);
+            if (folder) {
+                const file = folder.files.find(fl => fl.key === state.fileKey);
+                if (file) {
+                    folders.value = folders.value.map(f => ({ ...f, open: f.key === folder.key }));
+                    selectedFile.value = file;
+                }
+            }
+        }
+    } catch {}
+}
+
+function setPanelInUrl(panelKey: string) {
+    if (typeof window === 'undefined') return;
+    const url = new URL(window.location.href);
+    url.searchParams.set('section', panelKey);
+    window.history.replaceState({}, '', url.toString());
+}
+
 export function useAboutPanel() {
     return {
         panels,
         activePanel,
+        isPanelReady,
         terminalOutput,
         currentCommand,
         commandInput,
@@ -517,6 +595,13 @@ export function useAboutPanel() {
         selectFile,
         getAriaLabel,
         getTitle,
-        handleContactClick
+        handleContactClick,
+        games,
+        selectedGame,
+        selectedGameComponent,
+        getPanelFromUrl,
+        setPanelInUrl,
+        saveAboutPanelState,
+        loadAboutPanelState,
     };
 }

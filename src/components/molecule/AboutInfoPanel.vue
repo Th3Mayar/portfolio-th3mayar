@@ -28,12 +28,13 @@
             <ul v-if="folder.open" class="ml-6 mt-1">
               <li v-for="file in folder.files" :key="file.key" class="mb-2">
                 <button
-                  @click="selectFile(file)"
+                  @click="selectFileAndSave(file)"
                   class="flex items-center gap-2 text-light hover:text-green font-mono text-base w-full text-left"
                 >
                   <IconByName
                     name="FileText"
                     color="light"
+                    class="action-btn cursor-pointer"
                     className="text-base mb-1 group-hover:text-green"
                   />
                   <span>{{ file.label }}</span>
@@ -97,7 +98,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, nextTick } from "vue";
+import { onMounted, nextTick, watch } from "vue";
 import IconByName from "../atoms/IconByName.vue";
 import Prism from "prismjs";
 import "prismjs/components/prism-javascript";
@@ -108,7 +109,6 @@ import { folders, contacts } from "@/stores/about";
 import { useAboutPanel } from "@/composables/aboutPanel";
 import { useTranslations } from "@/i18n/utils";
 
-// get prop activeDirectory
 const props = withDefaults(defineProps<{
   activeDirectory?: string;
   lang?: "en" | "es";
@@ -128,19 +128,23 @@ const {
   getAriaLabel,
   getTitle,
   handleContactClick,
+  saveAboutPanelState,
 } = useAboutPanel();
 
 onMounted(() => {
-  const bioFolder = folders.value.find((f) => f.key === "bio");
-  if (bioFolder && bioFolder.files.length > 0) {
-    selectedFile.value = bioFolder.files[0];
-    nextTick(() => {
-      if (codeEl.value) {
-        Prism.highlightElement(codeEl.value);
-      }
-    });
+  if (!selectedFile.value) {
+    const bioFolder = folders.value.find((f) => f.key === "bio");
+    if (bioFolder && bioFolder.files.length > 0) {
+      selectFile(bioFolder.files[0]);
+      folders.value = folders.value.map(f => ({ ...f, open: f.key === bioFolder.key }));
+    }
   }
 });
+
+function selectFileAndSave(file) {
+  selectFile(file);
+  saveAboutPanelState();
+}
 </script>
 
 <style scoped>
