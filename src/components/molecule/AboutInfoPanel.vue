@@ -108,7 +108,6 @@ import { folders, contacts } from "@/stores/about";
 import { useAboutPanel } from "@/composables/aboutPanel";
 import { useTranslations } from "@/i18n/utils";
 
-// get prop activeDirectory
 const props = withDefaults(defineProps<{
   activeDirectory?: string;
   lang?: "en" | "es";
@@ -130,15 +129,67 @@ const {
   handleContactClick,
 } = useAboutPanel();
 
+import { watch } from "vue";
+
+function getFileFromUrl() {
+  if (typeof window === 'undefined') return {};
+  const params = new URLSearchParams(window.location.search);
+  return {
+    folder: params.get('folder'),
+    file: params.get('file'),
+  };
+}
+
+function setFileInUrl(folderKey, fileKey) {
+  if (typeof window === 'undefined') return;
+  const url = new URL(window.location.href);
+  if (folderKey) url.searchParams.set('folder', folderKey);
+  if (fileKey) url.searchParams.set('file', fileKey);
+  window.history.replaceState({}, '', url.toString());
+}
+
+function selectFileAndSync(file) {
+  selectFile(file);
+  const folder = folders.value.find(f => f.files.some(fl => fl.key === file.key));
+  if (folder) {
+    folders.value = folders.value.map(f => ({ ...f, open: f.key === folder.key }));
+  }
+  setFileInUrl(folder ? folder.key : '', file.key);
+}
+
 onMounted(() => {
-  const bioFolder = folders.value.find((f) => f.key === "bio");
-  if (bioFolder && bioFolder.files.length > 0) {
-    selectedFile.value = bioFolder.files[0];
-    nextTick(() => {
-      if (codeEl.value) {
-        Prism.highlightElement(codeEl.value);
-      }
-    });
+  const { folder, file } = getFileFromUrl();
+  let foundFile = null;
+  if (folder && file) {
+    const folderObj = folders.value.find(f => f.key === folder);
+    if (folderObj) {
+      foundFile = folderObj.files.find(fl => fl.key === file);
+    }
+  } else if (file) {
+    for (const f of folders.value) {
+      foundFile = f.files.find(fl => fl.key === file);
+      if (foundFile) break;
+    }
+  }
+  if (foundFile) {
+    selectFile(foundFile);
+    const folderObj = folders.value.find(f => f.files.some(fl => fl.key === foundFile.key));
+    folders.value = folders.value.map(f => ({ ...f, open: folderObj && f.key === folderObj.key }));
+    setFileInUrl(folder, file);
+  } else if (!selectedFile.value) {
+    const bioFolder = folders.value.find((f) => f.key === "bio");
+    if (bioFolder && bioFolder.files.length > 0) {
+      selectFile(bioFolder.files[0]);
+      folders.value = folders.value.map(f => ({ ...f, open: f.key === bioFolder.key }));
+      setFileInUrl(bioFolder.key, bioFolder.files[0].key);
+    }
+  }
+});
+
+watch(selectedFile, (file) => {
+  if (file) {
+    const folder = folders.value.find(f => f.files.some(fl => fl.key === file.key));
+    setFileInUrl(folder ? folder.key : '', file.key);
   }
 });
 </script>

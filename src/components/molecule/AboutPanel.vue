@@ -163,7 +163,6 @@ const {
   formatJsonLine,
 } = useAboutPanel();
 
-// --- Game selector logic ---
 const games = [
   { key: 'tetris', label: 'Tetris', component: TetrisMinimal },
   { key: 'flappy', label: 'Flappy Bird', component: FlappyBird },
