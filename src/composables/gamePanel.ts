@@ -1,5 +1,5 @@
 import { ref, onMounted, onUnmounted } from 'vue';
-import { getClientLang } from "@/composables/client/getLang";
+import { getClientLang } from "@/core/helper/getLang";
 
 // --- TETRIS ---
 export function useTetris(canvas) {

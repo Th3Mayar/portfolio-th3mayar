@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import { getClientLang } from "@/composables/client/getLang";
+import { getClientLang } from "@/core/helper/getLang";
 
 const frameworks = reactive([
   { key: "react", label: "React", icon: "React", checked: true },
