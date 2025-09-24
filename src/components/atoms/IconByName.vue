@@ -40,7 +40,7 @@ const iconComponent = computed(() => icons[props.name]);
 <template>
   <iconComponent
     :size="size"
-    :class="colorClasses[color] || colorClasses.dark"
+    :class="[colorClasses[color] || colorClasses.dark, className]"
     :stroke-width="strokeWidth"
     :default-class="defaultClass"
   />
