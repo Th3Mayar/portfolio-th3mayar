@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full h-[76dvh] min-h-[76dvh]">
+  <div v-if="isPanelReady" class="flex w-full h-[76dvh] min-h-[76dvh]">
     <aside
       class="flex flex-col items-center gap-6 py-8 px-2 bg-bg-background border-r border-border min-w-[80px] animate-panel-in-left"
     >
@@ -132,11 +132,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import IconByName from "@/components/atoms/IconByName.vue";
 import AboutInfoPanel from "@/components/molecule/AboutInfoPanel.vue";
 import { useAboutPanel } from "@/composables/aboutPanel";
-import { TetrisMinimal, FlappyBird } from "@/components/games";
 import { useTranslations } from "@/i18n/utils";
 
 const props = defineProps<{
@@ -161,24 +160,26 @@ const {
   isJsonLine,
   getIndentLevel,
   formatJsonLine,
+  games,
+  selectedGame,
+  selectedGameComponent,
+  loadAboutPanelState,
+  saveAboutPanelState,
+  isPanelReady,
 } = useAboutPanel();
 
-// --- Game selector logic ---
-const games = [
-  { key: 'tetris', label: 'Tetris', component: TetrisMinimal },
-  { key: 'flappy', label: 'Flappy Bird', component: FlappyBird },
-];
-
-const selectedGame = ref('tetris');
-const selectedGameComponent = computed(() => {
-  const found = games.find(g => g.key === selectedGame.value);
-  return found ? found.component : null;
+onMounted(() => {
+  loadAboutPanelState();
+  isPanelReady.value = true;
 });
 
-onMounted(() => {
-  if (activePanel.value === "terminal") {
-    onPanelOpen("terminal");
-  }
+watch([
+  activePanel,
+  selectedGame,
+  selectedGameComponent,
+  currentCommand,
+], () => {
+  saveAboutPanelState();
 });
 </script>
 
