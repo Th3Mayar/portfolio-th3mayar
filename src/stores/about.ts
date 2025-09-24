@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { getClientLang } from "@/composables/client/getLang";
+import { getClientLang } from "@/core/helper/getLang";
 import { work_experience_en, work_experience_es } from "@/data/experience.json";
 
 let availableFiles = [];
@@ -13,7 +13,7 @@ const panels = [
 const terminalOutput = ref([
   getClientLang() === "en"
     ? '🚀 Welcome to Jose\'s Portfolio Terminal v2.0!'
-    : `¡Bienvenido a Jose's Portfolio Terminal v2.0!`,
+    : `🚀 ¡Bienvenido a Jose's Portfolio Terminal v2.0!`,
   getClientLang() === "en"
     ? '💡 Type "help" for commands or "suggest" for autocomplete options'
     : '💡 Escribe «ayuda» para ver los comandos o «sugerir» para ver las opciones de autocompletado.',
@@ -29,7 +29,7 @@ const availableCommands = [
 
 if (getClientLang() === "en") {
   availableFiles = [
-    'about-me.js', 'interests.js', 'high-school.js', 'university.js', 'projects.js', 'skills.js', 'experience.json'
+    'about-me.js', 'interests.js', 'high-school.js', 'university.js', 'skills.js', 'experience.json'
   ];
 } else {
   availableFiles = [
@@ -59,7 +59,8 @@ if (getClientLang() === "en") {
 
  * work towards excellence. My passion for GUI and UX development is reflected in every project.
 
- */`,
+ */
+`,
         },
       ],
     },
@@ -95,7 +96,8 @@ if (getClientLang() === "en") {
 
  * - Discovering new things
 
- */`,
+ */
+`,
         },
       ],
     },
@@ -282,7 +284,8 @@ if (getClientLang() === "en") {
 
  * - Express
 
- */`,
+ */
+`,
         },
       ],
     },
@@ -321,7 +324,8 @@ if (getClientLang() === "en") {
 
  * se refleja en cada proyecto.
 
- */`,
+ */
+`,
         },
       ],
     },
@@ -357,7 +361,8 @@ if (getClientLang() === "en") {
  
  * - Descubrir cosas nuevas
  
- */`,
+ */
+`,
         },
       ],
     },
@@ -375,7 +380,8 @@ if (getClientLang() === "en") {
 
  * IATESA, La Vega, República Dominicana
  
- */`,
+ */
+`,
         },
         {
           key: "universidad",
@@ -392,7 +398,8 @@ if (getClientLang() === "en") {
  
  * Desde Enero 2022 hasta la actualidad.
  
- */`,
+ */
+`,
         },
       ],
       experience: [
@@ -542,7 +549,8 @@ if (getClientLang() === "en") {
 
  * - Express
           
- */`,
+ */
+`,
         },
       ],
     },

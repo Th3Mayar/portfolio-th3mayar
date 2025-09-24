@@ -11,7 +11,7 @@
 import { ref } from 'vue';
 import { useFlappyBird } from '@/composables/gamePanel';
 import { useTranslations } from "@/i18n/utils";
-import { getClientLang } from "@/composables/client/getLang";
+import { getClientLang } from "@/core/helper/getLang";
 
 const lang = getClientLang() as "en" | "es";
 

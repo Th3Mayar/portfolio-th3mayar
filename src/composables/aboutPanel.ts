@@ -1,6 +1,6 @@
 import { nextTick } from "vue";
 import { ref } from "vue";
-import { getClientLang } from "@/composables/client/getLang";
+import { getClientLang } from "@/core/helper/getLang";
 import { work_experience_en, work_experience_es } from "@/data/experience.json";
 import { availableCommands, availableFiles, panels, terminalOutput, folders } from "@/stores/about";
 import Prism from "prismjs";

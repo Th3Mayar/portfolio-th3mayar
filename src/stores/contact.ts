@@ -1,6 +1,6 @@
 import { ref } from "vue";
-import { sendContactMessage } from "@/composables/supabase";
-import { getClientLang } from "@/composables/client/getLang";
+import { sendContactMessage } from "@/core/services/supabase";
+import { getClientLang } from "@/core/helper/getLang";
 
 export const contactForm = ref({
   name: "",
