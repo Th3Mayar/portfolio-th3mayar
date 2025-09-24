@@ -1,6 +1,7 @@
 import { computed, ref } from "vue";
 import { frameworks, allProjects } from "@/stores/projects";
 
+const SHOW_FILTERS_KEY = "projectShowFilters";
 const showFilters = ref(true);
 
 const filteredProjects = computed(() => {
@@ -74,6 +75,7 @@ function saveFiltersToStorage() {
     checked: fw.checked,
   }));
   localStorage.setItem("projectFilters", JSON.stringify(filterState));
+  localStorage.setItem(SHOW_FILTERS_KEY, JSON.stringify(showFilters.value));
 }
 
 function loadFiltersFromStorage() {
@@ -90,6 +92,12 @@ function loadFiltersFromStorage() {
     } catch (error) {
       console.warn("Error loading filter state from localStorage:", error);
     }
+  }
+  const show = localStorage.getItem(SHOW_FILTERS_KEY);
+  if (show !== null) {
+    try {
+      showFilters.value = JSON.parse(show);
+    } catch {}
   }
 }
 

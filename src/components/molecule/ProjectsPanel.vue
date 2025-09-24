@@ -5,7 +5,7 @@
       : 'min-w-[60px] md:min-w-[60px] items-center justify-center'
       ">
       <div class="flex items-center justify-between cursor-pointer select-none transition-transform duration-300"
-        :class="showFilters ? 'flex-row' : 'flex-col w-[20px]'" @click="showFilters = !showFilters">
+        :class="showFilters ? 'flex-row' : 'flex-col w-[20px]'" @click="toggleShowFilters">
         <div class="flex items-center gap-2" :class="showFilters ? '' : 'flex-col gap-1'">
           <Typography variant="FiraCode" as="p" color="light"
             className="font-bold transition-transform duration-300"
@@ -135,6 +135,11 @@ watch(
 onMounted(() => {
   loadFiltersFromStorage();
 });
+
+function toggleShowFilters() {
+  showFilters.value = !showFilters.value;
+  saveFiltersToStorage();
+}
 </script>
 
 <style scoped>
