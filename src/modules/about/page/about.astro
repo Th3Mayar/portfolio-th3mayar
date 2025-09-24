@@ -20,9 +20,7 @@ Astro.cookies.set("lang", lang, {
   <AboutPanel
     client:only="vue"
     class:list="h-[75dvh]"
-    lang={Astro.params.lang === "en" || Astro.params.lang === "es"
-      ? Astro.params.lang
-      : "en"}
+    lang={ lang }
   />
 </Layout>
 

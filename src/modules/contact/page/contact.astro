@@ -42,9 +42,7 @@ Astro.cookies.set("lang", lang, {
       </div>
       <ContactForm
         client:load
-        lang={Astro.params.lang === "en" || Astro.params.lang === "es"
-          ? Astro.params.lang
-          : "en"}
+        lang={ lang }
       />
       <div class="text-light text-xs mt-4 font-mono">
         {info.orEmail} <a
