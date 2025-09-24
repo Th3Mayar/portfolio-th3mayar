@@ -28,12 +28,13 @@
             <ul v-if="folder.open" class="ml-6 mt-1">
               <li v-for="file in folder.files" :key="file.key" class="mb-2">
                 <button
-                  @click="selectFile(file)"
+                  @click="selectFileAndSave(file)"
                   class="flex items-center gap-2 text-light hover:text-green font-mono text-base w-full text-left"
                 >
                   <IconByName
                     name="FileText"
                     color="light"
+                    class="action-btn cursor-pointer"
                     className="text-base mb-1 group-hover:text-green"
                   />
                   <span>{{ file.label }}</span>
@@ -97,7 +98,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, nextTick } from "vue";
+import { onMounted, nextTick, watch } from "vue";
 import IconByName from "../atoms/IconByName.vue";
 import Prism from "prismjs";
 import "prismjs/components/prism-javascript";
@@ -127,71 +128,23 @@ const {
   getAriaLabel,
   getTitle,
   handleContactClick,
+  saveAboutPanelState,
 } = useAboutPanel();
 
-import { watch } from "vue";
-
-function getFileFromUrl() {
-  if (typeof window === 'undefined') return {};
-  const params = new URLSearchParams(window.location.search);
-  return {
-    folder: params.get('folder'),
-    file: params.get('file'),
-  };
-}
-
-function setFileInUrl(folderKey, fileKey) {
-  if (typeof window === 'undefined') return;
-  const url = new URL(window.location.href);
-  if (folderKey) url.searchParams.set('folder', folderKey);
-  if (fileKey) url.searchParams.set('file', fileKey);
-  window.history.replaceState({}, '', url.toString());
-}
-
-function selectFileAndSync(file) {
-  selectFile(file);
-  const folder = folders.value.find(f => f.files.some(fl => fl.key === file.key));
-  if (folder) {
-    folders.value = folders.value.map(f => ({ ...f, open: f.key === folder.key }));
-  }
-  setFileInUrl(folder ? folder.key : '', file.key);
-}
-
 onMounted(() => {
-  const { folder, file } = getFileFromUrl();
-  let foundFile = null;
-  if (folder && file) {
-    const folderObj = folders.value.find(f => f.key === folder);
-    if (folderObj) {
-      foundFile = folderObj.files.find(fl => fl.key === file);
-    }
-  } else if (file) {
-    for (const f of folders.value) {
-      foundFile = f.files.find(fl => fl.key === file);
-      if (foundFile) break;
-    }
-  }
-  if (foundFile) {
-    selectFile(foundFile);
-    const folderObj = folders.value.find(f => f.files.some(fl => fl.key === foundFile.key));
-    folders.value = folders.value.map(f => ({ ...f, open: folderObj && f.key === folderObj.key }));
-    setFileInUrl(folder, file);
-  } else if (!selectedFile.value) {
+  if (!selectedFile.value) {
     const bioFolder = folders.value.find((f) => f.key === "bio");
     if (bioFolder && bioFolder.files.length > 0) {
       selectFile(bioFolder.files[0]);
       folders.value = folders.value.map(f => ({ ...f, open: f.key === bioFolder.key }));
-      setFileInUrl(bioFolder.key, bioFolder.files[0].key);
     }
   }
 });
 
-watch(selectedFile, (file) => {
-  if (file) {
-    const folder = folders.value.find(f => f.files.some(fl => fl.key === file.key));
-    setFileInUrl(folder ? folder.key : '', file.key);
-  }
-});
+function selectFileAndSave(file) {
+  selectFile(file);
+  saveAboutPanelState();
+}
 </script>
 
 <style scoped>

@@ -1,7 +1,7 @@
 <template>
     <div class="relative w-full flex justify-end select-container">
         <button type="button"
-            class="select-trigger flex items-center justify-between gap-2 bg-background text-foreground rounded-md px-4 py-2 text-base font-normal shadow-sm transition-colors min-h-[2.5rem] w-36"
+            class="select-trigger flex items-center justify-between gap-2 bg-background text-foreground rounded-md px-4 py-2 text-base font-normal shadow-sm transition-colors min-h-[2.5rem] w-36 font-FiraCode"
             @click="toggleDropdown" :aria-expanded="open ? 'true' : 'false'" :aria-controls="dropdownId">
             <span class="truncate flex-1 text-left">{{ selectedLabel || placeholder }}</span>
             <IconByName name="ChevronDown" color="dark"
@@ -14,7 +14,7 @@
                 role="listbox" @keydown.esc="closeDropdown">
                 <li v-for="option in options" :key="option.value" @click="handleChange(option.value)" role="option"
                     :aria-selected="option.value === modelValue" :class="[
-                        'px-4 py-2 text-base cursor-pointer select-none transition-colors',
+                        'px-4 py-2 text-base cursor-pointer select-none transition-colors font-FiraCode',
                         option.value === modelValue
                             ? 'bg-orangeHover/10 text-orangeHover font-semibold'
                             : 'hover:bg-orangeHover/10 hover:text-orangeHover'
