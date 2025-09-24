@@ -40,7 +40,13 @@
         "limongrass": "_variant-limongrass",
         "orange": "_variant-orange"
       },
-      "example": "Life is too short to worry about unimportant things."
+      "example": "Life is too short to worry about unimportant things.",
+      "modal": {
+        "title": "Welcome",
+        "description": "Are you a Developer or a Recruiter?",
+        "developer": "developer",
+        "recruiter": "recruiter"
+      }
     },
     "page": {
       "error": "error",

@@ -40,7 +40,13 @@
         "limongrass": "_variante-limoncillo",
         "orange": "_variante-naranja"
       },
-      "example": "La vida es demasiado corta como para preocuparse por cosas sin importancia."
+      "example": "La vida es demasiado corta como para preocuparse por cosas sin importancia.",
+      "modal": {
+        "title": "Bienvenido",
+        "description": "¿Eres un Desarrollador o un Reclutador?",
+        "developer": "desarrollador",
+        "recruiter": "reclutador"
+      }
     },
     "page": {
       "error": "error",

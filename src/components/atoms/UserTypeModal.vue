@@ -9,7 +9,7 @@
     <div
       class="bg-bg-background rounded-s-lg rounded-e-lg shadow-2xl p-8 max-w-md w-full flex flex-col items-center ring-2 ring-limongrass/40 animate-fade-in"
     >
-      <h2 id="welcomeTitle" class="text-2xl font-bold mb-4 text-limongrass">Welcome!</h2>
+      <h2 id="welcomeTitle" class="text-2xl font-bold mb-4 text-limongrass">{{ TModal.title }}!</h2>
       <!-- paragraph con typewriter -->
       <p class="mb-6 text-center text-light min-h-[3rem]">
         <span aria-live="polite">{{ typedText }}</span><span class="cursor" v-if="typing">|</span>
@@ -24,7 +24,7 @@
             size="sm"
             class="text-orange font-mono hover:text-orange/80 transition-colors"
           >
-            developer ?
+            {{ TModal.developer }} ?
           </Button>
         </transition>
 
@@ -36,7 +36,7 @@
             size="sm"
             class="text-orange font-mono hover:text-orange/80 transition-colors"
           >
-            recruiter ?
+            {{ TModal.recruiter }} ?
           </Button>
         </transition>
       </div>
@@ -48,11 +48,17 @@
 import { ref, onMounted, nextTick } from "vue";
 import { userType, setUserType } from "@/stores/userType";
 import Button from "./Button.vue";
+import { getClientLang } from "@/core/helper/getLang";
+import { useTranslations } from "@/i18n/utils";
+
+const { common: TCommon} = useTranslations(getClientLang());
+const { components } = TCommon;
+const { modal: TModal } = components;
 
 const show = ref(false);
 
 // Typewriter state
-const fullText = "Are you a Developer or a Recruiter?";
+const fullText = TModal.description;
 const typedText = ref("");
 const typing = ref(true);
 
@@ -102,21 +108,6 @@ function select(type) {
 </script>
 
 <style scoped>
-.animate-fade-in {
-  animation: fadeIn 3s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 .z-index {
   z-index: 1000;
 }
@@ -126,11 +117,6 @@ function select(type) {
   width: 0.6rem;
   margin-left: 0.15rem;
   animation: blink 900ms steps(1) infinite;
-}
-
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
 }
 
 .btn-pop-enter-active,
