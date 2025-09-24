@@ -128,16 +128,53 @@ const {
   loadFiltersFromStorage,
 } = usePanelProjects();
 
+function getFiltersFromUrl() {
+  if (typeof window === 'undefined') return;
+
+  const params = new URLSearchParams(window.location.search);
+  const filters = params.get('filters');
+
+  if (filters === 'open') showFilters.value = true;
+  if (filters === 'closed') showFilters.value = false;
+
+  const fw = params.get('fw');
+
+  if (fw) {
+    const active = fw.split(',');
+    frameworks.forEach(fwObj => {
+      fwObj.checked = active.includes(fwObj.key);
+    });
+  }
+}
+
+function setFiltersInUrl() {
+  if (typeof window === 'undefined') return;
+
+  const url = new URL(window.location.href);
+  url.searchParams.set('filters', showFilters.value ? 'open' : 'closed');
+
+  const activeFw = frameworks.filter(fw => fw.checked).map(fw => fw.key);
+  url.searchParams.set('fw', activeFw.join(','));
+  window.history.replaceState({}, '', url.toString());
+}
+
 watch(
   () => frameworks.map((fw) => fw.checked),
   () => {
     saveFiltersToStorage();
+    setFiltersInUrl();
   },
   { deep: true }
 );
 
+watch(showFilters, () => {
+  setFiltersInUrl();
+});
+
 onMounted(() => {
+  getFiltersFromUrl();
   loadFiltersFromStorage();
+  setFiltersInUrl();
 });
 </script>
 

@@ -132,7 +132,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import IconByName from "@/components/atoms/IconByName.vue";
 import AboutInfoPanel from "@/components/molecule/AboutInfoPanel.vue";
 import { useAboutPanel } from "@/composables/aboutPanel";
@@ -175,10 +175,32 @@ const selectedGameComponent = computed(() => {
   return found ? found.component : null;
 });
 
+function getPanelFromUrl() {
+  if (typeof window === 'undefined') return null;
+  const params = new URLSearchParams(window.location.search);
+  return params.get('section');
+}
+
+function setPanelInUrl(panelKey: string) {
+  if (typeof window === 'undefined') return;
+  const url = new URL(window.location.href);
+  url.searchParams.set('section', panelKey);
+  window.history.replaceState({}, '', url.toString());
+}
+
 onMounted(() => {
-  if (activePanel.value === "terminal") {
+  const section = getPanelFromUrl();
+
+  if (section && panels.some(p => p.key === section)) {
+    activePanel.value = section;
+    onPanelOpen(section);
+  } else if (activePanel.value === "terminal") {
     onPanelOpen("terminal");
   }
+
+  watch(activePanel, (val) => {
+    setPanelInUrl(val);
+  });
 });
 </script>
 
