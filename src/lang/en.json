@@ -43,8 +43,9 @@
       "example": "Life is too short to worry about unimportant things.",
       "modal": {
         "title": "Welcome",
-        "description": "Are you a Developer or a Recruiter?",
+        "description": "Are you a",
         "developer": "developer",
+        "or": "or",
         "recruiter": "recruiter"
       }
     },

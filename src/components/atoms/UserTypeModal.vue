@@ -6,35 +6,46 @@
     aria-modal="true"
     aria-labelledby="welcomeTitle"
   >
+    <ImageByName name="effectCard" className="w-96 h-full absolute mt-7 opacity-60" fetchpriority="high" />
     <div
       class="bg-bg-background rounded-s-lg rounded-e-lg shadow-2xl p-8 max-w-md w-full flex flex-col items-center ring-2 ring-limongrass/40 animate-fade-in"
     >
-      <h2 id="welcomeTitle" class="text-2xl font-bold mb-4 text-limongrass">{{ TModal.title }}!</h2>
+      <h2
+        id="welcomeTitle"
+        class="text-2xl font-bold mb-4 text-limongrass animate-slide-down select-none"
+      >
+        {{ TModal.title }}!
+      </h2>
       <!-- paragraph con typewriter -->
       <p class="mb-6 text-center text-light min-h-[3rem]">
-        <span aria-live="polite">{{ typedText }}</span><span class="cursor" v-if="typing">|</span>
+        <span aria-live="polite">{{ typedText }}...</span
+        ><span class="cursor" v-if="typing">|</span>
       </p>
       <div class="flex gap-6">
         <transition name="btn-pop" appear>
           <Button
-            v-if="showButton1"
+            v-if="showButtonOne"
             ref="btn1"
             @click="select('developer')"
             variant="simple"
             size="sm"
-            class="text-orange font-mono hover:text-orange/80 transition-colors"
+            class="text-orange font-mono hover:text-orange/80 transition-colors animate-slide-down"
           >
-            {{ TModal.developer }} ?
+            {{ TModal.developer }}
           </Button>
         </transition>
 
         <transition name="btn-pop" appear>
+          <span v-if="showOr" class="animate-slide-down select-none">{{ TModal.or }}</span>
+        </transition>
+
+        <transition name="btn-pop" appear>
           <Button
-            v-if="showButton2"
+            v-if="showButtonTwo"
             @click="select('recruiter')"
             variant="secondary"
             size="sm"
-            class="text-orange font-mono hover:text-orange/80 transition-colors"
+            class="text-orange font-mono hover:text-orange/80 transition-colors animate-panel-in-up"
           >
             {{ TModal.recruiter }} ?
           </Button>
@@ -45,66 +56,53 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from "vue";
-import { userType, setUserType } from "@/stores/userType";
+import { onMounted, nextTick, ref } from "vue";
 import Button from "./Button.vue";
 import { getClientLang } from "@/core/helper/getLang";
 import { useTranslations } from "@/i18n/utils";
+import { useTypeModalUser } from "@/composables/userTypeModal";
+import ImageByName from "./ImageByName.vue";
 
-const { common: TCommon} = useTranslations(getClientLang());
+const {
+  show,
+  showButtonOne,
+  showButtonTwo,
+  btn,
+  typing,
+  typedText,
+  runTypewriter,
+  select,
+  userType,
+  setFullText,
+  showOr,
+} = useTypeModalUser();
+
+const { common: TCommon } = useTranslations(getClientLang());
 const { components } = TCommon;
 const { modal: TModal } = components;
-
-const show = ref(false);
-
-// Typewriter state
-const fullText = TModal.description;
-const typedText = ref("");
-const typing = ref(true);
-
-// Buttons
-const showButton1 = ref(false);
-const showButton2 = ref(false);
-const btn1 = ref(null);
 
 onMounted(async () => {
   if (!userType.value) {
     show.value = true;
+    setFullText(TModal.description);
     await runTypewriter();
-    showButton1.value = true;
+    showButtonOne.value = true;
     await nextTick();
-    if (btn1.value && btn1.value.$el) {
-      try { btn1.value.$el.focus(); } catch (e) { /* ignore */ }
+    if (btn.value && btn.value.$el) {
+      try {
+        btn.value.$el.focus();
+      } catch (e) {
+        /* ignore */
+      }
     }
     setTimeout(() => {
-      showButton2.value = true;
-    }, 1000);
+      showOr.value = true;
+      setTimeout(() => {
+        showButtonTwo.value = true;
+      }, 600);
+    }, 600);
   }
 });
-
-function sleep(ms) {
-  return new Promise((res) => setTimeout(res, ms));
-}
-
-async function runTypewriter() {
-  typing.value = true;
-  typedText.value = "";
-
-  for (let i = 0; i < fullText.length; i++) {
-    typedText.value += fullText[i];
-    const base = 35;
-    const variance = Math.random() * 40;
-    await sleep(base + variance);
-  }
-
-  await sleep(300);
-  typing.value = false;
-}
-
-function select(type) {
-  setUserType(type);
-  show.value = false;
-}
 </script>
 
 <style scoped>
