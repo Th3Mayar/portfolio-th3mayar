@@ -26,6 +26,8 @@ const imageSrc = computed(() => {
     return modifyUrl + routes.logos[imageName as keyof typeof routes.logos];
   } else if (routes.projects[imageName as keyof typeof routes.projects]) {
     return modifyUrl + routes.projects[imageName as keyof typeof routes.projects];
+  } else if  (routes.flags[imageName as keyof typeof routes.flags]) {
+    return modifyUrl + routes.flags[imageName as keyof typeof routes.flags];
   } else {
     console.error(`Image not found for name: ${imageName}`);
     return "";

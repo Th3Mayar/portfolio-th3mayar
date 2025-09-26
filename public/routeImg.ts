@@ -41,4 +41,8 @@ export const routes = {
   gif: {
     FractalMetamorphosis2D: "videos/FractalMetamorphosis2D.gif",
   },
+  flags: {
+    us: "assets/flags/usa.svg",
+    es: "assets/flags/spain.svg"
+  }
 };

@@ -19,7 +19,9 @@
                             ? 'bg-orangeHover/10 text-orangeHover font-semibold'
                             : 'hover:bg-orangeHover/10 hover:text-orangeHover'
                     ]">
-                    {{ option.label }}
+                    {{ option.label }} 
+                    <ImageByName v-if="option.flag" :name="option.flag" alt="Flag" fetchpriority="high"
+                        class="inline-block w-4 h-4 ml-2 align-middle" />
                 </li>
             </ul>
         </transition>
@@ -29,12 +31,13 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import IconByName from './IconByName.vue';
+import IconByName from '@/components/atoms/IconByName.vue';
 import { useSelect } from '@/composables/components';
+import ImageByName from '@/components/atoms/ImageByName.vue';
 
 const props = defineProps<{
     modelValue: string | number | null;
-    options: { label: string; value: string | number }[];
+    options: { label: string; value: string | number; flag?: string; }[];
     placeholder?: string;
 }>();
 
