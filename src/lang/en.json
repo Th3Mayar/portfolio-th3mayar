@@ -126,18 +126,18 @@
       "description": "Contact Page"
     },
     "info": {
-      "orEmail": "Or email me at",
+      "orEmail": "or email me at",
       "joseEmail": "josehenriquez.02.26@gmail.com"
     },
     "fields": {
-      "name": "Name",
-      "namePlaceholder": "Your Name",
-      "email": "Email",
-      "emailPlaceholder": "Your Email",
-      "message": "Message",
-      "messagePlaceholder": "Your Message",
-      "send": "Send",
-      "sending": "Sending"
+      "name": "_name",
+      "namePlaceholder": "_your-name",
+      "email": "_email",
+      "emailPlaceholder": "_your-email",
+      "message": "_message",
+      "messagePlaceholder": "_your-message",
+      "send": "_send",
+      "sending": "_sending"
     }
   }
 }
