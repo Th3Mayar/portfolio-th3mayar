@@ -572,7 +572,7 @@ if (getClientLang() === "en") {
 const contacts = ref([
   { type: "email", value: "josehenriquez.02.26@gmail.com", icon: "Mail" },
   { type: "github", value: "github.com/Th3Mayar", icon: "Github" },
-  { type: "linkedin", value: "linkedin.com/in/jose-fhenríquez", icon: "Linkedin" },
+  { type: "linkedin", value: "linkedin.com/in/jose-fhenr%C3%ADquez", icon: "Linkedin" },
   { type: "wakatime", value: "wakatime.com/th3mayar", icon: "Code" },
   { type: "instagram", value: "instagram.com/jose_f.ma", icon: "Instagram" },
 ]);
