@@ -3,11 +3,13 @@ import Layout from "@/layouts/Layout.astro";
 import ImageByName from "@/components/atoms/ImageByName.vue";
 import ContactForm from "@/components/organism/ContactForm.vue";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { detectDeviceFromRequest } from "@/core/helper/detectDevice";
 
 let lang = getLangFromUrl(Astro.url);
 
 const { contact: TContact } = useTranslations(lang);
 const { info, seo } = TContact;
+const { isMobile } = detectDeviceFromRequest(Astro.request);
 
 Astro.cookies.set("lang", lang, {
   path: "/",
@@ -17,7 +19,7 @@ Astro.cookies.set("lang", lang, {
 });
 ---
 
-<Layout title={ seo.title }>
+<Layout title={seo.title}>
   <head slot="head">
     <link rel="preload" as="image" href="/assets/contact-me.svg" />
     <link rel="preload" as="image" href="/assets/effect-card.svg" />
@@ -25,13 +27,17 @@ Astro.cookies.set("lang", lang, {
   <main
     class="flex flex-col md:flex-row h-full min-h-[76vh] w-full bg-dark-background"
   >
-    <section class="hidden md:flex p-4 ml-20 select-none contact-illustration">
-      <ImageByName
-        name="contactMe"
-        className="w-screen h-[100%] max-w-xl max-h-full select-none !animate-float"
-        fetchpriority="high"
-      />
-    </section>
+    {
+      !isMobile && (
+        <section class="hidden md:flex p-4 ml-20 select-none contact-illustration">
+          <ImageByName
+            name="contactMe"
+            className="w-screen h-[100%] max-w-xl max-h-full select-none !animate-float"
+            fetchpriority="high"
+          />
+        </section>
+      )
+    }
     <section class="flex-1 p-4 flex flex-col gap-6 items-center justify-center">
       <div class="absolute !z-1 opacity-40 top-20 -left-96">
         <ImageByName
@@ -40,14 +46,11 @@ Astro.cookies.set("lang", lang, {
           fetchpriority="high"
         />
       </div>
-      <ContactForm
-        client:load
-        lang={ lang }
-      />
+      <ContactForm client:load lang={lang} />
       <div class="text-light text-xs mt-4 font-mono">
-        {info.orEmail} <a
-          href="mailto:josehenriquez@gmail.com"
-          class="text-pink underline">{info.joseEmail}</a
+        {info.orEmail}
+        <a href="mailto:josehenriquez@gmail.com" class="text-pink underline"
+          >{info.joseEmail}</a
         >
       </div>
     </section>
@@ -70,7 +73,7 @@ Astro.cookies.set("lang", lang, {
     align-items: center;
     justify-content: center;
   }
-  
+
   @media (max-width: 1024px) {
     .contact-illustration {
       min-width: 220px;

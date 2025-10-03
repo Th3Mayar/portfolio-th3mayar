@@ -21,7 +21,7 @@ import Toggle from "@/components/atoms/Toggle.vue";
       <Item title={TComponents.name} class="link-card" />
     </div>
     <div class="header-right">
-      <Toggle class="toggle">
+      <Toggle class="toggle" client:load client:only="vue">
         <section class="popup-window">
           <Item
             href=`/${lang}/`

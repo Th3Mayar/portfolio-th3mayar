@@ -4,11 +4,14 @@ import { useTranslations, getLangFromUrl } from "@/i18n/utils";
 import Typography from "@/components/atoms/Typography.vue";
 import ImageByName from "@/components/atoms/ImageByName.vue";
 import SnakeGame from "@/components/template/Snake.astro";
+import { detectDeviceFromRequest } from "@/core/helper/detectDevice";
 
 const lang = getLangFromUrl(Astro.url);
 const { home: THome } = useTranslations(lang);
 const { seo: TSeo } = THome;
 const { home: THomeDescription } = useTranslations(lang);
+
+const { isMobile } = detectDeviceFromRequest(Astro.request);
 
 const { title, name, description, comment, commentTwo } =
   THomeDescription;
@@ -54,9 +57,11 @@ Astro.cookies.set("lang", lang, {
       <div class="relative -top-5 -left-20 z-1">
         <ImageByName name="effectCard" className="w-full h-full" fetchpriority="high" />
       </div>
-      <div class="absolute">
-        <SnakeGame client:load />
-      </div>
+      {!isMobile && (
+        <div class="absolute">
+          <SnakeGame client:load />
+        </div>
+      )}
     </section>
   </main>
 </Layout>

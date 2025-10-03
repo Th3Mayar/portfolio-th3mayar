@@ -8,6 +8,9 @@ import Header from "@/components/organism/Header.astro";
 import Footer from "@/components/organism/Footer.astro";
 import MobileOverlay from "@/components/molecule/MobileOverlay.vue";
 import "@/styles/global.css";
+import { detectDeviceFromRequest } from "@/core/helper/detectDevice";
+
+const { isMobile } = detectDeviceFromRequest(Astro.request);
 ---
 
 <!doctype html>
@@ -20,15 +23,15 @@ import "@/styles/global.css";
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="p-[50px] bg-darkBackground text-light overflow-hidden">
+  <body class=`${isMobile ? '' : 'p-[50px] bg-darkBackground text-light overflow-hidden'}`>
     <div
-      class="content max-h-[100%] h-[100%] rounded-[20px] border-2 bg-bg-background shadow-[0_0_50px_0px_var(--border-effect)] overflow-hidden relative"
+      class=`${isMobile ? 'bg-bg-background' : 'content max-h-[100%] h-[100%] rounded-[20px] border-2 bg-bg-background shadow-[0_0_50px_0px_var(--border-effect)] overflow-hidden relative'}`
       id="main-content-container"
     >
       <Header client:load />
       <div
         data-page-content
-        class="transition-all duration-400 ease-in-out min-h-[76dvh]"
+        class=`${isMobile ? '' : 'min-h-[76dvh]'} transition-all duration-400 ease-in-out`
       >
         <slot />
       </div>
@@ -38,7 +41,7 @@ import "@/styles/global.css";
     </div>
 
     <!-- Mobile Overlay -->
-    <MobileOverlay client:load />
+    <!-- <MobileOverlay client:load /> -->
 
     <!-- Page Loader -->
     <div
