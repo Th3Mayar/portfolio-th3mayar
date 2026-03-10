@@ -17,7 +17,10 @@ export const routes = {
     gestorPass: "assets/gestor_pass.jpg",
     encryptText: "assets/encrypt.png",
     contactMe: "assets/contact-me.svg",
-    encryptFile: "assets/encryptFile.png"
+    encryptFile: "assets/encryptFile.png",
+    stackAtlas: "assets/stackatlas.png",
+    teamsync: "assets/teamsync.png",
+    coaws: "assets/coaws.png",
   },
   logos: {
     css: "logos/css.svg",
@@ -37,6 +40,7 @@ export const routes = {
     api: "logos/api.png",
     csharp: "logos/csharp.svg",
     python: "logos/python.svg",
+    aws: "logos/aws.png",
   },
   gif: {
     FractalMetamorphosis2D: "videos/FractalMetamorphosis2D.gif",
